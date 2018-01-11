@@ -4,13 +4,15 @@ import UIKit
 
 class TodoListCell: UITableViewCell {
     
-    @IBOutlet private(set) weak var nameLabel: UILabel!
-    @IBOutlet private(set) weak var ageLabel: UILabel!
+    @IBOutlet private(set) weak var titleLabel: UILabel!
+    @IBOutlet private(set) weak var priorityLabel: UILabel!
+    @IBOutlet private(set) weak var dateLabel: UILabel!
 
     func show(viewModel: TodoListViewModel) -> Self {
         
-        nameLabel.text = viewModel.name
-        ageLabel.text = viewModel.age
+        titleLabel.text = viewModel.title
+        priorityLabel.text = viewModel.priority
+        dateLabel.text = viewModel.date
 
         return self
     }
