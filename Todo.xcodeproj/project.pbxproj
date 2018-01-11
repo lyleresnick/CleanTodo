@@ -25,6 +25,7 @@
 		B32058662006F5ED00C79C4A /* TodoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32058652006F5ED00C79C4A /* TodoData.swift */; };
 		B320586C2006F7C300C79C4A /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32058692006F7C300C79C4A /* DateFormatter.swift */; };
 		B320586D2006F7C300C79C4A /* NibBasedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320586B2006F7C300C79C4A /* NibBasedView.swift */; };
+		B320587020072DFC00C79C4A /* TodoRouterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320586F20072DFC00C79C4A /* TodoRouterViewController.swift */; };
 		B3523F2B1FFD271800DB7802 /* ManagerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3523F2A1FFD271800DB7802 /* ManagerResponse.swift */; };
 		B3523F301FFD299F00DB7802 /* EntityGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3523F2F1FFD299F00DB7802 /* EntityGateway.swift */; };
 		B3523F321FFD2A8C00DB7802 /* EntityGatewayImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3523F311FFD2A8C00DB7802 /* EntityGatewayImpl.swift */; };
@@ -68,6 +69,7 @@
 		B32058652006F5ED00C79C4A /* TodoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoData.swift; sourceTree = "<group>"; };
 		B32058692006F7C300C79C4A /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		B320586B2006F7C300C79C4A /* NibBasedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibBasedView.swift; sourceTree = "<group>"; };
+		B320586F20072DFC00C79C4A /* TodoRouterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRouterViewController.swift; sourceTree = "<group>"; };
 		B3523F2A1FFD271800DB7802 /* ManagerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerResponse.swift; sourceTree = "<group>"; };
 		B3523F2F1FFD299F00DB7802 /* EntityGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityGateway.swift; sourceTree = "<group>"; };
 		B3523F311FFD2A8C00DB7802 /* EntityGatewayImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityGatewayImpl.swift; sourceTree = "<group>"; };
@@ -189,6 +191,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		B320586E20072DD400C79C4A /* TodoRouter */ = {
+			isa = PBXGroup;
+			children = (
+				B320586F20072DFC00C79C4A /* TodoRouterViewController.swift */,
+			);
+			path = TodoRouter;
+			sourceTree = "<group>";
+		};
 		B3523F2E1FFD294F00DB7802 /* EntityGateway */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +258,7 @@
 		B3A454D11FFDABEF00EDC6E9 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B320586E20072DD400C79C4A /* TodoRouter */,
 				B32058672006F7C300C79C4A /* Common */,
 				B31148C8200040390091B71E /* TodoList */,
 				B35577D31FF8110000AF9815 /* Main.storyboard */,
@@ -399,6 +410,7 @@
 				B31148E9200040390091B71E /* TodoListCellConfigurator.swift in Sources */,
 				B31148F0200040390091B71E /* TodoListRouter.swift in Sources */,
 				B31148ED200040390091B71E /* TodoListUseCase.swift in Sources */,
+				B320587020072DFC00C79C4A /* TodoRouterViewController.swift in Sources */,
 				B39CC42A1FFD43AC008A3B8E /* EntityGatewayFactory.swift in Sources */,
 				B35577D01FF8110000AF9815 /* AppDelegate.swift in Sources */,
 			);

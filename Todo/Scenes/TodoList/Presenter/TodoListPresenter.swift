@@ -15,7 +15,7 @@ class TodoListPresenter {
     }
     
     func eventViewReady() {
-        useCase.eventViewReady(parameter: "Hello" )
+        useCase.eventViewReady()
     }
     
     func eventItemSelected( row: Int ) {
@@ -43,6 +43,6 @@ extension TodoListPresenter: TodoListUseCaseOutput {
     }
 
     func presentTodoListEnd() {
-        output.showModels()
+        output.showTodoList()
     }
 }

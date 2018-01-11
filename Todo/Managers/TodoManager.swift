@@ -7,5 +7,5 @@ enum  TodoErrorReason {
 
 protocol TodoManager {
     
-    func all(parameter: String, completion: (ManagerResponse<[Todo], TodoErrorReason>) -> ())
+    func all(completion: (ManagerResponse<[Todo], TodoErrorReason>) -> ())
 }

@@ -3,15 +3,15 @@ import Foundation
 
 class TodoListUseCaseTransformer {
     
-    private let modelManager: TodoManager
+    private let todoManager: TodoManager
 
-    init(modelManager:  TodoManager) {
-        self.modelManager = modelManager
+    init(todoManager:  TodoManager) {
+        self.todoManager = todoManager
     }
 
-    func transform( parameter: String, output: TodoListUseCaseOutput  )  {
+    func transform(output: TodoListUseCaseOutput)  {
         
-        modelManager.all(parameter: parameter) { [weak output] result in
+        todoManager.all() { [weak output] result in
 
             guard let output = output else { return }
 

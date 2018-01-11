@@ -11,12 +11,12 @@ class TodoListUseCase {
         self.entityGateway = entityGateway
     }
 
-    func eventViewReady(parameter: String, transformer: TodoListUseCaseTransformer! = nil) {
+    func eventViewReady(transformer: TodoListUseCaseTransformer! = nil) {
 
         var transformer: TodoListUseCaseTransformer! = transformer
         if transformer == nil {
-            transformer = TodoListUseCaseTransformer(modelManager: entityGateway.todoManager)
+            transformer = TodoListUseCaseTransformer(todoManager: entityGateway.todoManager)
         }
-        transformer.transform(parameter: parameter, output: output)
+        transformer.transform(output: output)
     }
 }

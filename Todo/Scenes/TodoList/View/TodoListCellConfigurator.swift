@@ -5,7 +5,7 @@ import UIKit
 class TodoListCellConfigurator {
     
     private enum Cell: String  {
-        case modelList
+        case todoList
     }
     
     var tableView: UITableView!
@@ -22,7 +22,7 @@ class TodoListCellConfigurator {
     }
     
     func tableCell() -> TodoListCell {
-        return tableView!.dequeueReusableCell(withIdentifier: Cell.modelList.rawValue, for: indexPath!) as! TodoListCell
+        return tableView!.dequeueReusableCell(withIdentifier: Cell.todoList.rawValue, for: indexPath!) as! TodoListCell
     }
 }
 

@@ -28,25 +28,10 @@ class TodoListViewController: UIViewController {
 
 extension TodoListViewController: TodoListPresenterOutput {
 
-    func showModels() {
+    func showTodoList() {
         tableView.reloadData()
     }
     
-    func showNotFound(message: String) {
-
-    }
-
-    func showOtherSemanticResult() {
-
-    }
-
-    func showNetworkError() {
-
-    }
-    
-    func showUnknownError() {
-        
-    }
 }
 
 

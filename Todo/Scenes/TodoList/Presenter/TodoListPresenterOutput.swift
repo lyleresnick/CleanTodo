@@ -2,11 +2,6 @@
 
 protocol TodoListPresenterOutput: class {
     
-    func showModels()
+    func showTodoList()
     
-    func showNotFound(message: String)
-    func showOtherSemanticResult()
-    
-    func showNetworkError()
-    func showUnknownError()
 }

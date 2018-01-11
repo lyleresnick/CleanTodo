@@ -2,7 +2,7 @@
 
 class TodoManagerImpl: TodoManager {
     
-    func all(parameter: String, completion: (ManagerResponse<[Todo], TodoErrorReason>) -> ()) {
-        
+    func all(completion: (ManagerResponse<[Todo], TodoErrorReason>) -> ()) {
+            completion(.success(entity: todoData))
     }
 }

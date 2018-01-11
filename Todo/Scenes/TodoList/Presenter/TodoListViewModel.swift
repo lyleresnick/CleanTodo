@@ -6,7 +6,6 @@ struct TodoListViewModel {
     
     let id: String
     let title: String
-    let notes: String
     let date: String
     let priority: String
     let done: Bool
@@ -14,7 +13,6 @@ struct TodoListViewModel {
     init(model: TodoListPresentationModel) {
         self.id = model.id
         self.title = model.title
-        self.notes = model.notes
         self.date = (model.date != nil) ? TodoListViewModel.outboundDateFormatter.string(from: model.date!) : ""
         self.priority = TodoListViewModel.bangString(priority: model.priority)
         self.done = model.done
