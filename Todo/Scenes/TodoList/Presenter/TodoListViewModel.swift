@@ -12,7 +12,7 @@ struct TodoListViewModel {
     let notes: String
     let date: String
     let priority: String
-    var done: Bool
+    let done: Bool
 
     
     init(model: TodoListPresentationModel) {
