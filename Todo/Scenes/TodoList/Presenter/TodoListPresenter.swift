@@ -1,5 +1,7 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
+import Foundation
+
 class TodoListPresenter {
     
     private let useCase: TodoListUseCase
@@ -32,7 +34,7 @@ class TodoListPresenter {
 
 extension TodoListPresenter: TodoListUseCaseOutput {
 
-    func presentModelListBegin() {
+    func presentTodoListBegin() {
         viewModelList = []
     }
 
@@ -40,25 +42,7 @@ extension TodoListPresenter: TodoListUseCaseOutput {
         viewModelList.append( TodoListViewModel( model: model ) )
     }
 
-    func presentModelListEnd() {
+    func presentTodoListEnd() {
         output.showModels()
-    }
-
-    
-    func presentNotFound(message: String) {
-        output.showNotFound(message: message)
-    }
-    
-    func presentOtherSemanticResult() {
-        output.showOtherSemanticResult()
-    }
-
-    
-    func presentNetworkError(code:Int) {
-        output.showNetworkError()
-    }
-    
-    func presentUnknownError(code:Int) {
-        output.showUnknownError()
     }
 }

@@ -4,21 +4,21 @@ import Foundation
 
 class Todo {
     
-    enum Priority: Int {
-        case first = 0
-        case second = 1
-        case third = 2
+    enum Priority: String {
+        case high
+        case medium
+        case low
         
         
         var bangs: Int {
             guard case self = self else { return 0 }
             
             switch self {
-            case .first:
+            case .high:
                 return 3
-            case .second:
+            case .medium:
                 return 2
-            case .third:
+            case .low:
                 return 1
             }
         }
@@ -49,7 +49,7 @@ class Todo {
             title: title,
             notes: notes,
             date: (date != nil) ? Todo.convert(date: date!) : nil,
-            priority: (priority != nil) ? Priority(rawValue: Int(priority!)!)! : nil,
+            priority: (priority != nil) ? Priority(rawValue: priority!)! : nil,
             done: (done == "true") )
     }
 

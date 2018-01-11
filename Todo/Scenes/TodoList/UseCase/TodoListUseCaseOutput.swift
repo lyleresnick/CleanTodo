@@ -2,13 +2,7 @@
 
 protocol TodoListUseCaseOutput: class {
     
-    func presentModelListBegin()
+    func presentTodoListBegin()
     func present(model: TodoListPresentationModel)
-    func presentModelListEnd()
-
-    func presentNetworkError(code:Int)
-    func presentUnknownError(code:Int)
-
-    func presentNotFound(message: String)
-    func presentOtherSemanticResult()
+    func presentTodoListEnd()
 }

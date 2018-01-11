@@ -1,4 +1,5 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
+import Foundation
 
 class TodoListUseCaseTransformer {
     
@@ -16,32 +17,20 @@ class TodoListUseCaseTransformer {
 
             switch result {
             case let .semanticError(reason):
-                
-                switch(reason) {
-                case .notFound:
-                    output.presentNotFound(message: "Hello")
 
-                case .otherSemanticResult:
-                    output.presentOtherSemanticResult()
-                }
+               fatalError("semanticError \(reason) is not being processed!")
                 
             case let .failure(code):
 
-                switch code {
-                case 400...499:
-                    output.presentNetworkError(code: code)
-                default:
-                    output.presentUnknownError(code: code)
-                    break
-                }
+                fatalError("failure \(code) is not being processed!")
 
             case let .success(entityList):
                 
-                output.presentModelListBegin()
+                output.presentTodoListBegin()
                 for entity in entityList {
                     output.present(model: TodoListPresentationModel(entity: entity))
                 }
-                output.presentModelListEnd()
+                output.presentTodoListEnd()
             }
         }
     }

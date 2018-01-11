@@ -107,9 +107,9 @@
 		B31148C8200040390091B71E /* TodoList */ = {
 			isa = PBXGroup;
 			children = (
-				B31148C9200040390091B71E /* Presenter */,
 				B31148D2200040390091B71E /* Connector */,
 				B31148D4200040390091B71E /* View */,
+				B31148C9200040390091B71E /* Presenter */,
 				B31148D9200040390091B71E /* UseCase */,
 				B31148DE200040390091B71E /* Router */,
 			);
