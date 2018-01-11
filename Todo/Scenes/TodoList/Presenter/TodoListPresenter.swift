@@ -20,7 +20,7 @@ class TodoListPresenter {
     
     func eventItemSelected( row: Int ) {
 
-        router.transitionToItem(index: row)
+        //router.transitionToItem(index: row)
     }
     
     func row(at index: Int ) -> TodoListViewModel {
