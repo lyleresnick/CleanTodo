@@ -22,8 +22,8 @@ struct TodoListViewModel {
     
     private static func bangString(priority: Todo.Priority? ) -> String {
     
-        let bangCount = priority != nil ? 0 : priority!.bangs
-        return (0...bangCount).reduce("") { result, index in "\(result)!" }
+        let bangCount = priority != nil ? priority!.bangs : 0
+        return (0..<bangCount).reduce(" ") { result, index in "!\(result)" }
     }
 
 }

@@ -139,9 +139,9 @@
 		B31148D4200040390091B71E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B31148D7200040390091B71E /* TodoListViewController.swift */,
 				B31148D5200040390091B71E /* TodoListAdapter.swift */,
 				B31148D6200040390091B71E /* TodoListCellConfigurator.swift */,
-				B31148D7200040390091B71E /* TodoListViewController.swift */,
 				B31148D8200040390091B71E /* TodoListCell.swift */,
 			);
 			path = View;
