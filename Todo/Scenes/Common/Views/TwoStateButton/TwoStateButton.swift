@@ -34,8 +34,9 @@ class TwoStateButton: UIButton {
 
     private func postInitSetUp() {
 
-        offImage = UIImage(named: ImageName.off)
-        onImage = UIImage(named: ImageName.on)
+        let bundle = Bundle(for:  type(of: self))
+        offImage = UIImage(named: ImageName.off, in: bundle, compatibleWith: nil)
+        onImage = UIImage(named: ImageName.on, in: bundle, compatibleWith: nil)
         addTarget(self, action: #selector(twoStateButtonTouched), for: .touchUpInside)
         reset()
     }
@@ -66,7 +67,7 @@ class TwoStateButton: UIButton {
 
 private extension UIImage {
 
-    convenience init?( named: TwoStateButton.ImageName ) {
+    convenience init?( named: TwoStateButton.ImageName, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection? ) {
         self.init( named: named.rawValue)
     }
 }
