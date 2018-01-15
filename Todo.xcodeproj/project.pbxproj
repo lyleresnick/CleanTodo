@@ -32,7 +32,6 @@
 		B3523F301FFD299F00DB7802 /* EntityGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3523F2F1FFD299F00DB7802 /* EntityGateway.swift */; };
 		B3523F321FFD2A8C00DB7802 /* EntityGatewayImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3523F311FFD2A8C00DB7802 /* EntityGatewayImpl.swift */; };
 		B35577D01FF8110000AF9815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35577CF1FF8110000AF9815 /* AppDelegate.swift */; };
-		B35577D21FF8110000AF9815 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35577D11FF8110000AF9815 /* ViewController.swift */; };
 		B35577D51FF8110000AF9815 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B35577D31FF8110000AF9815 /* Main.storyboard */; };
 		B35577D81FF8110000AF9815 /* Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B35577D61FF8110000AF9815 /* Todo.xcdatamodeld */; };
 		B35577DA1FF8110000AF9815 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B35577D91FF8110000AF9815 /* Assets.xcassets */; };
@@ -79,7 +78,6 @@
 		B3523F311FFD2A8C00DB7802 /* EntityGatewayImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityGatewayImpl.swift; sourceTree = "<group>"; };
 		B35577CC1FF8110000AF9815 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35577CF1FF8110000AF9815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B35577D11FF8110000AF9815 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B35577D41FF8110000AF9815 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B35577D71FF8110000AF9815 /* Todo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Todo.xcdatamodel; sourceTree = "<group>"; };
 		B35577D91FF8110000AF9815 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -250,7 +248,6 @@
 				B3523F2E1FFD294F00DB7802 /* EntityGateway */,
 				B3A454D11FFDABEF00EDC6E9 /* Scenes */,
 				B35577CF1FF8110000AF9815 /* AppDelegate.swift */,
-				B35577D11FF8110000AF9815 /* ViewController.swift */,
 				B35577D91FF8110000AF9815 /* Assets.xcassets */,
 				B35577DB1FF8110000AF9815 /* LaunchScreen.storyboard */,
 				B35577DE1FF8110000AF9815 /* Info.plist */,
@@ -272,10 +269,10 @@
 		B3A454D11FFDABEF00EDC6E9 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B35577D31FF8110000AF9815 /* Main.storyboard */,
 				B320586E20072DD400C79C4A /* TodoRouter */,
 				B32058672006F7C300C79C4A /* Common */,
 				B31148C8200040390091B71E /* TodoList */,
-				B35577D31FF8110000AF9815 /* Main.storyboard */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -402,7 +399,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3523F321FFD2A8C00DB7802 /* EntityGatewayImpl.swift in Sources */,
-				B35577D21FF8110000AF9815 /* ViewController.swift in Sources */,
 				B31148E2200040390091B71E /* TodoListViewModel.swift in Sources */,
 				B35577D81FF8110000AF9815 /* Todo.xcdatamodeld in Sources */,
 				B31148EB200040390091B71E /* TodoListCell.swift in Sources */,

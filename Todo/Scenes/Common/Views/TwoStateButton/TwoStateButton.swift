@@ -10,8 +10,15 @@ protocol TwoStateButtonDelegate {
 
 @IBDesignable
 class TwoStateButton: UIButton {
-
+    
+    #if TARGET_INTERFACE_BUILDER
+    var delegate: TwoStateButtonDelegate? {
+        set { }
+        get { return nil }
+    }
+    #else
     var delegate: TwoStateButtonDelegate?
+    #endif
 
     private var offImage: UIImage!
     private var onImage: UIImage!
@@ -35,8 +42,9 @@ class TwoStateButton: UIButton {
     private func postInitSetUp() {
 
         let bundle = Bundle(for:  type(of: self))
-        offImage = UIImage(named: ImageName.off, in: bundle, compatibleWith: nil)
-        onImage = UIImage(named: ImageName.on, in: bundle, compatibleWith: nil)
+        offImage = UIImage(named: ImageName.off, in: bundle)
+        onImage = UIImage(named: ImageName.on, in: bundle)
+        
         addTarget(self, action: #selector(twoStateButtonTouched), for: .touchUpInside)
         reset()
     }
@@ -45,29 +53,28 @@ class TwoStateButton: UIButton {
 
         if !isOn {
 
-            setImage(offImage, for: .normal)
+            setImage(onImage, for: .normal)
             isOn = true
             delegate?.onTouched()
         }
         else {
 
-            setImage(onImage, for: .normal)
+            setImage(offImage, for: .normal)
             isOn = false
             delegate?.offTouched()
         }
     }
 
     func reset() {
-        setImage(onImage, for: .normal)
+        setImage(offImage, for: .normal)
         isOn = false
 
     }
-
 }
 
 private extension UIImage {
 
-    convenience init?( named: TwoStateButton.ImageName, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection? ) {
-        self.init( named: named.rawValue)
+    convenience init?( named: TwoStateButton.ImageName, in bundle: Bundle? ) {
+        self.init( named: named.rawValue, in: bundle, compatibleWith: nil)
     }
 }
