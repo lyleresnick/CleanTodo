@@ -20,8 +20,21 @@ class TwoStateButton: UIButton {
     var delegate: TwoStateButtonDelegate?
     #endif
 
-    private var offImage: UIImage!
-    private var onImage: UIImage!
+    @IBInspectable var offImage: UIImage! {
+        didSet {
+            if !isOn {
+                setImage(offImage, for: .normal)
+            }
+        }
+    }
+    @IBInspectable var onImage: UIImage! {
+        didSet {
+            if isOn {
+                setImage(onImage, for: .normal)
+            }
+        }
+    }
+
     private var isOn = false
 
     public override init(frame: CGRect = CGRect.zero ) {
@@ -41,12 +54,12 @@ class TwoStateButton: UIButton {
 
     private func postInitSetUp() {
 
-        let bundle = Bundle(for:  type(of: self))
-        offImage = UIImage(named: ImageName.off, in: bundle)
-        onImage = UIImage(named: ImageName.on, in: bundle)
+//        let bundle = Bundle(for:  type(of: self))
+//        offImage = UIImage(named: ImageName.off, in: bundle)
+//        onImage = UIImage(named: ImageName.on, in: bundle)
         
         addTarget(self, action: #selector(twoStateButtonTouched), for: .touchUpInside)
-        reset()
+        isOn = false
     }
 
     @objc private func twoStateButtonTouched(_ sender: UIButton) {
@@ -65,11 +78,6 @@ class TwoStateButton: UIButton {
         }
     }
 
-    func reset() {
-        setImage(offImage, for: .normal)
-        isOn = false
-
-    }
 }
 
 private extension UIImage {

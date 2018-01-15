@@ -37,6 +37,10 @@
                                                         <constraint firstAttribute="height" constant="44" id="PjH-Ah-56M"/>
                                                         <constraint firstAttribute="width" constant="44" id="wSJ-rP-Dke"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="offImage" value="icon-media-player-audio-mute"/>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="onImage" value="icon-media-player-audio-on"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="!!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQK-YM-Kgm">
                                                     <rect key="frame" x="68" y="4" width="15" height="21"/>
@@ -175,4 +179,8 @@
             <point key="canvasLocation" x="2486" y="834"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon-media-player-audio-mute" width="24" height="24"/>
+        <image name="icon-media-player-audio-on" width="24" height="24"/>
+    </resources>
 </document>
