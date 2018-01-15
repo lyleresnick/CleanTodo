@@ -26,6 +26,8 @@
 		B320586C2006F7C300C79C4A /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32058692006F7C300C79C4A /* DateFormatter.swift */; };
 		B320586D2006F7C300C79C4A /* NibBasedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320586B2006F7C300C79C4A /* NibBasedView.swift */; };
 		B320587020072DFC00C79C4A /* TodoRouterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320586F20072DFC00C79C4A /* TodoRouterViewController.swift */; };
+		B320587C200C357E00C79C4A /* TwoStateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320587A200C357E00C79C4A /* TwoStateButton.swift */; };
+		B320587D200C357E00C79C4A /* TwoStateButton.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B320587B200C357E00C79C4A /* TwoStateButton.xcassets */; };
 		B3523F2B1FFD271800DB7802 /* ManagerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3523F2A1FFD271800DB7802 /* ManagerResponse.swift */; };
 		B3523F301FFD299F00DB7802 /* EntityGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3523F2F1FFD299F00DB7802 /* EntityGateway.swift */; };
 		B3523F321FFD2A8C00DB7802 /* EntityGatewayImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3523F311FFD2A8C00DB7802 /* EntityGatewayImpl.swift */; };
@@ -70,6 +72,8 @@
 		B32058692006F7C300C79C4A /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		B320586B2006F7C300C79C4A /* NibBasedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibBasedView.swift; sourceTree = "<group>"; };
 		B320586F20072DFC00C79C4A /* TodoRouterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRouterViewController.swift; sourceTree = "<group>"; };
+		B320587A200C357E00C79C4A /* TwoStateButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoStateButton.swift; sourceTree = "<group>"; };
+		B320587B200C357E00C79C4A /* TwoStateButton.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TwoStateButton.xcassets; sourceTree = "<group>"; };
 		B3523F2A1FFD271800DB7802 /* ManagerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerResponse.swift; sourceTree = "<group>"; };
 		B3523F2F1FFD299F00DB7802 /* EntityGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityGateway.swift; sourceTree = "<group>"; };
 		B3523F311FFD2A8C00DB7802 /* EntityGatewayImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityGatewayImpl.swift; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 		B320586A2006F7C300C79C4A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3205879200C357E00C79C4A /* TwoStateButton */,
 				B320586B2006F7C300C79C4A /* NibBasedView.swift */,
 			);
 			path = Views;
@@ -197,6 +202,15 @@
 				B320586F20072DFC00C79C4A /* TodoRouterViewController.swift */,
 			);
 			path = TodoRouter;
+			sourceTree = "<group>";
+		};
+		B3205879200C357E00C79C4A /* TwoStateButton */ = {
+			isa = PBXGroup;
+			children = (
+				B320587A200C357E00C79C4A /* TwoStateButton.swift */,
+				B320587B200C357E00C79C4A /* TwoStateButton.xcassets */,
+			);
+			path = TwoStateButton;
 			sourceTree = "<group>";
 		};
 		B3523F2E1FFD294F00DB7802 /* EntityGateway */ = {
@@ -368,6 +382,7 @@
 			files = (
 				B35577DD1FF8110000AF9815 /* LaunchScreen.storyboard in Resources */,
 				B35577DA1FF8110000AF9815 /* Assets.xcassets in Resources */,
+				B320587D200C357E00C79C4A /* TwoStateButton.xcassets in Resources */,
 				B35577D51FF8110000AF9815 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,6 +423,7 @@
 				B32058662006F5ED00C79C4A /* TodoData.swift in Sources */,
 				B31148EF200040390091B71E /* TodoListUseCaseOutput.swift in Sources */,
 				B31148E9200040390091B71E /* TodoListCellConfigurator.swift in Sources */,
+				B320587C200C357E00C79C4A /* TwoStateButton.swift in Sources */,
 				B31148F0200040390091B71E /* TodoListRouter.swift in Sources */,
 				B31148ED200040390091B71E /* TodoListUseCase.swift in Sources */,
 				B320587020072DFC00C79C4A /* TodoRouterViewController.swift in Sources */,
