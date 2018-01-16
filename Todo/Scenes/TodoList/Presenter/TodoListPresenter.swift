@@ -62,5 +62,9 @@ extension TodoListPresenter: TodoListUseCaseOutput {
     
     func presentChanged(model: TodoListPresentationModel) {
         viewModelList.replaceSubrange(Range(viewModelRowIndex...viewModelRowIndex), with: [TodoListViewModel( model: model )] )
+        
+        // the output is already updated
+        // if this were not the case, an async call would delay the update of the screen
+        // if a network error occurs or it turns out the item was deleted by another user, the app should present a message about the situation and, in the former case, reset the button to the previous state; in the latter case the item should be deleted
     }
 }
