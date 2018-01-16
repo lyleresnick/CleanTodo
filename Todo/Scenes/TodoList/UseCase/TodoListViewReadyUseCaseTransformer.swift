@@ -1,13 +1,8 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
+
 import Foundation
 
-class TodoListUseCaseTransformer {
-    
-    private let todoManager: TodoManager
-
-    init(todoManager:  TodoManager) {
-        self.todoManager = todoManager
-    }
+class TodoListViewReadyUseCaseTransformer: TodoListAbstractUseCaseTransformer {
 
     func transform(output: TodoListUseCaseOutput)  {
         

@@ -7,7 +7,9 @@ class TodoListPresenter {
     private let useCase: TodoListUseCase
     weak var router: TodoListRouter!
     weak var output: TodoListPresenterOutput!
-
+    
+    
+    private var viewModelRowIndex: Int!
     private var viewModelList: [TodoListViewModel] = []
     
     init(useCase: TodoListUseCase) {
@@ -18,6 +20,18 @@ class TodoListPresenter {
         useCase.eventViewReady()
     }
     
+    func eventDone(index: Int) {
+    
+        viewModelRowIndex = index
+        useCase.eventDone(id: viewModelList[index].id, done: true)
+    }
+    
+    func eventUndone(index: Int) {
+        
+        viewModelRowIndex = index
+        useCase.eventDone(id: viewModelList[index].id, done: false)
+    }
+
     func eventItemSelected( row: Int ) {
 
         //router.transitionToItem(index: row)
@@ -44,5 +58,9 @@ extension TodoListPresenter: TodoListUseCaseOutput {
 
     func presentTodoListEnd() {
         output.showTodoList()
+    }
+    
+    func presentChanged(model: TodoListPresentationModel) {
+        viewModelList.replaceSubrange(Range(viewModelRowIndex...viewModelRowIndex), with: [TodoListViewModel( model: model )] )
     }
 }

@@ -74,6 +74,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateLabel" destination="QaK-m8-FHw" id="QdU-GM-BMk"/>
+                                            <outlet property="doneButton" destination="jRd-pP-RtU" id="VQb-US-fR6"/>
                                             <outlet property="priorityLabel" destination="hQK-YM-Kgm" id="prW-XQ-0kz"/>
                                             <outlet property="titleLabel" destination="fbl-FY-chu" id="epd-0J-GrB"/>
                                         </connections>
@@ -100,7 +101,7 @@
             </objects>
             <point key="canvasLocation" x="741.60000000000002" y="106.59670164917542"/>
         </scene>
-        <!--Todo Item View Controller-->
+        <!--Todo-->
         <scene sceneID="gJn-Yp-2lz">
             <objects>
                 <viewController id="cGT-Tq-cT0" customClass="TodoItemViewController" sceneMemberID="viewController">
@@ -124,6 +125,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gcl-5P-oAu"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Todo" id="pKK-t0-Mob"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7p2-fs-wdz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

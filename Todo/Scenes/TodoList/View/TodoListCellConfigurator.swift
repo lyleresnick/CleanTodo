@@ -8,17 +8,19 @@ class TodoListCellConfigurator {
         case todoList
     }
     
-    var tableView: UITableView!
-    var indexPath: IndexPath!
+    private(set) var presenter: TodoListPresenter!
+    private(set) var tableView: UITableView!
+    private(set) var indexPath: IndexPath!
     
-    func set(tableView: UITableView, indexPath: IndexPath) -> Self {
+    func set(tableView: UITableView, indexPath: IndexPath, presenter: TodoListPresenter) -> Self {
+        self.presenter = presenter
         self.tableView = tableView
         self.indexPath = indexPath
         return self;
     }
     
-    func show(viewModel: TodoListViewModel) -> TodoListCell {
-        return tableCell().show(viewModel: viewModel)
+    func show(viewModel: TodoListViewModel, presenter: TodoListPresenter) -> TodoListCell {
+        return tableCell().show(viewModel: viewModel, index: indexPath.row, presenter: presenter)
     }
     
     func tableCell() -> TodoListCell {

@@ -53,10 +53,6 @@ class TwoStateButton: UIButton {
     }
 
     private func postInitSetUp() {
-
-//        let bundle = Bundle(for:  type(of: self))
-//        offImage = UIImage(named: ImageName.off, in: bundle)
-//        onImage = UIImage(named: ImageName.on, in: bundle)
         
         addTarget(self, action: #selector(twoStateButtonTouched), for: .touchUpInside)
         isOn = false
@@ -75,6 +71,19 @@ class TwoStateButton: UIButton {
             setImage(offImage, for: .normal)
             isOn = false
             delegate?.offTouched()
+        }
+    }
+    
+    var on: Bool {
+        get { return isOn }
+        set {
+            isOn = newValue
+            if isOn {
+                setImage(onImage, for: .normal)
+            }
+            else {
+                setImage(offImage, for: .normal)
+            }
         }
     }
 

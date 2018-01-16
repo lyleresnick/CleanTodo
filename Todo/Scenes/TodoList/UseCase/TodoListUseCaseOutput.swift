@@ -5,4 +5,7 @@ protocol TodoListUseCaseOutput: class {
     func presentTodoListBegin()
     func present(model: TodoListPresentationModel)
     func presentTodoListEnd()
+    
+    
+    func presentChanged(model: TodoListPresentationModel)
 }
