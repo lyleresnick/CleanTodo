@@ -23,13 +23,13 @@ class TodoListPresenter {
     func eventDone(index: Int) {
     
         viewModelRowIndex = index
-        useCase.eventDone(id: viewModelList[index].id, done: true)
+        useCase.event(done: true, id: viewModelList[index].id)
     }
     
     func eventUndone(index: Int) {
         
         viewModelRowIndex = index
-        useCase.eventDone(id: viewModelList[index].id, done: false)
+        useCase.event(done: false, id: viewModelList[index].id)
     }
 
     func eventItemSelected( row: Int ) {

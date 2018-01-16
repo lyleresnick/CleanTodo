@@ -4,7 +4,7 @@ import Foundation
 
 class TodoListDoneUseCaseTransformer: TodoListAbstractUseCaseTransformer {
     
-    func transform(id: String, done: Bool, output: TodoListUseCaseOutput)  {
+    func transform(done: Bool, id: String, output: TodoListUseCaseOutput)  {
         
         todoManager.done(id: id, done: done) { [weak output] result in
 

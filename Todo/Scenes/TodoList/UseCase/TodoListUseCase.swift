@@ -3,7 +3,6 @@
 class TodoListUseCase {
     
     weak var output: TodoListUseCaseOutput!
-    
     private let entityGateway: EntityGateway
     
     init( entityGateway: EntityGateway ) {
@@ -17,8 +16,8 @@ class TodoListUseCase {
         transformer.transform(output: output)
     }
     
-    func eventDone(id: String, done: Bool) {
+    func event(done: Bool, id: String) {
         let transformer = TodoListDoneUseCaseTransformer(todoManager: entityGateway.todoManager)
-        transformer.transform(id: id, done: done, output: output)
+        transformer.transform(done: done, id: id, output: output)
     }
 }
