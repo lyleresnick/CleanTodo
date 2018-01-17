@@ -4,7 +4,7 @@ import Foundation
 
 class TodoListDoneUseCaseTransformer: TodoListAbstractUseCaseTransformer {
     
-    func transform(done: Bool, id: String, output: TodoListUseCaseOutput)  {
+    func transform(done: Bool, at row: Int, id: String, output: TodoListUseCaseOutput)  {
         
         todoManager.done(id: id, done: done) { [weak output] result in
 
@@ -21,7 +21,7 @@ class TodoListDoneUseCaseTransformer: TodoListAbstractUseCaseTransformer {
 
             case let .success(entity):
                 
-                output.presentChanged(model: TodoListPresentationModel(entity: entity))
+                output.presentChanged(model: TodoListPresentationModel(entity: entity), at: row)
             }
         }
     }

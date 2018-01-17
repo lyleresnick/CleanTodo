@@ -7,13 +7,15 @@ class TodoManagerImpl: TodoManager {
     }
     
     func done(id:String, done: Bool, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+        
         for entity in todoData {
             if entity.id == id {
+                
                 entity.done = done
                 completion(.success(entity: entity))
-                break;
+                return;
             }
-            completion(.failure(code: 404))
         }
+        completion(.failure(code: 404))
     }
 }

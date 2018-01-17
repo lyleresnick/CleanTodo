@@ -7,5 +7,5 @@ protocol TodoListUseCaseOutput: class {
     func presentTodoListEnd()
     
     
-    func presentChanged(model: TodoListPresentationModel)
+    func presentChanged(model: TodoListPresentationModel, at row: Int)
 }

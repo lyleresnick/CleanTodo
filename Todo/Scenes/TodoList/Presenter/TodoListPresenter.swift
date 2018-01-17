@@ -9,7 +9,6 @@ class TodoListPresenter {
     weak var output: TodoListPresenterOutput!
     
     
-    private var viewModelRowIndex: Int!
     private var viewModelList: [TodoListViewModel] = []
     
     init(useCase: TodoListUseCase) {
@@ -22,14 +21,12 @@ class TodoListPresenter {
     
     func eventDone(index: Int) {
     
-        viewModelRowIndex = index
-        useCase.event(done: true, id: viewModelList[index].id)
+        useCase.event(done: true, at: index, id: viewModelList[index].id)
     }
     
     func eventUndone(index: Int) {
         
-        viewModelRowIndex = index
-        useCase.event(done: false, id: viewModelList[index].id)
+        useCase.event(done: false, at: index, id: viewModelList[index].id)
     }
 
     func eventItemSelected( row: Int ) {
@@ -60,8 +57,8 @@ extension TodoListPresenter: TodoListUseCaseOutput {
         output.showTodoList()
     }
     
-    func presentChanged(model: TodoListPresentationModel) {
-        viewModelList.replaceSubrange(Range(viewModelRowIndex...viewModelRowIndex), with: [TodoListViewModel( model: model )] )
+    func presentChanged(model: TodoListPresentationModel, at row: Int) {
+        viewModelList.replaceSubrange(Range(row...row), with: [TodoListViewModel( model: model )] )
         
         // the output is already updated
         // if this were not the case, an async call would delay the update of the screen
