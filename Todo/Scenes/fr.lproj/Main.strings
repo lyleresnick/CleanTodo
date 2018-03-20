@@ -1,0 +1,90 @@
+
+/* Class = "UILabel"; text = ":"; ObjectID = "2Av-NP-g7O"; */
+"2Av-NP-g7O.text" = ":";
+
+/* Class = "UINavigationItem"; title = "To Do Container"; ObjectID = "2BB-DO-mzh"; */
+"2BB-DO-mzh.title" = "To Do Container";
+
+/* Class = "UINavigationItem"; title = "To Do List"; ObjectID = "31F-Iv-vfg"; */
+"31F-Iv-vfg.title" = "Liste de choses à faire";
+
+/* Class = "UILabel"; text = ":"; ObjectID = "7zR-Gr-j2c"; */
+"7zR-Gr-j2c.text" = ":";
+
+/* Class = "UIBarButtonItem"; title = "Edit"; ObjectID = "8tl-ms-YuR"; */
+"8tl-ms-YuR.title" = "Modifier";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "GiG-Jc-73o"; */
+"GiG-Jc-73o.title" = "Annuler";
+
+/* Class = "UIButton"; normalTitle = "Set"; ObjectID = "H5w-pi-Lpc"; */
+"H5w-pi-Lpc.normalTitle" = "Ensemble";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "HJS-Yo-Y7m"; */
+"HJS-Yo-Y7m.text" = "Date";
+
+/* Class = "UIViewController"; title = "To Do Display"; ObjectID = "IoK-O0-JrT"; */
+"IoK-O0-JrT.title" = "To Do Display";
+
+/* Class = "UILabel"; text = ":"; ObjectID = "LgN-9H-aG1"; */
+"LgN-9H-aG1.text" = ":";
+
+/* Class = "UINavigationItem"; title = "To Do"; ObjectID = "Nfh-Pf-Mew"; */
+"Nfh-Pf-Mew.title" = "Faire";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "QaK-m8-FHw"; */
+"QaK-m8-FHw.text" = "Compléter par";
+
+/* Class = "UILabel"; text = "Priority"; ObjectID = "RMi-u9-lic"; */
+"RMi-u9-lic.text" = "Priorité";
+
+/* Class = "UILabel"; text = "Error Label"; ObjectID = "WsI-5D-8If"; */
+"WsI-5D-8If.text" = "Error Label";
+
+/* Class = "UILabel"; text = ":"; ObjectID = "YkV-qD-iXO"; */
+"YkV-qD-iXO.text" = ":";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "aiZ-rz-p3i"; */
+"aiZ-rz-p3i.text" = "Titre";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "at2-oo-Gtr"; */
+"at2-oo-Gtr.normalTitle" = "Annuler";
+
+/* Class = "UIViewController"; title = "To Do Edit"; ObjectID = "cLj-lx-RkX"; */
+"cLj-lx-RkX.title" = "To Do Edit";
+
+/* Class = "UILabel"; text = ":"; ObjectID = "eH8-Rp-ZmR"; */
+"eH8-Rp-ZmR.text" = ":";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "fbl-FY-chu"; */
+"fbl-FY-chu.text" = "Titre";
+
+/* Class = "UILabel"; text = "!!!"; ObjectID = "hQK-YM-Kgm"; */
+"hQK-YM-Kgm.text" = "!!!";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "hgK-p5-B1z"; */
+"hgK-p5-B1z.title" = "Sauvegarder";
+
+/* Class = "UILabel"; text = "Completed"; ObjectID = "iE1-Uk-gO7"; */
+"iE1-Uk-gO7.text" = "Terminé";
+
+/* Class = "UILabel"; text = "Complete By"; ObjectID = "iSC-Ul-DwF"; */
+"iSC-Ul-DwF.text" = "Compléter par";
+
+/* Class = "UILabel"; text = "Note"; ObjectID = "nSL-bi-bW0"; */
+"nSL-bi-bW0.text" = "Remarque";
+
+/* Class = "UINavigationItem"; title = "To Do"; ObjectID = "nbP-gk-gJv"; */
+"nbP-gk-gJv.title" = "Faire";
+
+/* Class = "UISegmentedControl"; qVi-zR-VZP.segmentTitles[0] = "None"; ObjectID = "qVi-zR-VZP"; */
+"qVi-zR-VZP.segmentTitles[0]" = "Aucun";
+
+/* Class = "UISegmentedControl"; qVi-zR-VZP.segmentTitles[1] = "Low"; ObjectID = "qVi-zR-VZP"; */
+"qVi-zR-VZP.segmentTitles[1]" = "Faible";
+
+/* Class = "UISegmentedControl"; qVi-zR-VZP.segmentTitles[2] = "Medium"; ObjectID = "qVi-zR-VZP"; */
+"qVi-zR-VZP.segmentTitles[2]" = "Moyen";
+
+/* Class = "UISegmentedControl"; qVi-zR-VZP.segmentTitles[3] = "High"; ObjectID = "qVi-zR-VZP"; */
+"qVi-zR-VZP.segmentTitles[3]" = "Haute";

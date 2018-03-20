@@ -1,0 +1,23 @@
+
+"todo" = "Faire";
+"todo list" = "Liste de choses à faire";
+
+"title" = "Titre";
+"note" = "Remarque";
+"completeBy" = "Compléter par";
+"priority" = "Priorité";
+"completed" = "Terminé";
+
+"high" = "Haute";
+"medium" = "Moyen";
+"low" = "Faible";
+"none" = "Aucun";
+
+"yes" = "Oui";
+"no" = "Non";
+
+"todoNotFound" = "Todo avec Id: '%@' n'a pas été trouvé";
+
+"cancel" = "Annuler";
+"save" = "Enregistrer";
+"edit" = "Modifier";

@@ -1,0 +1,24 @@
+
+"todo" = "To Do";
+"todo list" = "To Do List";
+
+"title" = "Title";
+"note" = "Note";
+"completeBy" = "Complete by";
+"priority" = "Priority";
+"completed" = "Completed";
+
+"high" = "High";
+"medium" = "Medium";
+"low" = "Low";
+"none" = "None";
+
+"yes" = "Yes";
+"no" = "No";
+
+"todoNotFound" = "Todo with Id: '%@' was not found";
+
+"cancel" = "Cancel";
+"save" = "Save";
+"edit" = "Edit";
+
