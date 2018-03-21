@@ -11,7 +11,7 @@ class CoreDataManager {
         
     }
     
-    private lazy var persistentContainer: NSPersistentContainer = {
+    lazy var persistentContainer: NSPersistentContainer = {
 
         let container = NSPersistentContainer(name: "Todo")
         container.loadPersistentStores { (storeDescription, error) in
@@ -31,7 +31,7 @@ class CoreDataManager {
         return container
     }()
     
-    func saveContext () {
+    func saveAll() {
         
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -45,6 +45,12 @@ class CoreDataManager {
             }
         }
     }
+    
+    func save() throws {
+        
+        try persistentContainer.viewContext.save()
+    }
+
 
 }
 

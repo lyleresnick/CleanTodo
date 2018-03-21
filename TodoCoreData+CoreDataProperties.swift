@@ -13,7 +13,11 @@ import CoreData
 
 extension TodoCoreData {
 
-    @NSManaged public var completeBy: Date?
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<TodoCoreData> {
+        return NSFetchRequest<TodoCoreData>(entityName: "Todo")
+    }
+
+    @NSManaged public var completeBy: NSDate?
     @NSManaged public var completed: Bool
     @NSManaged public var id: UUID?
     @NSManaged public var note: String?

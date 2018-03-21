@@ -1,6 +1,7 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
 import Foundation
+import CoreData
 
 class TodoManagerCoreDataImpl: TodoManager {
     
@@ -8,32 +9,58 @@ class TodoManagerCoreDataImpl: TodoManager {
     init(manager: CoreDataManager) {
         self.manager = manager
     }
+    
+    private let fetchRequest =  NSFetchRequest<TodoCoreData>(entityName: "Todo")
 
     func all(completion: (ManagerResponse<[Todo], TodoErrorReason>) -> ()) {
-        completion(.success(entity: todoData))
-    }
-    
-    func fetch(id:String, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
-        for entity in todoData {
-            if entity.id == id {
-                
-                completion(.success(entity: entity))
-                return
-            }
-        }
-        completion(.semanticError(reason: .notFound))
-    }
-    
-    func completed(id:String, completed: Bool, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
         
-        if let todo = findTodo(id: id) {
-            
-            todo.completed = completed
-            completion(.success(entity: todo))
-        }
-        else {
-            completion(.semanticError(reason: .notFound))
+        do {
+            let todos = try manager.persistentContainer.viewContext.fetch(fetchRequest)
+            let todoData = todos.map { Todo(todoCoreData: $0) }
+            completion(.success(entity: todoData))
 
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+
+        
+    }
+    
+    func fetch(id: String, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+        
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+
+        do {
+            
+            let todos = try manager.persistentContainer.viewContext.fetch(fetchRequest)
+            let todoData = todos.map { Todo(todoCoreData: $0) }
+            completion(.success(entity: todoData.first!))
+        }
+        catch {
+            
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    func completed(id: String, completed: Bool, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+        
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        
+        do {
+            
+            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest)
+            let todoCoreData = todoCoreDataList.first!
+            
+            todoCoreData.completed = completed
+
+            try manager.save()
+            completion(.success(entity: Todo(todoCoreData: todoCoreData) ) )
+        }
+        catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
     
@@ -41,56 +68,74 @@ class TodoManagerCoreDataImpl: TodoManager {
             values: TodoValues,
             completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
         
-        let todo = Todo( id: UUID().uuidString, values: values)
-        todoData.append(todo)
-        completion(.success(entity: todo))
+        let todoCoreData = NSEntityDescription.insertNewObject(forEntityName: "Todo", into: manager.persistentContainer.viewContext) as! TodoCoreData
+        
+        let id = UUID()
+
+        todoCoreData.id = id
+        assignValues(todoCoreData: todoCoreData, todoValues: values)
+        do {
+            try manager.save()
+            completion(.success(entity: Todo(id: id.uuidString, values: values) ) )
+        }
+        catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    private func assignValues(todoCoreData: TodoCoreData, todoValues: TodoValues) {
+        
+        todoCoreData.title = todoValues.title
+        todoCoreData.note = todoValues.note
+        todoCoreData.priority = (todoValues.priority != nil) ? todoValues.priority!.rawValue : nil
+        todoCoreData.completeBy = todoValues.completeBy
+        todoCoreData.completed = todoValues.completed
     }
 
     func update(
             id: String,
             values: TodoValues,
             completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
-        
-        if let todo = findTodo(id: id) {
-            
-            todo.set(values: values)
-            completion(.success(entity: todo))
-        }
-        else {
-            completion(.semanticError(reason: .notFound))
-        }
-    }
-    
-    private func findTodo(id: String) -> Todo? {
-        for entity in todoData {
-            if entity.id == id {
-                return entity
-            }
-        }
-        return nil
-    }
 
-    func delete(id:String, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
-        if let (index, todo) = findTodoIndex(id: id) {
+        do {
             
-            todoData.remove(at: index)
-            completion(.success(entity: todo))
+            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest)
+            let todoCoreData = todoCoreDataList.first!
+            
+            assignValues(todoCoreData: todoCoreData, todoValues: values)
+            try manager.save()
+            completion(.success(entity: Todo(id: id, values: values) ) )
         }
-        else {
-            completion(.semanticError(reason: .notFound))
+        catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
     
-    private func findTodoIndex(id: String) -> (Int,Todo)? {
-        for (index, entity) in todoData.enumerated() {
-            if entity.id == id {
-                return (index, entity)
-            }
+    func delete(id: String, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+        
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        
+        do {
+            
+            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest)
+            let todoCoreData = todoCoreDataList.first!
+            
+            let todo = Todo(todoCoreData: todoCoreData)
+            manager.persistentContainer.viewContext.delete(todoCoreData)
+            try manager.save()
+            completion(.success(entity: todo) )
         }
-        return nil
+        catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
     }
 }
+        
 
 private extension Todo {
     
