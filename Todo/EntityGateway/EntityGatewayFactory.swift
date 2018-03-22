@@ -1,9 +1,23 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
 class EntityGatewayFactory {
-   // static var entityGateway = { EntityGatewayImpl() }()
     
-    static var entityGateway = { EntityGatewayCoreDataImpl(manager: CoreDataManager.shared) }()
+    enum Implementation {
+        case test
+        case coreData
+    }
     
+    static let gatewayImplementedVia = Implementation.coreData
+    
+    static var entityGateway: EntityGateway = {
+
+        switch gatewayImplementedVia {
+        case .test:
+            return { EntityGatewayImpl() }()
+        case .coreData:
+            return { EntityGatewayCoreDataImpl(manager: CoreDataManager.shared) }()
+        }
+    } ()
+
 }
 

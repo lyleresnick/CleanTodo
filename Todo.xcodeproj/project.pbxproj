@@ -440,8 +440,8 @@
 		B3A454F91FFDACBE00EDC6E9 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				B3743E7D20620B94009D45F6 /* Todo+CoreData.swift */,
 				B3A454FA1FFDACBE00EDC6E9 /* Todo.swift */,
+				B3743E7D20620B94009D45F6 /* Todo+CoreData.swift */,
 				B371FD26204313F7000A38E4 /* Todo+Dictionary.swift */,
 			);
 			path = Entities;
