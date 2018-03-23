@@ -12,11 +12,11 @@ class TodoItemEditSaveUseCaseTransformer {
         self.cache = cache
     }
     
-    private typealias TodoManagerResponse = (ManagerResponse<Todo, TodoErrorReason>) -> ()
+    private typealias TodoManagerResponder = (TodoItemManagerResponse) -> ()
     
     func transform(editingTodo: TodoItemEditUseCase.EditingTodo, output: TodoItemEditUseCaseOutput) {
         
-        let completion: TodoManagerResponse = {
+        let completion: TodoManagerResponder = {
             [weak output] result in
             
             guard let output = output else { return }
@@ -49,13 +49,13 @@ class TodoItemEditSaveUseCaseTransformer {
         }
     }
     
-    private func create(editingTodo: TodoItemEditUseCase.EditingTodo, completion: TodoManagerResponse) {
+    private func create(editingTodo: TodoItemEditUseCase.EditingTodo, completion: TodoManagerResponder) {
         todoManager.create(
             values: TodoValues(editingTodo: editingTodo),
             completion: completion)
     }
 
-    private func update(editingTodo: TodoItemEditUseCase.EditingTodo, completion: TodoManagerResponse) {
+    private func update(editingTodo: TodoItemEditUseCase.EditingTodo, completion: TodoManagerResponder) {
         todoManager.update(
             id: editingTodo.id!,
             values: TodoValues(editingTodo: editingTodo),

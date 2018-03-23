@@ -12,7 +12,7 @@ class TodoManagerCoreDataImpl: TodoManager {
     
     private let fetchRequest =  NSFetchRequest<TodoCoreData>(entityName: "Todo")
 
-    func all(completion: (ManagerResponse<[Todo], TodoErrorReason>) -> ()) {
+    func all(completion: (TodoListManagerResponse) -> ()) {
         
         do {
             let todos = try manager.persistentContainer.viewContext.fetch(fetchRequest)
@@ -27,7 +27,7 @@ class TodoManagerCoreDataImpl: TodoManager {
         
     }
     
-    func fetch(id: String, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+    func fetch(id: String, completion: (TodoItemManagerResponse) -> ()) {
         
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
 
@@ -44,7 +44,7 @@ class TodoManagerCoreDataImpl: TodoManager {
         }
     }
     
-    func completed(id: String, completed: Bool, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+    func completed(id: String, completed: Bool, completion: (TodoItemManagerResponse) -> ()) {
         
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
@@ -66,7 +66,7 @@ class TodoManagerCoreDataImpl: TodoManager {
     
     func create(
             values: TodoValues,
-            completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+            completion: (TodoItemManagerResponse) -> ()) {
         
         let todoCoreData = NSEntityDescription.insertNewObject(forEntityName: "Todo", into: manager.persistentContainer.viewContext) as! TodoCoreData
         
@@ -96,7 +96,7 @@ class TodoManagerCoreDataImpl: TodoManager {
     func update(
             id: String,
             values: TodoValues,
-            completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+            completion: (TodoItemManagerResponse) -> ()) {
 
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
@@ -115,7 +115,7 @@ class TodoManagerCoreDataImpl: TodoManager {
         }
     }
     
-    func delete(id: String, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+    func delete(id: String, completion: (TodoItemManagerResponse) -> ()) {
         
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         

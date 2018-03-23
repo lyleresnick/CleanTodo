@@ -5,7 +5,6 @@ import Foundation
 enum  TodoErrorReason {
     case notFound
 }
-
 struct TodoValues {
     
     var title: String
@@ -15,20 +14,23 @@ struct TodoValues {
     var completed: Bool
 }
 
+typealias TodoListManagerResponse = ManagerResponse<[Todo], DataSources, TodoErrorReason>
+typealias TodoItemManagerResponse = ManagerResponse<Todo, DataSources, TodoErrorReason>
+
 protocol TodoManager {
     
-    func all(completion: (ManagerResponse<[Todo], TodoErrorReason>) -> ())
-    func completed(id: String, completed: Bool, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ())
+    func all(completion: (TodoListManagerResponse) -> ())
+    func completed(id: String, completed: Bool, completion: (TodoItemManagerResponse) -> ())
     
     func create(
                 values: TodoValues,
-                completion: (ManagerResponse<Todo, TodoErrorReason>) -> ())
+                completion: (TodoItemManagerResponse) -> ())
     
     func update(id: String,
                 values: TodoValues,
-                completion: (ManagerResponse<Todo, TodoErrorReason>) -> ())
+                completion: (TodoItemManagerResponse) -> ())
     
-    func fetch(id:String, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ())
+    func fetch(id:String, completion: (TodoItemManagerResponse) -> ())
     
-    func delete(id:String, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ())
+    func delete(id:String, completion: (TodoItemManagerResponse) -> ())
 }

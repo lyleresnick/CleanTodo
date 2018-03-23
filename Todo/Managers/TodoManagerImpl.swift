@@ -4,11 +4,11 @@ import Foundation
 
 class TodoManagerImpl: TodoManager {
 
-    func all(completion: (ManagerResponse<[Todo], TodoErrorReason>) -> ()) {
+    func all(completion: (TodoListManagerResponse) -> ()) {
         completion(.success(entity: todoData))
     }
     
-    func fetch(id:String, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+    func fetch(id:String, completion: (TodoItemManagerResponse) -> ()) {
         for entity in todoData {
             if entity.id == id {
                 
@@ -19,7 +19,7 @@ class TodoManagerImpl: TodoManager {
         completion(.semanticError(reason: .notFound))
     }
     
-    func completed(id:String, completed: Bool, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+    func completed(id:String, completed: Bool, completion: (TodoItemManagerResponse) -> ()) {
         
         if let todo = findTodo(id: id) {
             
@@ -34,7 +34,7 @@ class TodoManagerImpl: TodoManager {
     
     func create(
             values: TodoValues,
-            completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+            completion: (TodoItemManagerResponse) -> ()) {
         
         let todo = Todo( id: UUID().uuidString, values: values)
         todoData.append(todo)
@@ -44,7 +44,7 @@ class TodoManagerImpl: TodoManager {
     func update(
             id: String,
             values: TodoValues,
-            completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+            completion: (TodoItemManagerResponse) -> ()) {
         
         if let todo = findTodo(id: id) {
             
@@ -65,7 +65,7 @@ class TodoManagerImpl: TodoManager {
         return nil
     }
 
-    func delete(id:String, completion: (ManagerResponse<Todo, TodoErrorReason>) -> ()) {
+    func delete(id:String, completion: (TodoItemManagerResponse) -> ()) {
         
         if let (index, todo) = findTodoIndex(id: id) {
             
