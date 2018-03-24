@@ -10,12 +10,19 @@ class TodoManagerCoreDataImpl: TodoManager {
         self.manager = manager
     }
     
-    private let fetchRequest =  NSFetchRequest<TodoCoreData>(entityName: "Todo")
+    private let fetchRequestAll =  NSFetchRequest<TodoCoreData>(entityName: "Todo")
+    
+    private func fetchRequest(id: String) -> NSFetchRequest<TodoCoreData> {
+        
+        let fetchRequest = NSFetchRequest<TodoCoreData>(entityName: "Todo")
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        return fetchRequest
+    }
 
     func all(completion: (TodoListManagerResponse) -> ()) {
         
         do {
-            let todos = try manager.persistentContainer.viewContext.fetch(fetchRequest)
+            let todos = try manager.persistentContainer.viewContext.fetch(fetchRequestAll)
             let todoData = todos.map { Todo(todoCoreData: $0) }
             completion(.success(entity: todoData))
 
@@ -23,17 +30,13 @@ class TodoManagerCoreDataImpl: TodoManager {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
-
-        
     }
     
     func fetch(id: String, completion: (TodoItemManagerResponse) -> ()) {
-        
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
 
         do {
             
-            let todos = try manager.persistentContainer.viewContext.fetch(fetchRequest)
+            let todos = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
             let todoData = todos.map { Todo(todoCoreData: $0) }
             completion(.success(entity: todoData.first!))
         }
@@ -46,11 +49,9 @@ class TodoManagerCoreDataImpl: TodoManager {
     
     func completed(id: String, completed: Bool, completion: (TodoItemManagerResponse) -> ()) {
         
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
-        
         do {
             
-            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest)
+            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
             let todoCoreData = todoCoreDataList.first!
             
             todoCoreData.completed = completed
@@ -98,11 +99,9 @@ class TodoManagerCoreDataImpl: TodoManager {
             values: TodoValues,
             completion: (TodoItemManagerResponse) -> ()) {
 
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
-        
         do {
             
-            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest)
+            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
             let todoCoreData = todoCoreDataList.first!
             
             assignValues(todoCoreData: todoCoreData, todoValues: values)
@@ -117,11 +116,9 @@ class TodoManagerCoreDataImpl: TodoManager {
     
     func delete(id: String, completion: (TodoItemManagerResponse) -> ()) {
         
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
-        
         do {
             
-            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest)
+            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
             let todoCoreData = todoCoreDataList.first!
             
             let todo = Todo(todoCoreData: todoCoreData)
