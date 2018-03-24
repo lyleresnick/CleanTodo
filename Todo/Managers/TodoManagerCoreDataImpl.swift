@@ -135,27 +135,4 @@ class TodoManagerCoreDataImpl: TodoManager {
         }
     }
 }
-        
 
-private extension Todo {
-    
-    convenience init(id: String, values: TodoValues) {
-        
-        self.init(
-            id: id,
-            title: values.title,
-            note: values.note,
-            completeBy: values.completeBy,
-            priority: values.priority,
-            completed: values.completed)
-    }
-    
-    func set(values: TodoValues) {
-        
-        title = values.title
-        note = values.note
-        completeBy = values.completeBy
-        priority = values.priority
-        completed = values.completed
-    }
-}
