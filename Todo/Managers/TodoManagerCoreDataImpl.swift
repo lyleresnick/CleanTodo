@@ -28,8 +28,13 @@ class TodoManagerCoreDataImpl: TodoManager {
 
         } catch {
             let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
         }
+    }
+    
+    private func makeFailure(error: Error) -> TodoItemManagerResponse {
+        let nserror = error as NSError
+        return .failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription)
     }
     
     func fetch(id: String, completion: (TodoItemManagerResponse) -> ()) {
@@ -46,8 +51,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             }
         }
         catch {
-            let nserror = error as NSError
-            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
+            completion(makeFailure(error: error))
         }
     }
     
@@ -68,8 +72,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             }
         }
         catch {
-            let nserror = error as NSError
-            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
+            completion(makeFailure(error: error))
         }
     }
     
@@ -88,8 +91,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             completion(.success(entity: Todo(id: id.uuidString, values: values) ) )
         }
         catch {
-            let nserror = error as NSError
-            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
+            completion(makeFailure(error: error))
         }
     }
     
@@ -113,8 +115,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             }
         }
         catch {
-            let nserror = error as NSError
-            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
+            completion(makeFailure(error: error))
         }
     }
     
@@ -135,8 +136,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             }
         }
         catch {
-            let nserror = error as NSError
-            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
+            completion(makeFailure(error: error))
         }
     }
 }
