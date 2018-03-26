@@ -15,9 +15,9 @@ class TodoListViewReadyUseCaseTransformer: TodoListAbstractUseCaseTransformer {
 
                fatalError("semanticError \(reason) is not being processed!")
                 
-            case let .failure(code):
+            case let .failure(error):
 
-                fatalError("failure \(code) is not being processed!")
+                fatalError("Unresolved error: \(error.description)")
 
             case let .success(entityList):
                 

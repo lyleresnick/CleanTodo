@@ -22,9 +22,9 @@ class TodoManagerCoreDataImpl: TodoManager {
     func all(completion: (TodoListManagerResponse) -> ()) {
         
         do {
-            let todos = try manager.persistentContainer.viewContext.fetch(fetchRequestAll)
-            let todoData = todos.map { Todo(todoCoreData: $0) }
-            completion(.success(entity: todoData))
+            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequestAll)
+            let todoList = todoCoreDataList.map { Todo(todoCoreData: $0) }
+            completion(.success(entity: todoList))
 
         } catch {
             let nserror = error as NSError
@@ -35,33 +35,41 @@ class TodoManagerCoreDataImpl: TodoManager {
     func fetch(id: String, completion: (TodoItemManagerResponse) -> ()) {
 
         do {
-            
-            let todos = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
-            let todoData = todos.map { Todo(todoCoreData: $0) }
-            completion(.success(entity: todoData.first!))
+            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
+            if todoCoreDataList.count > 0 {
+
+                let todoList = todoCoreDataList.map { Todo(todoCoreData: $0) }
+                completion(.success(entity: todoList.first!))
+            }
+            else {
+                completion(.semanticError(reason: .notFound))
+            }
         }
         catch {
-            
             let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
         }
     }
     
     func completed(id: String, completed: Bool, completion: (TodoItemManagerResponse) -> ()) {
         
         do {
-            
             let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
-            let todoCoreData = todoCoreDataList.first!
-            
-            todoCoreData.completed = completed
+            if todoCoreDataList.count > 0 {
+                
+                let todoCoreData = todoCoreDataList.first!
+                todoCoreData.completed = completed
 
-            try manager.save()
-            completion(.success(entity: Todo(todoCoreData: todoCoreData) ) )
+                try manager.save()
+                completion(.success(entity: Todo(todoCoreData: todoCoreData) ) )
+            }
+            else {
+                completion(.semanticError(reason: .notFound))
+            }
         }
         catch {
             let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
         }
     }
     
@@ -81,7 +89,7 @@ class TodoManagerCoreDataImpl: TodoManager {
         }
         catch {
             let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
         }
     }
     
@@ -91,35 +99,44 @@ class TodoManagerCoreDataImpl: TodoManager {
             completion: (TodoItemManagerResponse) -> ()) {
 
         do {
-            
             let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
-            let todoCoreData = todoCoreDataList.first!
-            
-            todoCoreData.set(values: values)
-            try manager.save()
-            completion(.success(entity: Todo(id: id, values: values) ) )
+            if todoCoreDataList.count > 0 {
+                
+                let todoCoreData = todoCoreDataList.first!
+                todoCoreData.set(values: values)
+
+                try manager.save()
+                completion(.success(entity: Todo(id: id, values: values) ) )
+            }
+            else {
+                completion(.semanticError(reason: .notFound))
+            }
         }
         catch {
             let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
         }
     }
     
     func delete(id: String, completion: (TodoItemManagerResponse) -> ()) {
         
         do {
-            
             let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
-            let todoCoreData = todoCoreDataList.first!
-            
-            let todo = Todo(todoCoreData: todoCoreData)
-            manager.persistentContainer.viewContext.delete(todoCoreData)
-            try manager.save()
-            completion(.success(entity: todo) )
+            if todoCoreDataList.count > 0 {
+                
+                let todoCoreData = todoCoreDataList.first!
+                let todo = Todo(todoCoreData: todoCoreData)
+                manager.persistentContainer.viewContext.delete(todoCoreData)
+                try manager.save()
+                completion(.success(entity: todo) )
+            }
+            else {
+                completion(.semanticError(reason: .notFound))
+            }
         }
         catch {
             let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
         }
     }
 }
