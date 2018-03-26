@@ -13,7 +13,7 @@ class EntityGatewayFactory {
 
         switch gatewayImplementedVia {
         case .test:
-            return { EntityGatewayImpl() }()
+            return { EntityGatewayTestImpl() }()
         case .coreData:
             return { EntityGatewayCoreDataImpl(manager: CoreDataManager.shared) }()
         }
