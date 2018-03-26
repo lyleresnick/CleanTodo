@@ -28,7 +28,7 @@
 		B31D2090203248A50039FB32 /* BackingInputViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31D208F203248A50039FB32 /* BackingInputViewLabel.swift */; };
 		B31D209420324A0B0039FB32 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31D209220324A0B0039FB32 /* DatePickerView.swift */; };
 		B31F98792029E56F0045892A /* StringLocalize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31F98782029E56F0045892A /* StringLocalize.swift */; };
-		B32058662006F5ED00C79C4A /* TodoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32058652006F5ED00C79C4A /* TodoData.swift */; };
+		B32058662006F5ED00C79C4A /* TodoTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32058652006F5ED00C79C4A /* TodoTestData.swift */; };
 		B320586C2006F7C300C79C4A /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32058692006F7C300C79C4A /* DateFormatter.swift */; };
 		B320586D2006F7C300C79C4A /* NibBasedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320586B2006F7C300C79C4A /* NibBasedView.swift */; };
 		B320587C200C357E00C79C4A /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320587A200C357E00C79C4A /* ToggleButton.swift */; };
@@ -129,7 +129,7 @@
 		B31D208F203248A50039FB32 /* BackingInputViewLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackingInputViewLabel.swift; sourceTree = "<group>"; };
 		B31D209220324A0B0039FB32 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		B31F98782029E56F0045892A /* StringLocalize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLocalize.swift; sourceTree = "<group>"; };
-		B32058652006F5ED00C79C4A /* TodoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoData.swift; sourceTree = "<group>"; };
+		B32058652006F5ED00C79C4A /* TodoTestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTestData.swift; sourceTree = "<group>"; };
 		B32058692006F7C300C79C4A /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		B320586B2006F7C300C79C4A /* NibBasedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibBasedView.swift; sourceTree = "<group>"; };
 		B320587A200C357E00C79C4A /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
@@ -348,7 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				B306CD98201068D50018F92A /* Localizable.strings */,
-				B32058652006F5ED00C79C4A /* TodoData.swift */,
+				B32058652006F5ED00C79C4A /* TodoTestData.swift */,
 				B3743E702060AEE5009D45F6 /* CoreData */,
 				B3A454F91FFDACBE00EDC6E9 /* Entities */,
 				B3A454FB1FFDACBE00EDC6E9 /* Managers */,
@@ -800,7 +800,7 @@
 				B3B017BA20256E6F00B9AFFC /* TodoItemDisplayPresenterOutput.swift in Sources */,
 				B36C3726203C550100E19029 /* TodoRootRouterPresenter.swift in Sources */,
 				B3743E7C206205E8009D45F6 /* EntityGatewayCoreDataImpl.swift in Sources */,
-				B32058662006F5ED00C79C4A /* TodoData.swift in Sources */,
+				B32058662006F5ED00C79C4A /* TodoTestData.swift in Sources */,
 				B3B017C220256E6F00B9AFFC /* TodoItemDisplayViewReadyUseCaseTransformer.swift in Sources */,
 				B3112D5F20307EB0005E9CA1 /* TodoItemEditNoteTextViewDelegate.swift in Sources */,
 				B31148EF200040390091B71E /* TodoListUseCaseOutput.swift in Sources */,

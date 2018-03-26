@@ -5,11 +5,11 @@ import Foundation
 class TodoManagerTestImpl: TodoManager {
 
     func all(completion: (TodoListManagerResponse) -> ()) {
-        completion(.success(entity: todoData))
+        completion(.success(entity: todoTestData))
     }
     
     func fetch(id:String, completion: (TodoItemManagerResponse) -> ()) {
-        for entity in todoData {
+        for entity in todoTestData {
             if entity.id == id {
                 
                 completion(.success(entity: entity))
@@ -37,7 +37,7 @@ class TodoManagerTestImpl: TodoManager {
             completion: (TodoItemManagerResponse) -> ()) {
         
         let todo = Todo( id: UUID().uuidString, values: values)
-        todoData.append(todo)
+        todoTestData.append(todo)
         completion(.success(entity: todo))
     }
 
@@ -57,7 +57,7 @@ class TodoManagerTestImpl: TodoManager {
     }
     
     private func findTodo(id: String) -> Todo? {
-        for entity in todoData {
+        for entity in todoTestData {
             if entity.id == id {
                 return entity
             }
@@ -69,7 +69,7 @@ class TodoManagerTestImpl: TodoManager {
         
         if let (index, todo) = findTodoIndex(id: id) {
             
-            todoData.remove(at: index)
+            todoTestData.remove(at: index)
             completion(.success(entity: todo))
         }
         else {
@@ -78,7 +78,7 @@ class TodoManagerTestImpl: TodoManager {
     }
     
     private func findTodoIndex(id: String) -> (Int,Todo)? {
-        for (index, entity) in todoData.enumerated() {
+        for (index, entity) in todoTestData.enumerated() {
             if entity.id == id {
                 return (index, entity)
             }
