@@ -99,9 +99,7 @@ class TodoItemEditViewController: UIViewController {
     }
     
     @IBAction func mainViewTouched(_ sender: Any) {
-        completeByLabel.resignFirstResponder()
-        noteTextView.resignFirstResponder()
-        titleTextField.resignFirstResponder()
+        view.endEditing(true)
     }
 }
 
