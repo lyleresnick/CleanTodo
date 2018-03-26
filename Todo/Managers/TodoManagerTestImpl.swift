@@ -65,7 +65,7 @@ class TodoManagerTestImpl: TodoManager {
         return nil
     }
 
-    func delete(id:String, completion: (TodoItemManagerResponse) -> ()) {
+    func delete(id: String, completion: (TodoItemManagerResponse) -> ()) {
         
         if let (index, todo) = findTodoIndex(id: id) {
             
@@ -88,7 +88,6 @@ class TodoManagerTestImpl: TodoManager {
 }
 
 private extension Todo {
-
     
     func set(values: TodoValues) {
         

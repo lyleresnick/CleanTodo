@@ -74,7 +74,7 @@ class TodoManagerCoreDataImpl: TodoManager {
         let id = UUID()
 
         todoCoreData.id = id
-        assignValues(todoCoreData: todoCoreData, todoValues: values)
+        todoCoreData.set(values: values)
         do {
             try manager.save()
             completion(.success(entity: Todo(id: id.uuidString, values: values) ) )
@@ -85,15 +85,6 @@ class TodoManagerCoreDataImpl: TodoManager {
         }
     }
     
-    private func assignValues(todoCoreData: TodoCoreData, todoValues: TodoValues) {
-        
-        todoCoreData.title = todoValues.title
-        todoCoreData.note = todoValues.note
-        todoCoreData.priority = (todoValues.priority != nil) ? todoValues.priority!.rawValue : nil
-        todoCoreData.completeBy = todoValues.completeBy
-        todoCoreData.completed = todoValues.completed
-    }
-
     func update(
             id: String,
             values: TodoValues,
@@ -104,7 +95,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
             let todoCoreData = todoCoreDataList.first!
             
-            assignValues(todoCoreData: todoCoreData, todoValues: values)
+            todoCoreData.set(values: values)
             try manager.save()
             completion(.success(entity: Todo(id: id, values: values) ) )
         }
@@ -130,6 +121,18 @@ class TodoManagerCoreDataImpl: TodoManager {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
+    }
+}
+
+private extension TodoCoreData {
+    
+    func set(values: TodoValues) {
+        
+        title = values.title
+        note = values.note
+        priority = (values.priority != nil) ? values.priority!.rawValue : nil
+        completeBy = values.completeBy
+        completed = values.completed
     }
 }
 
