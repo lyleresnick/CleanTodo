@@ -32,7 +32,7 @@ class TodoManagerCoreDataImpl: TodoManager {
         }
     }
     
-    private func makeFailure(error: Error) -> TodoItemManagerResponse {
+    private func makeItemFailure(error: Error) -> TodoItemManagerResponse {
         let nserror = error as NSError
         return .failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription)
     }
@@ -51,7 +51,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             }
         }
         catch {
-            completion(makeFailure(error: error))
+            completion(makeItemFailure(error: error))
         }
     }
     
@@ -72,7 +72,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             }
         }
         catch {
-            completion(makeFailure(error: error))
+            completion(makeItemFailure(error: error))
         }
     }
     
@@ -91,7 +91,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             completion(.success(entity: Todo(id: id.uuidString, values: values) ) )
         }
         catch {
-            completion(makeFailure(error: error))
+            completion(makeItemFailure(error: error))
         }
     }
     
@@ -115,7 +115,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             }
         }
         catch {
-            completion(makeFailure(error: error))
+            completion(makeItemFailure(error: error))
         }
     }
     
@@ -136,7 +136,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             }
         }
         catch {
-            completion(makeFailure(error: error))
+            completion(makeItemFailure(error: error))
         }
     }
 }
