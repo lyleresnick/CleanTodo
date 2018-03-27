@@ -22,7 +22,7 @@ class TodoManagerCoreDataImpl: TodoManager {
     func all(completion: (TodoListManagerResponse) -> ()) {
         
         do {
-            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequestAll)
+            let todoCoreDataList = try manager.fetch(fetchRequest: fetchRequestAll)
             let todoList = todoCoreDataList.map { Todo(todoCoreData: $0) }
             completion(.success(entity: todoList))
 
@@ -40,7 +40,7 @@ class TodoManagerCoreDataImpl: TodoManager {
     func fetch(id: String, completion: (TodoItemManagerResponse) -> ()) {
 
         do {
-            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
+            let todoCoreDataList = try manager.fetch(fetchRequest: fetchRequest(id: id))
             if todoCoreDataList.count > 0 {
 
                 let todoList = todoCoreDataList.map { Todo(todoCoreData: $0) }
@@ -58,7 +58,7 @@ class TodoManagerCoreDataImpl: TodoManager {
     func completed(id: String, completed: Bool, completion: (TodoItemManagerResponse) -> ()) {
         
         do {
-            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
+            let todoCoreDataList = try manager.fetch(fetchRequest: fetchRequest(id: id))
             if todoCoreDataList.count > 0 {
                 
                 let todoCoreData = todoCoreDataList.first!
@@ -80,7 +80,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             values: TodoValues,
             completion: (TodoItemManagerResponse) -> ()) {
         
-        let todoCoreData = NSEntityDescription.insertNewObject(forEntityName: "Todo", into: manager.persistentContainer.viewContext) as! TodoCoreData
+        let todoCoreData = manager.insertNewObject(entityName: "Todo") as! TodoCoreData
         
         let id = UUID()
 
@@ -101,7 +101,7 @@ class TodoManagerCoreDataImpl: TodoManager {
             completion: (TodoItemManagerResponse) -> ()) {
 
         do {
-            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
+            let todoCoreDataList = try manager.fetch(fetchRequest: fetchRequest(id: id))
             if todoCoreDataList.count > 0 {
                 
                 let todoCoreData = todoCoreDataList.first!
@@ -122,12 +122,12 @@ class TodoManagerCoreDataImpl: TodoManager {
     func delete(id: String, completion: (TodoItemManagerResponse) -> ()) {
         
         do {
-            let todoCoreDataList = try manager.persistentContainer.viewContext.fetch(fetchRequest(id: id))
+            let todoCoreDataList = try manager.fetch(fetchRequest: fetchRequest(id: id))
             if todoCoreDataList.count > 0 {
                 
                 let todoCoreData = todoCoreDataList.first!
                 let todo = Todo(todoCoreData: todoCoreData)
-                manager.persistentContainer.viewContext.delete(todoCoreData)
+                manager.delete(object: todoCoreData)
                 try manager.save()
                 completion(.success(entity: todo) )
             }
