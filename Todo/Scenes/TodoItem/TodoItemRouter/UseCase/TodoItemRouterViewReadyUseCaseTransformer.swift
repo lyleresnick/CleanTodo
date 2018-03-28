@@ -42,12 +42,13 @@ class TodoItemRouterViewReadyUseCaseTransformer {
                     output.presentNotFound(id: id)
                 }
                 
-            case let .failure(code):
-                fatalError("unexpected Failure: code \(code)")
+            case let .failure(error):
+                
+                fatalError("Unresolved error: \(error.description)")
 
             case let .success(todo):
                 
-                cache.currentTodo = todo
+                self.cache.currentTodo = todo
                 output.presentViewReady(startMode: startMode)
             }
         }
