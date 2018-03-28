@@ -51,13 +51,13 @@ class TodoItemEditSaveUseCaseTransformer {
         }
     }
     
-    private func create(editingTodo: TodoItemEditUseCase.EditingTodo, completion: TodoManagerResponder) {
+    private func create(editingTodo: TodoItemEditUseCase.EditingTodo, completion: @escaping TodoManagerResponder) {
         todoManager.create(
             values: TodoValues(editingTodo: editingTodo),
             completion: completion)
     }
 
-    private func update(editingTodo: TodoItemEditUseCase.EditingTodo, completion: TodoManagerResponder) {
+    private func update(editingTodo: TodoItemEditUseCase.EditingTodo, completion: @escaping TodoManagerResponder) {
         todoManager.update(
             id: editingTodo.id!,
             values: TodoValues(editingTodo: editingTodo),

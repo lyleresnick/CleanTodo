@@ -48,7 +48,7 @@ class TodoItemRouterViewReadyUseCaseTransformer {
 
             case let .success(todo):
                 
-                cache.currentTodo = todo
+                self.cache.currentTodo = todo
                 output.presentViewReady(startMode: startMode)
             }
         }
