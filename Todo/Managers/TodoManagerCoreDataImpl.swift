@@ -40,7 +40,7 @@ class TodoManagerCoreDataImpl: TodoManager {
         return .failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription)
     }
     
-    func fetch(id: String, completion:  @escaping (TodoItemManagerResponse) -> ()) {
+    func fetch(id: String, completion: @escaping (TodoItemManagerResponse) -> ()) {
 
         manager.persistentContainer.performBackgroundTask() { context in
 
@@ -87,7 +87,7 @@ class TodoManagerCoreDataImpl: TodoManager {
     
     func create(
             values: TodoValues,
-            completion:  @escaping (TodoItemManagerResponse) -> ()) {
+            completion: @escaping (TodoItemManagerResponse) -> ()) {
         
         manager.persistentContainer.performBackgroundTask() { context in
             
@@ -110,7 +110,7 @@ class TodoManagerCoreDataImpl: TodoManager {
     func update(
             id: String,
             values: TodoValues,
-            completion:  @escaping (TodoItemManagerResponse) -> ()) {
+            completion: @escaping (TodoItemManagerResponse) -> ()) {
 
         manager.persistentContainer.performBackgroundTask() { context in
             
@@ -134,7 +134,7 @@ class TodoManagerCoreDataImpl: TodoManager {
         }
     }
     
-    func delete(id: String, completion:  @escaping (TodoItemManagerResponse) -> ()) {
+    func delete(id: String, completion: @escaping (TodoItemManagerResponse) -> ()) {
         
         manager.persistentContainer.performBackgroundTask() { context in
             

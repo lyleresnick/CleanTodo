@@ -46,6 +46,18 @@ class CoreDataManager {
         }
     }
     
+    func insertNewObject(entityName: String) -> NSManagedObject {
+        return NSEntityDescription.insertNewObject(forEntityName: entityName, into: persistentContainer.viewContext)
+    }
+    
+    func delete(object: NSManagedObject) {
+        persistentContainer.viewContext.delete(object)
+    }
+    
+    func fetch<T>(fetchRequest: NSFetchRequest<T>) throws -> [T]  {
+        return try persistentContainer.viewContext.fetch(fetchRequest)
+    }
+    
     func save() throws {
         
         try persistentContainer.viewContext.save()

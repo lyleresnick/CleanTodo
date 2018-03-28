@@ -8,7 +8,7 @@ class TodoManagerTestImpl: TodoManager {
         completion(.success(entity: todoTestData))
     }
     
-    func fetch(id:String, completion:  @escaping (TodoItemManagerResponse) -> ()) {
+    func fetch(id:String, completion: @escaping (TodoItemManagerResponse) -> ()) {
         for entity in todoTestData {
             if entity.id == id {
                 
@@ -19,7 +19,7 @@ class TodoManagerTestImpl: TodoManager {
         completion(.semanticError(reason: .notFound))
     }
     
-    func completed(id:String, completed: Bool, completion:  @escaping (TodoItemManagerResponse) -> ()) {
+    func completed(id:String, completed: Bool, completion: @escaping (TodoItemManagerResponse) -> ()) {
         
         if let todo = findTodo(id: id) {
             
@@ -34,7 +34,7 @@ class TodoManagerTestImpl: TodoManager {
     
     func create(
             values: TodoValues,
-            completion:  @escaping (TodoItemManagerResponse) -> ()) {
+            completion: @escaping (TodoItemManagerResponse) -> ()) {
         
         let todo = Todo( id: UUID().uuidString, values: values)
         todoTestData.append(todo)
@@ -44,7 +44,7 @@ class TodoManagerTestImpl: TodoManager {
     func update(
             id: String,
             values: TodoValues,
-            completion:  @escaping (TodoItemManagerResponse) -> ()) {
+            completion: @escaping (TodoItemManagerResponse) -> ()) {
         
         if let todo = findTodo(id: id) {
             
@@ -65,7 +65,7 @@ class TodoManagerTestImpl: TodoManager {
         return nil
     }
 
-    func delete(id: String, completion:  @escaping (TodoItemManagerResponse) -> ()) {
+    func delete(id: String, completion: @escaping (TodoItemManagerResponse) -> ()) {
         
         if let (index, todo) = findTodoIndex(id: id) {
             
