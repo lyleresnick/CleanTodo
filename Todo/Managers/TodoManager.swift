@@ -5,13 +5,10 @@ import Foundation
 enum  TodoErrorReason {
     case notFound
 }
-struct TodoValues {
-    
-    var title: String
-    var note: String
-    var completeBy: Date?
-    var priority: Todo.Priority?
-    var completed: Bool
+
+enum DataSources {
+    case test
+    case coreData
 }
 
 typealias TodoListManagerResponse = ManagerResponse<[Todo], DataSources, TodoErrorReason>
@@ -35,18 +32,5 @@ protocol TodoManager {
     func delete(id:String, completion: @escaping (TodoItemManagerResponse) -> ())
 }
 
-extension Todo {
-    
-    convenience init(id: String, values: TodoValues) {
-        
-        self.init(
-            id: id,
-            title: values.title,
-            note: values.note,
-            completeBy: values.completeBy,
-            priority: values.priority,
-            completed: values.completed)
-    }
-}
 
 
