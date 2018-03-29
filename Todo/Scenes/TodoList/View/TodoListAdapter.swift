@@ -21,8 +21,8 @@ extension TodoListAdapter: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         return cellConfigurator
-            .set( tableView: tableView, indexPath: indexPath, presenter: presenter )
-            .show( viewModel: presenter.row( at: indexPath.row ))
+            .set(tableView: tableView, indexPath: indexPath, presenter: presenter)
+            .show(viewModel: presenter.row(at: indexPath.row))
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
