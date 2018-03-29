@@ -15,10 +15,10 @@ class TodoListDeleteUseCaseTransformer: TodoListAbstractUseCaseTransformer {
                 
                 fatalError("semanticError \(reason) is not being processed!")
                 
-            case let .failure(code):
+            case let .failure(error):
                 
-                fatalError("failure \(code) is not being processed!")
-                
+                fatalError("Unresolved error: \(error.description)")
+
             case .success(_):
                 
                 output.presentDeleted(index: index)

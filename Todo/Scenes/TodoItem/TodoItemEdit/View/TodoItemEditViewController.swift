@@ -91,17 +91,16 @@ class TodoItemEditViewController: UIViewController {
     
     @IBAction func completeByCancelTouched(_ sender: UIButton) {
         completeByLabel.resignFirstResponder()
-
     }
+    
     @IBAction func completeBySetTouched(_ sender: UIButton) {
+        
         presenter.event(completeBy: completeByPickerView.date! )
         completeByLabel.resignFirstResponder()
     }
     
     @IBAction func mainViewTouched(_ sender: Any) {
-        completeByLabel.resignFirstResponder()
-        noteTextView.resignFirstResponder()
-        titleTextField.resignFirstResponder()
+        view.endEditing(true)
     }
 }
 
