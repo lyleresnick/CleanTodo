@@ -20,19 +20,19 @@ typealias TodoItemManagerResponse = ManagerResponse<Todo, DataSources, TodoError
 protocol TodoManager {
     
     func all(completion: @escaping (TodoListManagerResponse) -> ())
-    func completed(id: String, completed: Bool, completion:  @escaping (TodoItemManagerResponse) -> ())
+    func completed(id: String, completed: Bool, completion: @escaping (TodoItemManagerResponse) -> ())
     
     func create(
                 values: TodoValues,
-                completion:  @escaping (TodoItemManagerResponse) -> ())
+                completion: @escaping (TodoItemManagerResponse) -> ())
     
     func update(id: String,
                 values: TodoValues,
-                completion:  @escaping (TodoItemManagerResponse) -> ())
+                completion: @escaping (TodoItemManagerResponse) -> ())
     
-    func fetch(id:String, completion:  @escaping (TodoItemManagerResponse) -> ())
+    func fetch(id:String, completion: @escaping (TodoItemManagerResponse) -> ())
     
-    func delete(id:String, completion:  @escaping (TodoItemManagerResponse) -> ())
+    func delete(id:String, completion: @escaping (TodoItemManagerResponse) -> ())
 }
 
 extension Todo {
