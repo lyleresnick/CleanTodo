@@ -14,11 +14,11 @@ extension TodoRootRouterPresenter: TodoItemRouterRouter {
 
 extension TodoRootRouterPresenter: TodoListRouter {
     
-    func routeCreateItem(completion: @escaping TodoListChangedItemCallback) {
-        output.showCreateItem(completion: completion)
+    func routeDisplayItem(id: String, completion: @escaping TodoListChangedItemCallback) {
+        output.showItem(id: id, completion: completion)
     }
     
-    func routeItem(id: String, completion: @escaping TodoListChangedItemCallback) {
-        output.showItem(id: id, completion: completion)
+    func routeCreateItem(completion: @escaping TodoListChangedItemCallback) {
+        output.showCreateItem(completion: completion)
     }
 }

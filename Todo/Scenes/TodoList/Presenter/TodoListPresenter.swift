@@ -42,7 +42,7 @@ class TodoListPresenter {
     
     func eventItemSelected(index: Int) {
         
-        router.routeItem(id: viewModelList[index].id) { model in
+        router.routeDisplayItem(id: viewModelList[index].id) { model in
             self.viewModelList[index] = TodoListViewModel(model: model)
             self.output.showChanged(index: index)
         }

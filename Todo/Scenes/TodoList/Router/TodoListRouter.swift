@@ -4,6 +4,6 @@ typealias TodoListChangedItemCallback = (TodoListPresentationModel) -> ()
 
 protocol TodoListRouter: class {
     
-    func routeItem(id: String, completion: @escaping TodoListChangedItemCallback )
+    func routeDisplayItem(id: String, completion: @escaping TodoListChangedItemCallback )
     func routeCreateItem(completion: @escaping TodoListChangedItemCallback )
 }
