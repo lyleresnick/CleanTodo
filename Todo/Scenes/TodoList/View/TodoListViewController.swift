@@ -8,12 +8,15 @@ class TodoListViewController: UIViewController {
     var presenter: TodoListPresenter!
     @IBOutlet weak var tableView: UITableView!
     
-    var router: TodoListRouter! {
-        didSet {
-            presenter.router = router
+    weak var router: TodoListRouter! {
+        set {
+            presenter.router = newValue
+        }
+        get {
+            return presenter.router
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
