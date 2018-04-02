@@ -7,11 +7,11 @@ class EntityGatewayFactory {
         case coreData
     }
     
-    static let gatewayImplementedVia = Implementation.coreData
+    static let gatewayImplementation = Implementation.coreData
     
     static var entityGateway: EntityGateway = {
 
-        switch gatewayImplementedVia {
+        switch gatewayImplementation {
         case .test:
             return { EntityGatewayTestImpl() }()
         case .coreData:
