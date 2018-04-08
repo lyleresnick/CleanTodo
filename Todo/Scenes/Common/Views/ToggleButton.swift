@@ -10,14 +10,7 @@ protocol ToggleButtonDelegate: class {
 @IBDesignable
 class ToggleButton: UIButton {
     
-    #if TARGET_INTERFACE_BUILDER
-    weak var delegate: TwoStateButtonDelegate? {
-        set { }
-        get { return nil }
-    }
-    #else
     weak var delegate: ToggleButtonDelegate?
-    #endif
 
     @IBInspectable var offImage: UIImage! {
         didSet {

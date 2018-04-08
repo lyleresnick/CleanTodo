@@ -32,19 +32,25 @@ class TodoListPresenter {
 
     func eventCreate() {
         
-        router.routeCreateItem() { model in
+        router.routeCreateItem() { [weak self] model in
             
-            let index = self.viewModelList.count
-            self.viewModelList.append(TodoListViewModel(model: model))
-            self.output.showAdded(index: index)
+            if let strongSelf = self {
+
+                let index = strongSelf.viewModelList.count
+                strongSelf.viewModelList.append(TodoListViewModel(model: model))
+                strongSelf.output.showAdded(index: index)
+            }
         }
     }
     
     func eventItemSelected(index: Int) {
         
-        router.routeDisplayItem(id: viewModelList[index].id) { model in
-            self.viewModelList[index] = TodoListViewModel(model: model)
-            self.output.showChanged(index: index)
+        router.routeDisplayItem(id: viewModelList[index].id) { [weak self] model in
+            
+            if let strongSelf = self {
+                strongSelf.viewModelList[index] = TodoListViewModel(model: model)
+                strongSelf.output.showChanged(index: index)
+            }
         }
     }
     
