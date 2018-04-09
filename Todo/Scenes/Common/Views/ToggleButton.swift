@@ -61,7 +61,7 @@ class ToggleButton: UIButton {
         }
     }
     
-    var on: Bool {
+    @IBInspectable var on: Bool {
         get { return isOn }
         set {
             isOn = newValue

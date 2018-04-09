@@ -40,6 +40,7 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="offImage" value="checkbox_unchecked"/>
                                                         <userDefinedRuntimeAttribute type="image" keyPath="onImage" value="checkbox_checked"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="on" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="!!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQK-YM-Kgm">
