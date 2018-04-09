@@ -7,7 +7,7 @@ class TodoItemDisplayPresenter {
     weak var output: TodoItemDisplayPresenterOutput!
     weak var router: TodoItemDisplayRouter! {
         didSet {
-            useCase.cache = router.cache
+            useCase.state = router.state
         }
     }
     

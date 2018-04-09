@@ -3,19 +3,19 @@
 class TodoItemEditViewReadyUseCaseTransformer {
     
     private let editMode: TodoItemEditMode
-    private let cache: TodoItemRouterUseCaseCache
+    private let state: TodoItemRouterUseCaseState
     
-    init(editMode: TodoItemEditMode, cache: TodoItemRouterUseCaseCache) {
+    init(editMode: TodoItemEditMode, state: TodoItemRouterUseCaseState) {
         self.editMode = editMode
-        self.cache = cache
+        self.state = state
     }
 
     func transform(output: TodoItemEditUseCaseOutput) -> TodoItemEditUseCase.EditingTodo {
         
         switch editMode {
         case .update:
-            output.present(model: TodoItemEditPresentationModel(entity: cache.currentTodo!))
-            return TodoItemEditUseCase.EditingTodo(todo: cache.currentTodo!)
+            output.present(model: TodoItemEditPresentationModel(entity: state.currentTodo!))
+            return TodoItemEditUseCase.EditingTodo(todo: state.currentTodo!)
         case .create:
             output.presentNewModel()
             return TodoItemEditUseCase.EditingTodo()

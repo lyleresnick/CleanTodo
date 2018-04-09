@@ -7,7 +7,7 @@ class TodoItemEditPresenter {
     private let useCase: TodoItemEditUseCase
     weak var router: TodoItemEditRouter! {
         didSet {
-            useCase.cache = router.cache
+            useCase.state = router.state
         }
     }
     

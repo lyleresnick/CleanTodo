@@ -3,7 +3,7 @@
 class TodoItemDisplayUseCase {
     
     weak var output: TodoItemDisplayUseCaseOutput!
-    weak var cache: TodoItemRouterUseCaseCache!
+    weak var state: TodoItemRouterUseCaseState!
     
     private let entityGateway: EntityGateway
     
@@ -14,7 +14,7 @@ class TodoItemDisplayUseCase {
 
     func eventViewReady() {
 
-        let transformer = TodoItemDisplayViewReadyUseCaseTransformer(cache: cache)
+        let transformer = TodoItemDisplayViewReadyUseCaseTransformer(state: state)
         transformer.transform(output: output)
     }
 }

@@ -4,12 +4,12 @@ class TodoItemEditSaveUseCaseTransformer {
     
     private let editMode: TodoItemEditMode
     private let todoManager: TodoManager
-    private let cache: TodoItemRouterUseCaseCache
+    private let state: TodoItemRouterUseCaseState
 
-    init(editMode: TodoItemEditMode, todoManager: TodoManager, cache: TodoItemRouterUseCaseCache) {
+    init(editMode: TodoItemEditMode, todoManager: TodoManager, state: TodoItemRouterUseCaseState) {
         self.editMode = editMode
         self.todoManager = todoManager
-        self.cache = cache
+        self.state = state
     }
     
     private typealias TodoManagerResponder = (TodoItemManagerResponse) -> ()
@@ -30,8 +30,8 @@ class TodoItemEditSaveUseCaseTransformer {
                 
             case let .success(todo):
                 
-                self.cache.currentTodo = todo
-                self.cache.itemChanged = true
+                self.state.currentTodo = todo
+                self.state.itemChanged = true
                 
                 output.presentDisplayView()
             }

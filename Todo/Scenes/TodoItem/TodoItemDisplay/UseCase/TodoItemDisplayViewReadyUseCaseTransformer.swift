@@ -2,15 +2,15 @@
 
 class TodoItemDisplayViewReadyUseCaseTransformer {
     
-    private let cache: TodoItemRouterUseCaseCache
+    private let state: TodoItemRouterUseCaseState
 
-    init(cache: TodoItemRouterUseCaseCache) {
-        self.cache = cache
+    init(state: TodoItemRouterUseCaseState) {
+        self.state = state
     }
 
     func transform(output: TodoItemDisplayUseCaseOutput  )  {
         
-        let todo = cache.currentTodo!
+        let todo = state.currentTodo!
         output.presentBegin()
         
         output.present(field: .title, value: todo.title)
