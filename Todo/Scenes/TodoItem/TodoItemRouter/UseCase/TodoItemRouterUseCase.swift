@@ -3,7 +3,7 @@
 class TodoItemRouterUseCase {
     
     weak var output: TodoItemRouterUseCaseOutput!
-    weak var cache: TodoItemRouterUseCaseState!
+    weak var state: TodoItemRouterUseCaseState!
     
     private let entityGateway: EntityGateway
     
@@ -14,14 +14,14 @@ class TodoItemRouterUseCase {
 
     func eventViewReady(startMode: TodoStartMode) {
 
-        let transformer = TodoItemRouterViewReadyUseCaseTransformer(modelManager: entityGateway.todoManager, cache: cache)
+        let transformer = TodoItemRouterViewReadyUseCaseTransformer(modelManager: entityGateway.todoManager, state: state)
         transformer.transform(startMode: startMode, output: output)
     }
     
     func eventBack() {
         
-        if cache.itemChanged {
-            output.presentChanged(item: TodoListPresentationModel(entity: cache.currentTodo!))
+        if state.itemChanged {
+            output.presentChanged(item: TodoListPresentationModel(entity: state.currentTodo!))
         }
     }
 }

@@ -3,11 +3,11 @@
 class TodoItemRouterViewReadyUseCaseTransformer {
     
     private let modelManager: TodoManager
-    private let cache: TodoItemRouterUseCaseState
+    private let state: TodoItemRouterUseCaseState
 
-    init(modelManager: TodoManager, cache: TodoItemRouterUseCaseState) {
+    init(modelManager: TodoManager, state: TodoItemRouterUseCaseState) {
         self.modelManager = modelManager
-        self.cache = cache
+        self.state = state
     }
 
     func transform( startMode: TodoStartMode, output: TodoItemRouterUseCaseOutput )  {
@@ -22,7 +22,7 @@ class TodoItemRouterViewReadyUseCaseTransformer {
     
     private func startCreate(startMode: TodoStartMode, output: TodoItemRouterUseCaseOutput) {
         
-        cache.currentTodo = nil
+        state.currentTodo = nil
         output.presentViewReady(startMode: startMode)
     }
 
@@ -48,7 +48,7 @@ class TodoItemRouterViewReadyUseCaseTransformer {
 
             case let .success(todo):
                 
-                self.cache.currentTodo = todo
+                self.state.currentTodo = todo
                 output.presentViewReady(startMode: startMode)
             }
         }

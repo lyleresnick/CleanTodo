@@ -15,6 +15,7 @@ class TodoItemRouterPresenter {
 
     init(useCase: TodoItemRouterUseCase) {
         self.useCase = useCase
+        useCase.state = state
     }
     
     func eventViewReady() {
