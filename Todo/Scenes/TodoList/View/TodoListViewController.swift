@@ -21,12 +21,12 @@ class TodoListViewController: UIViewController {
         super.awakeFromNib()
 
         TodoListConnector(viewController: self).configure()
+        adapter = TodoListAdapter(presenter: presenter)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        adapter = TodoListAdapter(presenter: presenter)
         tableView.delegate = adapter
         tableView.dataSource = adapter
 

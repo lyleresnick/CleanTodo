@@ -74,7 +74,6 @@ class TodoItemEditPresenter {
         }
         else {
             useCase.eventCancel()
-
         }
     }
 }
@@ -86,15 +85,12 @@ extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
     }
 
     func present(model: TodoItemEditPresentationModel) {
-        
         output.show(model: TodoItemEditViewModel(model: model))
     }
     
     func presentNewModel() {
-        
         output.showNewModel()
     }
-
     
     func presentDisplayView() {
         router.routeDisplayView()
@@ -109,6 +105,7 @@ extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
     }
     
     func present(completeBy: Date?) {
+        
         output.show(completeBy: (completeBy != nil) ? TodoItemEditViewModel.outboundDateFormatter.string(from: completeBy!) : "")
     }
     
