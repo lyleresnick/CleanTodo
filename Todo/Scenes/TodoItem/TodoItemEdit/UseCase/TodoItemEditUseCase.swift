@@ -5,7 +5,7 @@ import Foundation
 class TodoItemEditUseCase {
     
     weak var output: TodoItemEditUseCaseOutput!
-    weak var state: TodoItemRouterUseCaseState!
+    weak var state: TodoItemUseCaseState!
     
     struct EditingTodo {
         

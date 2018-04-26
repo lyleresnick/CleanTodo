@@ -3,9 +3,9 @@
 class TodoItemRouterViewReadyUseCaseTransformer {
     
     private let modelManager: TodoManager
-    private let state: TodoItemRouterUseCaseState
+    private let state: TodoItemUseCaseState
 
-    init(modelManager: TodoManager, state: TodoItemRouterUseCaseState) {
+    init(modelManager: TodoManager, state: TodoItemUseCaseState) {
         self.modelManager = modelManager
         self.state = state
     }

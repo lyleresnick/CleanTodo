@@ -3,9 +3,9 @@
 class TodoItemEditViewReadyUseCaseTransformer {
     
     private let editMode: TodoItemEditMode
-    private let state: TodoItemRouterUseCaseState
+    private let state: TodoItemUseCaseState
     
-    init(editMode: TodoItemEditMode, state: TodoItemRouterUseCaseState) {
+    init(editMode: TodoItemEditMode, state: TodoItemUseCaseState) {
         self.editMode = editMode
         self.state = state
     }

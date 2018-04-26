@@ -2,9 +2,9 @@
 
 class TodoItemDisplayViewReadyUseCaseTransformer {
     
-    private let state: TodoItemRouterUseCaseState
+    private let state: TodoItemUseCaseState
 
-    init(state: TodoItemRouterUseCaseState) {
+    init(state: TodoItemUseCaseState) {
         self.state = state
     }
 

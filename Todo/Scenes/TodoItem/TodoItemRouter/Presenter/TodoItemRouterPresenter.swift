@@ -11,7 +11,7 @@ class TodoItemRouterPresenter {
 
     weak var output: TodoItemRouterPresenterOutput!
     
-    var state = TodoItemRouterUseCaseState()
+    var state = TodoItemUseCaseState()
 
     init(useCase: TodoItemRouterUseCase) {
         self.useCase = useCase

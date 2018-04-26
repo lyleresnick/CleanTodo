@@ -2,7 +2,7 @@
 
 protocol TodoItemDisplayRouter: class {
     
-    var state: TodoItemRouterUseCaseState {get}
+    var state: TodoItemUseCaseState {get}
 
     func routeEditView()
 }

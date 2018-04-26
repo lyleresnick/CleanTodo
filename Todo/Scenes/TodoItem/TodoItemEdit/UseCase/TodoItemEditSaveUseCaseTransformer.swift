@@ -4,9 +4,9 @@ class TodoItemEditSaveUseCaseTransformer {
     
     private let editMode: TodoItemEditMode
     private let todoManager: TodoManager
-    private let state: TodoItemRouterUseCaseState
+    private let state: TodoItemUseCaseState
 
-    init(editMode: TodoItemEditMode, todoManager: TodoManager, state: TodoItemRouterUseCaseState) {
+    init(editMode: TodoItemEditMode, todoManager: TodoManager, state: TodoItemUseCaseState) {
         self.editMode = editMode
         self.todoManager = todoManager
         self.state = state

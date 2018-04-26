@@ -3,7 +3,7 @@
 class TodoItemRouterUseCase {
     
     weak var output: TodoItemRouterUseCaseOutput!
-    weak var state: TodoItemRouterUseCaseState!
+    weak var state: TodoItemUseCaseState!
     
     private let entityGateway: EntityGateway
     
