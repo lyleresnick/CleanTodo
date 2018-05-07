@@ -2,9 +2,9 @@
 
 import Foundation
 
-class TodoListDoneUseCaseTransformer: TodoListAbstractUseCaseTransformer {
+class TodoListCompleteUseCaseTransformer: TodoListAbstractUseCaseTransformer {
     
-    func transform(completed: Bool, index: Int, id: String, output: TodoListUseCaseOutput)  {
+    func transform(completed: Bool, index: Int, id: String, output: TodoListCompleteUseCaseOutput)  {
         
         todoManager.completed(id: id, completed: completed) { [weak output] result in
 
@@ -21,7 +21,7 @@ class TodoListDoneUseCaseTransformer: TodoListAbstractUseCaseTransformer {
 
             case let .success(entity):
                 
-                output.presentChangedNoUpdate(model: TodoListPresentationModel(entity: entity), index: index)
+                output.presentCompleted(model: TodoListPresentationModel(entity: entity), index: index)
             }
         }
     }

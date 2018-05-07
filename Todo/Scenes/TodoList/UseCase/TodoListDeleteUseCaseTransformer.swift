@@ -4,7 +4,7 @@ import Foundation
 
 class TodoListDeleteUseCaseTransformer: TodoListAbstractUseCaseTransformer {
     
-    func transform(index: Int, id: String, output: TodoListUseCaseOutput)  {
+    func transform(index: Int, id: String, output: TodoListDeleteUseCaseOutput)  {
         
         todoManager.delete(id: id) { [weak output] result in
             
