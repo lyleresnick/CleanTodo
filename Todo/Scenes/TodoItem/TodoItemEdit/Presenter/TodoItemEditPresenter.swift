@@ -73,7 +73,7 @@ class TodoItemEditPresenter {
             router.routeCreateItemCancelled()
         }
         else {
-            useCase.eventCancel()
+            router.routeDisplayView()
         }
     }
 }

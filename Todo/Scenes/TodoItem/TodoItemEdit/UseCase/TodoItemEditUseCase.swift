@@ -96,8 +96,4 @@ class TodoItemEditUseCase {
         let transformer = TodoItemEditSaveUseCaseTransformer(editMode: editMode, todoManager: entityGateway.todoManager, state: state)
         transformer.transform(editingTodo: editingTodo, output: output)
     }
-    
-    func eventCancel() {
-        output.presentDisplayView()
-    }
 }
