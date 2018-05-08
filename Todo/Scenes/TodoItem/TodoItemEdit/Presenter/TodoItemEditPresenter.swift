@@ -69,10 +69,10 @@ class TodoItemEditPresenter {
     }
     
     func eventCancel() {
-        if editMode == .create {
+        switch editMode  {
+        case .create:
             router.routeCreateItemCancelled()
-        }
-        else {
+        case .update:
             router.routeDisplayView()
         }
     }
