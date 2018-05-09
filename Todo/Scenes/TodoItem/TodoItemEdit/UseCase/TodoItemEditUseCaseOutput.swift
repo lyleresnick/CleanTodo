@@ -2,16 +2,27 @@
 
 import Foundation
 
-protocol TodoItemEditUseCaseOutput: class {
+protocol TodoItemEditUseCaseOutput:
+    TodoItemEditViewReadyUseCaseOutput,
+    TodoItemEditSaveUseCaseOutput,
+    TodoItemEditCompleteByUseCaseOutput {}
+
+protocol TodoItemEditViewReadyUseCaseOutput: class {
     
     func present(model: TodoItemEditPresentationModel)
     func presentNewModel()
+}
+
+protocol TodoItemEditSaveUseCaseOutput: class {
     
     func presentDisplayView()
+    func presentTitleIsEmpty()
+}
+
+protocol TodoItemEditCompleteByUseCaseOutput: class {
     
     func presentKeyboard(completeBy: Date?)
     func presentKeyboardHidden()
     func present(completeBy: Date?)
-    
-    func presentTitleIsEmpty()
 }
+

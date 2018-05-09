@@ -104,7 +104,9 @@ class TodoItemEditViewController: UIViewController {
     }
 }
 
-extension TodoItemEditViewController: TodoItemEditPresenterOutput {
+extension TodoItemEditViewController: TodoItemEditPresenterOutput {}
+
+extension TodoItemEditViewController: TodoItemEditViewReadyPresenterOutput {
     
     func show(model: TodoItemEditViewModel) {
         
@@ -138,6 +140,9 @@ extension TodoItemEditViewController: TodoItemEditPresenterOutput {
             self.completedSwitch.isOn = false
         }
     }
+}
+
+extension TodoItemEditViewController: TodoItemEditCompleteByPresenterOutput {
     
     func showKeyboardHidden() {
         
@@ -156,13 +161,16 @@ extension TodoItemEditViewController: TodoItemEditPresenterOutput {
             self.completeByLabel.becomeFirstResponder()
         }
     }
-
+    
     func show(completeBy: String) {
         
         DispatchQueue.main.async {
             self.completeByLabel.text = completeBy
         }
     }
+}
+
+extension TodoItemEditViewController: TodoItemEditSavePresenterOutput {
     
     func showTitleIsEmpty(alertTitle: String, message: String) {
         
@@ -173,7 +181,6 @@ extension TodoItemEditViewController: TodoItemEditPresenterOutput {
             self.present(alert, animated: true, completion: nil)
         }
     }
-
 }
 
 

@@ -76,13 +76,15 @@ class TodoItemEditPresenter {
             router.routeDisplayView()
         }
     }
-}
-
-extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
     
     static let priortyTitles = ["none", "low", "medium", "high"].map { title in
         return title.localized
     }
+}
+
+extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {}
+
+extension TodoItemEditPresenter: TodoItemEditViewReadyUseCaseOutput {
 
     func present(model: TodoItemEditPresentationModel) {
         output.show(model: TodoItemEditViewModel(model: model))
@@ -91,15 +93,14 @@ extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
     func presentNewModel() {
         output.showNewModel()
     }
-    
-    func presentDisplayView() {
-        router.routeDisplayView()
-    }
+}
+
+extension TodoItemEditPresenter: TodoItemEditCompleteByUseCaseOutput {
 
     func presentKeyboardHidden() {
         output.showKeyboardHidden()
     }
-
+    
     func presentKeyboard(completeBy: Date?) {
         output.showKeyboard(completeBy: completeBy)
     }
@@ -108,9 +109,17 @@ extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
         
         output.show(completeBy: (completeBy != nil) ? TodoItemEditViewModel.outboundDateFormatter.string(from: completeBy!) : "")
     }
+}
+
+extension TodoItemEditPresenter: TodoItemEditSaveUseCaseOutput {
+    
+    func presentDisplayView() {
+        router.routeDisplayView()
+    }
     
     func presentTitleIsEmpty() {
         output.showTitleIsEmpty(alertTitle: "Title is empty", message: "Enter a Title")
     }
-
 }
+
+
