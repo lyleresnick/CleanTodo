@@ -1,5 +1,9 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
+protocol TodoListUseCaseOutput:
+    TodoListViewReadyUseCaseOutput,
+    TodoListCompleteUseCaseOutput,
+    TodoListDeleteUseCaseOutput {}
 
 protocol TodoListViewReadyUseCaseOutput: class {
     
@@ -15,8 +19,3 @@ protocol TodoListCompleteUseCaseOutput: class {
 protocol TodoListDeleteUseCaseOutput: class {
     func presentDeleted(index: Int)
 }
-
-protocol TodoListUseCaseOutput:
-    TodoListViewReadyUseCaseOutput,
-    TodoListCompleteUseCaseOutput,
-    TodoListDeleteUseCaseOutput {}

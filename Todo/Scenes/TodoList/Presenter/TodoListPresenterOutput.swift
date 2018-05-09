@@ -1,5 +1,10 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
+protocol TodoListPresenterOutput: class,
+    TodoListViewReadyPresenterOutput,
+    TodoListCreatePresenterOutput,
+    TodoListDeletePresenterOutput,
+    TodoListChangedPresenterOutput {}
 
 protocol TodoListViewReadyPresenterOutput {
     func showTodoList()
@@ -17,9 +22,3 @@ protocol TodoListChangedPresenterOutput {
     func showChanged(index: Int)
 }
 
-protocol TodoListPresenterOutput: class,
-    TodoListViewReadyPresenterOutput,
-    TodoListCreatePresenterOutput,
-    TodoListDeletePresenterOutput,
-    TodoListChangedPresenterOutput {
-}
