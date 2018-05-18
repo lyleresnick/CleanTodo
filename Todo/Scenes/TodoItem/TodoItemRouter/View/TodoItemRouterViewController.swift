@@ -57,14 +57,14 @@ class TodoItemRouterViewController: CurrentContainerViewController {
         case .showDisplayView:
 
             let viewController = segue.destination as! TodoItemDisplayViewController
-            viewController.presenter.router = presenter
+            viewController.router = presenter
             show(navigationItem: viewController.navigationItem)
 
         case .showEditView:
             
             let viewController = segue.destination as! TodoItemEditViewController
             viewController.editMode = sender as! TodoItemEditMode
-            viewController.presenter.router = presenter
+            viewController.router = presenter
             show(navigationItem: viewController.navigationItem)
         }
     }
