@@ -7,7 +7,7 @@ struct TodoValues {
     var title: String
     var note: String
     var completeBy: Date?
-    var priority: Todo.Priority?
+    var priority: Todo.Priority
     var completed: Bool
 }
 

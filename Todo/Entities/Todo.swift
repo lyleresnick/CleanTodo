@@ -8,7 +8,8 @@ class Todo {
         case high
         case medium
         case low
-        
+        case none
+
         var bangs: Int {
             get {
                 switch self {
@@ -18,6 +19,8 @@ class Todo {
                     return 2
                 case .low:
                     return 1
+                case .none:
+                    return 0
                 }
             }
         }
@@ -32,8 +35,10 @@ class Todo {
                 rawValue = "medium"
             case 1:
                 rawValue = "low"
+            case 0:
+                rawValue = "none"
             default:
-                fatalError("bangs must be 1, 2 or 3")
+                fatalError("bangs must be 0, 1, 2 or 3")
             }
             self.init(rawValue: rawValue)
         }
@@ -43,11 +48,11 @@ class Todo {
     var title: String
     var note: String
     var completeBy: Date?
-    var priority: Priority?
+    var priority: Priority
     var completed: Bool
     
     
-    init( id: String, title: String, note: String = "", completeBy: Date? = nil, priority: Priority? = nil, completed: Bool = false) {
+    init( id: String, title: String, note: String = "", completeBy: Date? = nil, priority: Priority = .none, completed: Bool = false) {
         self.id = id
         self.title = title
         self.note = note

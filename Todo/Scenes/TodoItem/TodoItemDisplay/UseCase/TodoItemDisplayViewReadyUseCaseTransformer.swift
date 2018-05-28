@@ -20,8 +20,11 @@ class TodoItemDisplayViewReadyUseCaseTransformer {
         if let completeBy = todo.completeBy {
             output.present(field: .completeBy, value: completeBy)
         }
-        if let priority = todo.priority {
-            output.present(field: .priority, value: priority)
+        switch todo.priority {
+        case .none:
+            break
+        default:
+            output.present(field: .priority, value: todo.priority)
         }
         output.present(field: .completed, value: todo.completed)
 

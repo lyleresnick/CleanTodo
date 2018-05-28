@@ -14,7 +14,7 @@ struct TodoListPresentationModel {
         self.id = entity.id
         self.title = entity.title
         self.completeBy = entity.completeBy
-        self.priority = entity.priority != nil ? entity.priority!.bangs : 0
+        self.priority = entity.priority.bangs
         self.completed = entity.completed
     }
 }

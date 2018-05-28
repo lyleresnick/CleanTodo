@@ -21,7 +21,7 @@ extension Todo {
             title: title,
             note: note,
             completeBy: completeBy,
-            priority: (priority != nil) ? Priority(rawValue: priority!)! : nil,
+            priority: Priority(rawValue: priority!)!,
             completed: completed )
     }
 }

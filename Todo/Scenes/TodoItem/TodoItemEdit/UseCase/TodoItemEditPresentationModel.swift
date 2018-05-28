@@ -16,7 +16,7 @@ struct TodoItemEditPresentationModel {
         title = entity.title
         note = entity.note
         completeBy = entity.completeBy
-        self.priority = entity.priority != nil ? entity.priority!.bangs : 0
+        priority = entity.priority.bangs
         completed = entity.completed
     }
 }
