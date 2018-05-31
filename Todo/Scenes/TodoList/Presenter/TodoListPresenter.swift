@@ -63,7 +63,9 @@ class TodoListPresenter {
     }
 }
 
-extension TodoListPresenter: TodoListUseCaseOutput {
+extension TodoListPresenter: TodoListUseCaseOutput {}
+
+extension TodoListPresenter: TodoListViewReadyUseCaseOutput {
 
     func presentTodoListBegin() {
         viewModelList = []
@@ -76,28 +78,24 @@ extension TodoListPresenter: TodoListUseCaseOutput {
     func presentTodoListEnd() {
         output.showTodoList()
     }
-    
-    func presentChangedNoUpdate(model: TodoListPresentationModel, index: Int) {
+}
+
+extension TodoListPresenter: TodoListCompleteUseCaseOutput {
+
+    func presentCompleted(model: TodoListPresentationModel, index: Int) {
         viewModelList[index] = TodoListViewModel( model: model )
         
         // the output was previously updated due to the immediate toggle state change
         // if this were not the case, an async call would delay the update of the screen
         // if a network error occurs or it turns out the item was deleted by another user, the app should present a message about the situation and, in the former case, reset the button to the previous state; in the latter case the item should be deleted
     }
-    
-    func presentChanged(model: TodoListPresentationModel, index: Int) {
-        viewModelList[index] = TodoListViewModel( model: model )
-        output.showChanged(index: index)
-    }
-    
+}
+
+extension TodoListPresenter: TodoListDeleteUseCaseOutput {
+
     func presentDeleted(index: Int) {
         viewModelList.remove(at: index)
         output.showDeleted(index: index)
     }
     
-    func presentAdded(model: TodoListPresentationModel) {
-        viewModelList.append(TodoListViewModel(model: model))
-        output.showAdded(index: viewModelList.count - 1)
-    }
-
 }

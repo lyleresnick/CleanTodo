@@ -10,7 +10,7 @@ class TodoItemEditViewReadyUseCaseTransformer {
         self.state = state
     }
 
-    func transform(output: TodoItemEditUseCaseOutput) -> TodoItemEditUseCase.EditingTodo {
+    func transform(output: TodoItemEditViewReadyUseCaseOutput) -> TodoItemEditUseCase.EditingTodo {
         
         switch editMode {
         case .update:

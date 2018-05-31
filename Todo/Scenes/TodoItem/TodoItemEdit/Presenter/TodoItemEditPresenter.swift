@@ -60,7 +60,7 @@ class TodoItemEditPresenter {
     
     func eventPriority(index: Int) {
         
-        let priority = (index == 0 ) ? nil : Todo.Priority(bangs: index)
+        let priority = Todo.Priority(bangs: index)!
         useCase.event(priority: priority)
     }
     
@@ -69,20 +69,22 @@ class TodoItemEditPresenter {
     }
     
     func eventCancel() {
-        if editMode == .create {
+        switch editMode  {
+        case .create:
             router.routeCreateItemCancelled()
-        }
-        else {
+        case .update:
             router.routeDisplayView()
         }
     }
-}
-
-extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
     
     static let priortyTitles = ["none", "low", "medium", "high"].map { title in
         return title.localized
     }
+}
+
+extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {}
+
+extension TodoItemEditPresenter: TodoItemEditViewReadyUseCaseOutput {
 
     func present(model: TodoItemEditPresentationModel) {
         output.show(model: TodoItemEditViewModel(model: model))
@@ -91,15 +93,14 @@ extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
     func presentNewModel() {
         output.showNewModel()
     }
-    
-    func presentDisplayView() {
-        router.routeDisplayView()
-    }
+}
+
+extension TodoItemEditPresenter: TodoItemEditCompleteByUseCaseOutput {
 
     func presentKeyboardHidden() {
         output.showKeyboardHidden()
     }
-
+    
     func presentKeyboard(completeBy: Date?) {
         output.showKeyboard(completeBy: completeBy)
     }
@@ -108,9 +109,17 @@ extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
         
         output.show(completeBy: (completeBy != nil) ? TodoItemEditViewModel.outboundDateFormatter.string(from: completeBy!) : "")
     }
+}
+
+extension TodoItemEditPresenter: TodoItemEditSaveUseCaseOutput {
+    
+    func presentDisplayView() {
+        router.routeDisplayView()
+    }
     
     func presentTitleIsEmpty() {
         output.showTitleIsEmpty(alertTitle: "Title is empty", message: "Enter a Title")
     }
-
 }
+
+

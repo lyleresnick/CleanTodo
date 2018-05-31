@@ -86,7 +86,7 @@ class TodoItemRouterViewController: CurrentContainerViewController {
     }
 }
 
-extension TodoItemRouterViewController: TodoItemRouterPresenterOutput {
+extension TodoItemRouterViewController: TodoItemRouterViewReadyPresenterOutput {
     
     func show(title: String) {
         self.title = title
@@ -102,16 +102,7 @@ extension TodoItemRouterViewController: TodoItemRouterPresenterOutput {
         }
     }
     
-    func showDisplayView() {
-
-        DispatchQueue.main.async {
-            
-            self.configureMessage(hidden: true)
-            self.performSegue(withIdentifier: Segue.showDisplayView.rawValue, sender: nil)
-        }
-    }
-    
-    func showCreateView() {
+    private func showCreateView() {
         
         DispatchQueue.main.async {
             
@@ -120,15 +111,6 @@ extension TodoItemRouterViewController: TodoItemRouterPresenterOutput {
         }
     }
     
-    func showEditView() {
-        
-        DispatchQueue.main.async {
-            
-            self.configureMessage(hidden: true)
-            self.performSegue(withIdentifier: Segue.showEditView.rawValue, sender: TodoItemEditMode.update)
-        }
-    }
-
     func showView(message: String) {
         
         DispatchQueue.main.async {
@@ -145,13 +127,41 @@ extension TodoItemRouterViewController: TodoItemRouterPresenterOutput {
         navItem.title = "todo".localized
         return navItem
     }
-
+}
+    
+extension TodoItemRouterViewController: TodoItemRouterPresenterOutput {
+    
     private func configureMessage(hidden: Bool) {
         
         messageLabel.isHidden = hidden
         containerView.isHidden = !hidden
     }
 }
+
+extension TodoItemRouterViewController: TodoItemRouterDisplayPresenterOutput {
+
+    func showDisplayView() {
+        
+        DispatchQueue.main.async {
+            
+            self.configureMessage(hidden: true)
+            self.performSegue(withIdentifier: Segue.showDisplayView.rawValue, sender: nil)
+        }
+    }
+}
+
+extension TodoItemRouterViewController: TodoItemRouterEditPresenterOutput {
+    
+    func showEditView() {
+        
+        DispatchQueue.main.async {
+            
+            self.configureMessage(hidden: true)
+            self.performSegue(withIdentifier: Segue.showEditView.rawValue, sender: TodoItemEditMode.update)
+        }
+    }
+}
+
 
 
 

@@ -4,7 +4,7 @@ import Foundation
 
 class TodoListViewReadyUseCaseTransformer: TodoListAbstractUseCaseTransformer {
 
-    func transform(output: TodoListUseCaseOutput)  {
+    func transform(output: TodoListViewReadyUseCaseOutput)  {
         
         todoManager.all() { [weak output] result in
 

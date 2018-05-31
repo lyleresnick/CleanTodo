@@ -165,7 +165,7 @@ private extension TodoCoreData {
         
         title = values.title
         note = values.note
-        priority = (values.priority != nil) ? values.priority!.rawValue : nil
+        priority = values.priority.rawValue
         completeBy = values.completeBy
         completed = values.completed
     }

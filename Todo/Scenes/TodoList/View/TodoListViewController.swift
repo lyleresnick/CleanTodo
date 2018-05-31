@@ -38,7 +38,9 @@ class TodoListViewController: UIViewController {
     }
 }
 
-extension TodoListViewController: TodoListPresenterOutput {
+extension TodoListViewController: TodoListPresenterOutput {}
+
+extension TodoListViewController: TodoListViewReadyPresenterOutput {
 
     func showTodoList() {
         
@@ -46,20 +48,30 @@ extension TodoListViewController: TodoListPresenterOutput {
             self.tableView.reloadData()
         }
     }
-    
+}
+
+extension TodoListViewController: TodoListDeletePresenterOutput {
+
     func showDeleted(index: Int) {
         
         DispatchQueue.main.async {
             self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .bottom)
         }
     }
-    
+}
+
+extension TodoListViewController: TodoListChangedPresenterOutput {
+
     func showChanged(index: Int) {
         
         DispatchQueue.main.async {
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
         }
     }
+}
+
+extension TodoListViewController: TodoListCreatePresenterOutput {
+
     func showAdded(index: Int) {
         
         DispatchQueue.main.async {

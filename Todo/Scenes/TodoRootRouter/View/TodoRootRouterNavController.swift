@@ -24,24 +24,29 @@ private enum TodoRootRouterSegue: String {
     case showTodo
 }
 
-extension TodoRootRouterNavController: TodoRootRouterPresenterOutput {
+extension TodoRootRouterNavController: TodoRootRouterPresenterOutput {}
+
+extension TodoRootRouterNavController: TodoRootRouterItemPresenterOutput {
+
+    func showPop() {
+        popViewController(animated: true)
+    }
+}
+
+extension TodoRootRouterNavController: TodoRootRouterListPresenterOutput {
     
     func showCreateItem(completion: @escaping TodoListChangedItemCallback) {
-
+        
         let identifier = TodoRootRouterSegue.createTodo.rawValue
         let startMode: TodoStartMode = .create(completion: completion)
         viewControllers.first?.performSegue(withIdentifier: identifier, sender: startMode)
     }
     
     func showItem(id: String, completion: @escaping TodoListChangedItemCallback) {
-
+        
         let identifier = TodoRootRouterSegue.showTodo.rawValue
         let startMode: TodoStartMode = .update(id: id, completion: completion)
         viewControllers.first?.performSegue(withIdentifier: identifier, sender: startMode)
-    }
-    
-    func showPop() {
-        popViewController(animated: true)
     }
 }
 

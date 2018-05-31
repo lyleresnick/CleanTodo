@@ -10,7 +10,7 @@ class TodoItemRouterViewReadyUseCaseTransformer {
         self.state = state
     }
 
-    func transform( startMode: TodoStartMode, output: TodoItemRouterUseCaseOutput )  {
+    func transform( startMode: TodoStartMode, output: TodoItemRouterViewReadyUseCaseOutput )  {
         
         switch startMode {
         case .create:
@@ -20,13 +20,13 @@ class TodoItemRouterViewReadyUseCaseTransformer {
         }
     }
     
-    private func startCreate(startMode: TodoStartMode, output: TodoItemRouterUseCaseOutput) {
+    private func startCreate(startMode: TodoStartMode, output: TodoItemRouterViewReadyUseCaseOutput) {
         
         state.currentTodo = nil
         output.presentViewReady(startMode: startMode)
     }
 
-    private func startUpdate(startMode: TodoStartMode, id: String, output: TodoItemRouterUseCaseOutput) {
+    private func startUpdate(startMode: TodoStartMode, id: String, output: TodoItemRouterViewReadyUseCaseOutput) {
         
         modelManager.fetch(id: id) { [weak output] result in
             

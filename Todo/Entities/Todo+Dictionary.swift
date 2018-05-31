@@ -15,7 +15,10 @@ extension Todo {
         let title = dictionary["title"]!
         let note = dictionary["note"]!
         let completeBy = dictionary["completeBy"]
-        let priority = dictionary["priority"]
+        var priority = dictionary["priority"]
+        if priority == nil {
+            priority = "none"
+        }
         let completed = dictionary["completed"]!
         
         self.init(
@@ -23,7 +26,7 @@ extension Todo {
             title: title,
             note: note,
             completeBy: (completeBy != nil) ? Todo.convert(date: completeBy!) : nil,
-            priority: (priority != nil) ? Priority(rawValue: priority!)! : nil,
+            priority: Priority(rawValue: priority!)!,
             completed: (completed == "true") )
     }
     

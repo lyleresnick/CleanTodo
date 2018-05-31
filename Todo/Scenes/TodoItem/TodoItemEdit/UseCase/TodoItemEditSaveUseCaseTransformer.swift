@@ -14,7 +14,7 @@ class TodoItemEditSaveUseCaseTransformer {
     
     private typealias TodoManagerResponder = (TodoItemManagerResponse) -> ()
     
-    func transform(editingTodo: TodoItemEditUseCase.EditingTodo, output: TodoItemEditUseCaseOutput) {
+    func transform(editingTodo: TodoItemEditUseCase.EditingTodo, output: TodoItemEditSaveUseCaseOutput) {
         
         let completion: TodoManagerResponder = {
             [weak output] result in

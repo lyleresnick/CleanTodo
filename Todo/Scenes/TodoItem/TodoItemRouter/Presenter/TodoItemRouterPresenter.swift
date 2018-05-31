@@ -27,8 +27,10 @@ class TodoItemRouterPresenter {
     }
 }
 
-extension TodoItemRouterPresenter: TodoItemRouterUseCaseOutput {
+extension TodoItemRouterPresenter: TodoItemRouterUseCaseOutput {}
     
+extension TodoItemRouterPresenter: TodoItemRouterBackUseCaseOutput {
+
     func presentChanged(item: TodoListPresentationModel) {
         
         switch startMode! {
@@ -38,6 +40,9 @@ extension TodoItemRouterPresenter: TodoItemRouterUseCaseOutput {
             addedCompletion(item)
         }
     }
+}
+
+extension TodoItemRouterPresenter: TodoItemRouterViewReadyUseCaseOutput {
     
     func presentTitle() {
         output.show(title: title )
@@ -56,14 +61,6 @@ extension TodoItemRouterPresenter: TodoItemRouterUseCaseOutput {
         let messageFormat = "todoNotFound".localized
         let message = String(format: messageFormat, id)
         output.showView(message: message )
-    }
-        
-    func presentEditView() {
-        output.showEditView()
-    }
-    
-    func presentDisplayView(){
-        output.showDisplayView()
     }
 }
     

@@ -18,7 +18,7 @@ class TodoListUseCase {
     
     func event(completed: Bool, index: Int, id: String) {
         
-        let transformer = TodoListDoneUseCaseTransformer(todoManager: entityGateway.todoManager)
+        let transformer = TodoListCompleteUseCaseTransformer(todoManager: entityGateway.todoManager)
         transformer.transform(completed: completed, index: index, id: id, output: output)
     }
     
