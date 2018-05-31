@@ -2,7 +2,6 @@
 
 import Foundation
 
-
 class TodoItemRouterPresenter {
 
     private let useCase: TodoItemRouterUseCase

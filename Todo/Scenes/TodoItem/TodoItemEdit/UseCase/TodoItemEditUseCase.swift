@@ -49,7 +49,6 @@ class TodoItemEditUseCase {
         let transformer = TodoItemEditViewReadyUseCaseTransformer(editMode: editMode, state: state)
         editingTodo = transformer.transform(output: output)
     }
-    
 
     // MARK: - Data Capture
     

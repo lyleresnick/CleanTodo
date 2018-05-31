@@ -97,5 +97,4 @@ extension TodoListPresenter: TodoListDeleteUseCaseOutput {
         viewModelList.remove(at: index)
         output.showDeleted(index: index)
     }
-    
 }
