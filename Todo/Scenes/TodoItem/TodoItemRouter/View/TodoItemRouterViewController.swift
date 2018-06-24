@@ -70,10 +70,10 @@ class TodoItemRouterViewController: CurrentContainerViewController {
     }
 
     override func willMove(toParentViewController parent: UIViewController?) {
-        super.willMove(toParentViewController:parent)
+        
+        super.willMove(toParentViewController: parent)
         if parent == nil {
             presenter.eventBack()
-
         }
     }
     

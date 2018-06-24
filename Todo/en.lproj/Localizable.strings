@@ -22,3 +22,5 @@
 "save" = "Save";
 "edit" = "Edit";
 
+"titleRequiredTitle" = "Title is Empty";
+"titleRequiredMessage" = "Enter a Title";

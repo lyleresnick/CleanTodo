@@ -4,6 +4,6 @@ protocol TodoItemEditRouter: class {
     
     var state: TodoItemUseCaseState {get}
     
-    func routeDisplayView()
-    func routeCreateItemCancelled()
+    func routeEditingCancelled()
+    func routeSaveCompleted()
 }
