@@ -33,7 +33,7 @@ class TodoItemEditSaveUseCaseTransformer {
                 self.state.currentTodo = todo
                 self.state.itemChanged = true
                 
-                output.presentDisplayView()
+                output.presentSaveCompleted()
             }
         }
             

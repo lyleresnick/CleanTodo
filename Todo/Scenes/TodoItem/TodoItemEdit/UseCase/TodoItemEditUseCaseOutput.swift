@@ -15,7 +15,7 @@ protocol TodoItemEditViewReadyUseCaseOutput: class {
 
 protocol TodoItemEditSaveUseCaseOutput: class {
     
-    func presentDisplayView()
+    func presentSaveCompleted()
     func presentTitleIsEmpty()
 }
 

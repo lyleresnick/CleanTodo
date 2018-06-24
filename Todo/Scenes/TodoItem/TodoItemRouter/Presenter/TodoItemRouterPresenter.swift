@@ -71,14 +71,22 @@ extension TodoItemRouterPresenter: TodoItemDisplayRouter {
 }
 
 extension TodoItemRouterPresenter: TodoItemEditRouter {
-
-    func routeDisplayView() {
+    
+    func routeSaveCompleted() {
         output.showDisplayView()
     }
     
-    func routeCreateItemCancelled() {
-        router.routeCreateItemCancelled()
+    func routeEditingCancelled() {
+        
+        switch startMode! {
+        case .update:
+            output.showDisplayView()
+        case .create:
+            router.routeCreateItemCancelled()
+        }
     }
+    
+    
 }
 
 

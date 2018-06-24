@@ -69,12 +69,7 @@ class TodoItemEditPresenter {
     }
     
     func eventCancel() {
-        switch editMode  {
-        case .create:
-            router.routeCreateItemCancelled()
-        case .update:
-            router.routeDisplayView()
-        }
+        router.routeEditingCancelled()
     }
     
     static let priortyTitles = ["none", "low", "medium", "high"].map { $0.localized }
@@ -113,8 +108,8 @@ extension TodoItemEditPresenter: TodoItemEditCompleteByUseCaseOutput {
 
 extension TodoItemEditPresenter: TodoItemEditSaveUseCaseOutput {
     
-    func presentDisplayView() {
-        router.routeDisplayView()
+    func presentSaveCompleted() {
+        router.routeSaveCompleted()
     }
     
     func presentTitleIsEmpty() {
