@@ -77,9 +77,7 @@ class TodoItemEditPresenter {
         }
     }
     
-    static let priortyTitles = ["none", "low", "medium", "high"].map { title in
-        return title.localized
-    }
+    static let priortyTitles = ["none", "low", "medium", "high"].map { $0.localized }
 }
 
 extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {}
@@ -107,7 +105,9 @@ extension TodoItemEditPresenter: TodoItemEditCompleteByUseCaseOutput {
     
     func present(completeBy: Date?) {
         
-        output.show(completeBy: (completeBy != nil) ? TodoItemEditViewModel.outboundDateFormatter.string(from: completeBy!) : "")
+        output.show(completeBy: (completeBy != nil)
+            ? TodoItemEditViewModel.outboundDateFormatter.string(from: completeBy!)
+            : "")
     }
 }
 
@@ -118,7 +118,7 @@ extension TodoItemEditPresenter: TodoItemEditSaveUseCaseOutput {
     }
     
     func presentTitleIsEmpty() {
-        output.showTitleIsEmpty(alertTitle: "Title is empty", message: "Enter a Title")
+        output.showTitleIsEmpty(alertTitle: "titleRequiredTitle".localized, message: "titleRequiredMessage".localized)
     }
 }
 

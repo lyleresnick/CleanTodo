@@ -21,3 +21,6 @@
 "cancel" = "Annuler";
 "save" = "Enregistrer";
 "edit" = "Modifier";
+
+"titleRequiredTitle" = "Le Titre est Vide";
+"titleRequiredMessage" = "Entrez un Titre";
