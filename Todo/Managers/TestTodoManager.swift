@@ -2,7 +2,7 @@
 
 import Foundation
 
-class TodoManagerTestImpl: TodoManager {
+class TestTodoManager: TodoManager {
 
     func all(completion: @escaping (TodoListManagerResponse) -> ()) {
         completion(.success(entity: todoTestData))

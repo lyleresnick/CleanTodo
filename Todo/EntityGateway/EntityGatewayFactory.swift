@@ -13,9 +13,9 @@ class EntityGatewayFactory {
 
         switch gatewayImplementation {
         case .test:
-            return { EntityGatewayTestImpl() }()
+            return TestEntityGateway()
         case .coreData:
-            return { EntityGatewayCoreDataImpl(manager: CoreDataManager.shared) }()
+            return CoreDataEntityGateway(manager: CoreDataManager.shared)
         }
     } ()
 

@@ -3,7 +3,7 @@
 import Foundation
 import CoreData
 
-class TodoManagerCoreDataImpl: TodoManager {
+class CoreDataTodoManager: TodoManager {
     
     let manager: CoreDataManager
     init(manager: CoreDataManager) {
