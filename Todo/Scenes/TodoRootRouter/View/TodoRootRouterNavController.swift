@@ -19,7 +19,7 @@ class TodoRootRouterNavController:  UINavigationController  {
     }
 }
 
-private enum TodoRootRouterSegue: String {
+enum TodoRootRouterSegue: String, Segue {
     case createTodo
     case showTodo
 }
@@ -37,25 +37,22 @@ extension TodoRootRouterNavController: TodoRootRouterListPresenterOutput {
     
     func showCreateItem(completion: @escaping TodoListChangedItemCallback) {
         
-        let identifier = TodoRootRouterSegue.createTodo.rawValue
-        let startMode: TodoStartMode = .create(completion: completion)
-        viewControllers.first?.performSegue(withIdentifier: identifier, sender: startMode)
+        performSegue(identifier: .createTodo, startMode: .create(completion: completion))
     }
     
     func showItem(id: String, completion: @escaping TodoListChangedItemCallback) {
         
-        let identifier = TodoRootRouterSegue.showTodo.rawValue
-        let startMode: TodoStartMode = .update(id: id, completion: completion)
-        viewControllers.first?.performSegue(withIdentifier: identifier, sender: startMode)
+        performSegue(identifier: .showTodo, startMode: .update(id: id, completion: completion))
     }
-}
-
-extension TodoListViewController {
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    private func performSegue(identifier: TodoRootRouterSegue, startMode: TodoStartMode) {
         
-        let viewController = segue.destination as! TodoItemRouterViewController
-        viewController.startMode = sender as! TodoStartMode
+        let listViewController = viewControllers.first as! TodoListViewController
+        listViewController.prepareFor = { segue in
+            let viewController = segue.destination as! TodoItemRouterViewController
+            viewController.startMode = startMode
+        }
+        listViewController.performSegue(identifier: identifier)
     }
 }
 
