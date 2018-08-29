@@ -7,6 +7,7 @@ class TodoListViewController: UIViewController {
     private var adapter: TodoListAdapter!
     var presenter: TodoListPresenter!
     @IBOutlet weak var tableView: UITableView!
+    var prepareFor: PrepareForSegueClosure!
     
     weak var router: TodoListRouter! {
         set {
@@ -32,6 +33,11 @@ class TodoListViewController: UIViewController {
 
         presenter.eventViewReady()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        prepareFor(segue)
+    }
+
     
     @IBAction func addTouched(_ sender: Any) {
         presenter.eventCreate()

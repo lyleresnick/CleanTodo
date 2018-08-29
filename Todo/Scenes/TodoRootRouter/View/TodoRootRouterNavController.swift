@@ -19,7 +19,7 @@ class TodoRootRouterNavController:  UINavigationController  {
     }
 }
 
-private enum TodoRootRouterSegue: String {
+enum TodoRootRouterSegue: String, Segue {
     case createTodo
     case showTodo
 }
@@ -37,25 +37,22 @@ extension TodoRootRouterNavController: TodoRootRouterListPresenterOutput {
     
     func showCreateItem(completion: @escaping TodoListChangedItemCallback) {
         
-        let identifier = TodoRootRouterSegue.createTodo.rawValue
-        let startMode: TodoStartMode = .create(completion: completion)
-        viewControllers.first?.performSegue(withIdentifier: identifier, sender: startMode)
+        let firstViewController = viewControllers.first as! TodoListViewController
+        firstViewController.prepareFor = { segue in
+            let viewController = segue.destination as! TodoItemRouterViewController
+            viewController.startMode = .create(completion: completion)
+        }
+        firstViewController.performSegue(identifier: TodoRootRouterSegue.createTodo)
     }
     
     func showItem(id: String, completion: @escaping TodoListChangedItemCallback) {
         
-        let identifier = TodoRootRouterSegue.showTodo.rawValue
-        let startMode: TodoStartMode = .update(id: id, completion: completion)
-        viewControllers.first?.performSegue(withIdentifier: identifier, sender: startMode)
-    }
-}
-
-extension TodoListViewController {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        let viewController = segue.destination as! TodoItemRouterViewController
-        viewController.startMode = sender as! TodoStartMode
+        let firstViewController = viewControllers.first as! TodoListViewController
+        firstViewController.prepareFor = { segue in
+            let viewController = segue.destination as! TodoItemRouterViewController
+            viewController.startMode = .update(id: id, completion: completion)
+        }
+        firstViewController.performSegue(identifier: TodoRootRouterSegue.showTodo)
     }
 }
 
