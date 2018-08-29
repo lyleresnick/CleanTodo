@@ -38,7 +38,6 @@ class TodoListViewController: UIViewController {
         prepareFor(segue)
     }
 
-    
     @IBAction func addTouched(_ sender: Any) {
         presenter.eventCreate()
     }

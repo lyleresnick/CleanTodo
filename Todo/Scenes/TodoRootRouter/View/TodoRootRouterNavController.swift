@@ -37,22 +37,22 @@ extension TodoRootRouterNavController: TodoRootRouterListPresenterOutput {
     
     func showCreateItem(completion: @escaping TodoListChangedItemCallback) {
         
-        let firstViewController = viewControllers.first as! TodoListViewController
-        firstViewController.prepareFor = { segue in
-            let viewController = segue.destination as! TodoItemRouterViewController
-            viewController.startMode = .create(completion: completion)
-        }
-        firstViewController.performSegue(identifier: TodoRootRouterSegue.createTodo)
+        performSegue(identifier: .createTodo, startMode: .create(completion: completion))
     }
     
     func showItem(id: String, completion: @escaping TodoListChangedItemCallback) {
         
-        let firstViewController = viewControllers.first as! TodoListViewController
-        firstViewController.prepareFor = { segue in
+        performSegue(identifier: .showTodo, startMode: .update(id: id, completion: completion))
+    }
+    
+    private func performSegue(identifier: TodoRootRouterSegue, startMode: TodoStartMode) {
+        
+        let listViewController = viewControllers.first as! TodoListViewController
+        listViewController.prepareFor = { segue in
             let viewController = segue.destination as! TodoItemRouterViewController
-            viewController.startMode = .update(id: id, completion: completion)
+            viewController.startMode = startMode
         }
-        firstViewController.performSegue(identifier: TodoRootRouterSegue.showTodo)
+        listViewController.performSegue(identifier: identifier)
     }
 }
 
