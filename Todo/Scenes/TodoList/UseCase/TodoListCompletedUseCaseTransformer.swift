@@ -2,7 +2,7 @@
 
 import Foundation
 
-class TodoListCompleteUseCaseTransformer: TodoListAbstractUseCaseTransformer {
+class TodoListCompletedUseCaseTransformer: TodoListAbstractUseCaseTransformer {
     
     func transform(completed: Bool, index: Int, id: String, output: TodoListCompleteUseCaseOutput)  {
         
