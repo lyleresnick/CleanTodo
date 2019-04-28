@@ -3,18 +3,18 @@
 class TodoItemDisplayUseCase {
     
     weak var output: TodoItemDisplayUseCaseOutput!
-    weak var state: TodoItemUseCaseState!
-    
     private let entityGateway: EntityGateway
-    
-    init( entityGateway: EntityGateway ) {
-        
+    private let itemState: TodoItemUseCaseState
+
+    init( entityGateway: EntityGateway = EntityGatewayFactory.entityGateway,
+          useCaseStore: UseCaseStore = RealUseCaseStore.store ) {
         self.entityGateway = entityGateway
+        self.itemState = useCaseStore[itemStateKey] as! TodoItemUseCaseState
     }
 
     func eventViewReady() {
 
-        let transformer = TodoItemDisplayViewReadyUseCaseTransformer(state: state)
+        let transformer = TodoItemDisplayViewReadyUseCaseTransformer(state: itemState)
         transformer.transform(output: output)
     }
 }

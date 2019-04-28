@@ -5,11 +5,7 @@ import Foundation
 class TodoItemEditPresenter {
     
     private let useCase: TodoItemEditUseCase
-    weak var router: TodoItemEditRouter! {
-        didSet {
-            useCase.state = router.state
-        }
-    }
+    weak var router: TodoItemEditRouter!
     
     var editMode: TodoItemEditMode {
         get {

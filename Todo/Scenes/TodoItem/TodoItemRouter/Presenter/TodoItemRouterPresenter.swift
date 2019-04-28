@@ -10,11 +10,8 @@ class TodoItemRouterPresenter {
 
     weak var output: TodoItemRouterPresenterOutput!
     
-    var state = TodoItemUseCaseState()
-
     init(useCase: TodoItemRouterUseCase) {
         self.useCase = useCase
-        useCase.state = state
     }
     
     func eventViewReady() {

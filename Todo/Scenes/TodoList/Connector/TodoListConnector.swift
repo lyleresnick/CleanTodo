@@ -15,9 +15,9 @@ class TodoListConnector {
         self.presenter = presenter
     }
 
-    convenience init(viewController: TodoListViewController, entityGateway: EntityGateway = EntityGatewayFactory.entityGateway) {
+    convenience init(viewController: TodoListViewController) {
 
-        let useCase = TodoListUseCase(entityGateway: entityGateway)
+        let useCase = TodoListUseCase()
         let presenter = TodoListPresenter(useCase: useCase)
 
         self.init(viewController: viewController, useCase: useCase, presenter: presenter)

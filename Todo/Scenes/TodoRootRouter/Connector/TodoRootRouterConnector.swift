@@ -13,10 +13,9 @@ class TodoRootRouterConnector {
         self.presenter = presenter
     }
 
-    convenience init(viewController: TodoRootRouterNavController, entityGateway: EntityGateway = EntityGatewayFactory.entityGateway) {
+    convenience init(viewController: TodoRootRouterNavController) {
 
         let presenter = TodoRootRouterPresenter()
-
         self.init(viewController: viewController, presenter: presenter)
     }
 

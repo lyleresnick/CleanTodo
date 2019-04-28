@@ -3,25 +3,33 @@
 class TodoItemRouterUseCase {
     
     weak var output: TodoItemRouterUseCaseOutput!
-    weak var state: TodoItemUseCaseState!
     
-    private let entityGateway: EntityGateway
-    
-    init( entityGateway: EntityGateway ) {
+    private var entityGateway: EntityGateway
+    private var useCaseStore: UseCaseStore
+    private var itemState = TodoItemUseCaseState()
+
+    init( entityGateway: EntityGateway = EntityGatewayFactory.entityGateway,
+          useCaseStore: UseCaseStore = RealUseCaseStore.store ) {
         
         self.entityGateway = entityGateway
+        self.useCaseStore = useCaseStore
+        self.useCaseStore[itemStateKey] = itemState
     }
 
     func eventViewReady(startMode: TodoStartMode) {
 
-        let transformer = TodoItemRouterViewReadyUseCaseTransformer(modelManager: entityGateway.todoManager, state: state)
+        let transformer = TodoItemRouterViewReadyUseCaseTransformer(modelManager: entityGateway.todoManager, state: itemState)
         transformer.transform(startMode: startMode, output: output)
     }
     
     func eventBack() {
         
-        if state.itemChanged {
-            output.presentChanged(item: TodoListPresentationModel(entity: state.currentTodo!))
+        if itemState.itemChanged {
+            output.presentChanged(item: TodoListPresentationModel(entity: itemState.currentTodo!))
         }
+    }
+    
+    deinit {
+        useCaseStore[itemStateKey] = nil
     }
 }

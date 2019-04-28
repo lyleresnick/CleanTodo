@@ -5,11 +5,7 @@ import Foundation
 class TodoItemDisplayPresenter {
     
     weak var output: TodoItemDisplayPresenterOutput!
-    weak var router: TodoItemDisplayRouter! {
-        didSet {
-            useCase.state = router.state
-        }
-    }
+    weak var router: TodoItemDisplayRouter!
     
     private let useCase: TodoItemDisplayUseCase
     

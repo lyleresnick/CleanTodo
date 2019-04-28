@@ -15,9 +15,9 @@ class TodoItemEditConnector {
         self.presenter = presenter
     }
 
-    convenience init(viewController: TodoItemEditViewController, entityGateway: EntityGateway = EntityGatewayFactory.entityGateway) {
+    convenience init(viewController: TodoItemEditViewController) {
 
-        let useCase = TodoItemEditUseCase(entityGateway: entityGateway)
+        let useCase = TodoItemEditUseCase()
         let presenter = TodoItemEditPresenter(useCase: useCase)
 
         self.init(viewController: viewController, useCase: useCase, presenter: presenter)

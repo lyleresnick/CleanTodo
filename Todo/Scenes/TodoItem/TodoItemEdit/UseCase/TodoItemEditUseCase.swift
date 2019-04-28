@@ -5,7 +5,6 @@ import Foundation
 class TodoItemEditUseCase {
     
     weak var output: TodoItemEditUseCaseOutput!
-    weak var state: TodoItemUseCaseState!
     
     struct EditingTodo {
         
@@ -36,17 +35,20 @@ class TodoItemEditUseCase {
     var editMode: TodoItemEditMode!
     
     private let entityGateway: EntityGateway
-    
-    init( entityGateway: EntityGateway ) {
+    private let itemState: TodoItemUseCaseState
+
+    init( entityGateway: EntityGateway = EntityGatewayFactory.entityGateway,
+          useCaseStore: UseCaseStore = RealUseCaseStore.store ) {
         
         self.entityGateway = entityGateway
+        self.itemState = useCaseStore[itemStateKey] as! TodoItemUseCaseState
     }
     
     // MARK: - Initialization
 
     func eventViewReady() {
 
-        let transformer = TodoItemEditViewReadyUseCaseTransformer(editMode: editMode, state: state)
+        let transformer = TodoItemEditViewReadyUseCaseTransformer(editMode: editMode, state: itemState)
         editingTodo = transformer.transform(output: output)
     }
 
@@ -92,7 +94,7 @@ class TodoItemEditUseCase {
     
     func eventSave() {
         
-        let transformer = TodoItemEditSaveUseCaseTransformer(editMode: editMode, todoManager: entityGateway.todoManager, state: state)
+        let transformer = TodoItemEditSaveUseCaseTransformer(editMode: editMode, todoManager: entityGateway.todoManager, state: itemState)
         transformer.transform(editingTodo: editingTodo, output: output)
     }
 }

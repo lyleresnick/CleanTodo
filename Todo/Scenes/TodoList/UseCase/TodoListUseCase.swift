@@ -5,8 +5,7 @@ class TodoListUseCase {
     weak var output: TodoListUseCaseOutput!
     private let entityGateway: EntityGateway
     
-    init( entityGateway: EntityGateway ) {
-        
+    init( entityGateway: EntityGateway = EntityGatewayFactory.entityGateway ) {
         self.entityGateway = entityGateway
     }
 

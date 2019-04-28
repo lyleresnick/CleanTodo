@@ -15,11 +15,10 @@ class TodoItemDisplayConnector {
         self.presenter = presenter
     }
 
-    convenience init(viewController: TodoItemDisplayViewController, entityGateway: EntityGateway = EntityGatewayFactory.entityGateway) {
+    convenience init(viewController: TodoItemDisplayViewController) {
 
-        let useCase = TodoItemDisplayUseCase(entityGateway: entityGateway)
+        let useCase = TodoItemDisplayUseCase()
         let presenter = TodoItemDisplayPresenter(useCase: useCase)
-
         self.init(viewController: viewController, useCase: useCase, presenter: presenter)
     }
 

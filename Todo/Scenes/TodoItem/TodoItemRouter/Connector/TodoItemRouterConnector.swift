@@ -16,11 +16,10 @@ class TodoItemRouterConnector {
         self.presenter = presenter
     }
 
-    convenience init(viewController: TodoItemRouterViewController, entityGateway: EntityGateway = EntityGatewayFactory.entityGateway) {
+    convenience init(viewController: TodoItemRouterViewController) {
 
-        let useCase = TodoItemRouterUseCase(entityGateway: entityGateway)
+        let useCase = TodoItemRouterUseCase()
         let presenter = TodoItemRouterPresenter(useCase: useCase)
-
         self.init(viewController: viewController, useCase: useCase, presenter: presenter)
     }
 
