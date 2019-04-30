@@ -2,11 +2,6 @@
 
 import UIKit
 
-enum TodoStartMode {
-    case create(completion: TodoListChangedItemCallback)
-    case update(id: String, completion: TodoListChangedItemCallback)
-}
-
 class TodoItemRouterViewController: CurrentContainerViewController {
 
     var presenter: TodoItemRouterPresenter!

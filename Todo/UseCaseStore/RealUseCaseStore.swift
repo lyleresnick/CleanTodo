@@ -3,7 +3,7 @@
 
 class RealUseCaseStore: UseCaseStore {
     
-    static var store = RealUseCaseStore()
+    static let store = RealUseCaseStore()
     
     private var data = [String: AnyObject]()
     

@@ -31,9 +31,8 @@ class TodoItemRouterViewReadyUseCaseTransformer {
         modelManager.fetch(id: id) { [weak output] result in
             
             guard let output = output else { return }
-            
             output.presentTitle()
-            
+
             switch result {
             case let .semanticError(reason):
                 
