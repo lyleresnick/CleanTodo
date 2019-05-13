@@ -6,24 +6,6 @@ class TodoItemEditViewController: UIViewController {
     
     var presenter: TodoItemEditPresenter!
     
-    weak var router: TodoItemEditRouter! {
-        set {
-            presenter.router = newValue
-        }
-        get {
-            return presenter.router
-        }
-    }
-    
-    var editMode: TodoItemEditMode {
-        get {
-            return presenter.editMode
-        }
-        set {
-            presenter.editMode = newValue
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
 

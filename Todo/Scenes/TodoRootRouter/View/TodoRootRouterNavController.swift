@@ -50,7 +50,7 @@ extension TodoRootRouterNavController: TodoRootRouterListPresenterOutput {
         let listViewController = viewControllers.first as! TodoListViewController
         listViewController.prepareFor = { segue in
             let viewController = segue.destination as! TodoItemRouterViewController
-            viewController.startMode = startMode
+            viewController.presenter.startMode = startMode
         }
         listViewController.performSegue(identifier: identifier)
     }
@@ -62,9 +62,9 @@ extension TodoRootRouterNavController: UINavigationControllerDelegate {
        
         switch viewController {
         case let viewController as TodoItemRouterViewController:
-            viewController.router = presenter
+            viewController.presenter.router = presenter
         case let viewController as TodoListViewController:
-            viewController.router = presenter
+            viewController.presenter.router = presenter
         default:
             fatalError("Unknown viewController encountered")
         }

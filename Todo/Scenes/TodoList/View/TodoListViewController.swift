@@ -9,15 +9,6 @@ class TodoListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var prepareFor: PrepareForSegueClosure!
     
-    weak var router: TodoListRouter! {
-        set {
-            presenter.router = newValue
-        }
-        get {
-            return presenter.router
-        }
-    }
-
     override func awakeFromNib() {
         super.awakeFromNib()
 

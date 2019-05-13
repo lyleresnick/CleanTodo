@@ -7,7 +7,6 @@ class TodoItemRouterPresenter {
     private let useCase: TodoItemRouterUseCase
     weak var router: TodoItemRouterRouter!
     var startMode: TodoStartMode!
-
     weak var output: TodoItemRouterPresenterOutput!
     
     init(useCase: TodoItemRouterUseCase) {

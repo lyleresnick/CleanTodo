@@ -6,15 +6,6 @@ class TodoItemDisplayViewController: UIViewController {
     
     var presenter: TodoItemDisplayPresenter!
     
-    weak var router: TodoItemDisplayRouter! {
-        set {
-            presenter.router = newValue
-        }
-        get {
-            return presenter.router
-        }
-    }
-
     @IBOutlet weak var stackView: UIStackView!
     
     override func awakeFromNib() {

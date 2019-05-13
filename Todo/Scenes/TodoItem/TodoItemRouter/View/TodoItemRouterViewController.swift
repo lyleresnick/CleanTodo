@@ -5,37 +5,15 @@ import UIKit
 class TodoItemRouterViewController: CurrentContainerViewController {
 
     var presenter: TodoItemRouterPresenter!
-
     @IBOutlet weak var messageLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
         TodoItemRouterConnector(viewController: self).configure()
-
-    }
-    
-    weak var router: TodoItemRouterRouter! {
-        set {
-            presenter.router = newValue
-        }
-        get {
-            return presenter.router
-        }
-    }
-    
-    var startMode: TodoStartMode! {
-        set {
-            presenter.startMode = newValue
-        }
-        get {
-            return presenter.startMode
-        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         presenter.eventViewReady()
     }
 
@@ -52,20 +30,19 @@ class TodoItemRouterViewController: CurrentContainerViewController {
         case .showDisplayView:
 
             let viewController = segue.destination as! TodoItemDisplayViewController
-            viewController.router = presenter
+            viewController.presenter.router = presenter
             show(navigationItem: viewController.navigationItem)
 
         case .showEditView:
             
             let viewController = segue.destination as! TodoItemEditViewController
-            viewController.editMode = sender as! TodoItemEditMode
-            viewController.router = presenter
+            viewController.presenter.editMode = sender as! TodoItemEditMode
+            viewController.presenter.router = presenter
             show(navigationItem: viewController.navigationItem)
         }
     }
 
     override func willMove(toParentViewController parent: UIViewController?) {
-        
         super.willMove(toParentViewController: parent)
         if parent == nil {
             presenter.eventBack()
@@ -127,7 +104,6 @@ extension TodoItemRouterViewController: TodoItemRouterViewReadyPresenterOutput {
 extension TodoItemRouterViewController: TodoItemRouterPresenterOutput {
     
     private func configureMessage(hidden: Bool) {
-        
         messageLabel.isHidden = hidden
         containerView.isHidden = !hidden
     }
@@ -138,7 +114,6 @@ extension TodoItemRouterViewController: TodoItemRouterDisplayPresenterOutput {
     func showDisplayView() {
         
         DispatchQueue.main.async {
-            
             self.configureMessage(hidden: true)
             self.performSegue(withIdentifier: Segue.showDisplayView.rawValue, sender: nil)
         }
@@ -150,13 +125,8 @@ extension TodoItemRouterViewController: TodoItemRouterEditPresenterOutput {
     func showEditView() {
         
         DispatchQueue.main.async {
-            
             self.configureMessage(hidden: true)
             self.performSegue(withIdentifier: Segue.showEditView.rawValue, sender: TodoItemEditMode.update)
         }
     }
 }
-
-
-
-
