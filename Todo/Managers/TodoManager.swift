@@ -2,7 +2,7 @@
 
 import Foundation
 
-enum  TodoErrorReason {
+enum  TodoErrorReason: Error {
     case notFound
 }
 

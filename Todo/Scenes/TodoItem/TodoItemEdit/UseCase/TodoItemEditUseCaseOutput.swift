@@ -21,8 +21,8 @@ protocol TodoItemEditSaveUseCaseOutput: class {
 
 protocol TodoItemEditCompleteByUseCaseOutput: class {
     
-    func presentKeyboard(completeBy: Date?)
-    func presentKeyboardHidden()
+    func presentEnableEdit(completeBy: Date?)
+    func presentCompleteByClear()
     func present(completeBy: Date?)
 }
 

@@ -19,7 +19,7 @@ class TodoListCellConfigurator {
         return self;
     }
     
-    func show(viewModel: TodoListViewModel) -> TodoListCell {
+    func show(viewModel: TodoListRowViewModel) -> TodoListCell {
         return tableCell().show(viewModel: viewModel)
     }
     

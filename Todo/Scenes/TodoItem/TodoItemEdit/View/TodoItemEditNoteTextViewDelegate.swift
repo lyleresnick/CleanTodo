@@ -2,7 +2,6 @@
 
 import UIKit
 
-
 class TodoItemEditNoteTextViewDelegate: NSObject, UITextViewDelegate {
     
     let presenter: TodoItemEditPresenter
@@ -15,4 +14,3 @@ class TodoItemEditNoteTextViewDelegate: NSObject, UITextViewDelegate {
         presenter.eventEdited(note: textView.text!)
     }
 }
-

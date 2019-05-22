@@ -27,7 +27,6 @@ class TodoItemDisplayViewReadyUseCaseTransformer {
             output.present(field: .priority, value: todo.priority)
         }
         output.present(field: .completed, value: todo.completed)
-
         output.presentEnd()
     }
 }

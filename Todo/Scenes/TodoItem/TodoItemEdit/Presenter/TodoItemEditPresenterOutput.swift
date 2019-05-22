@@ -8,18 +8,16 @@ protocol TodoItemEditPresenterOutput:
     TodoItemEditSavePresenterOutput {}
 
 protocol TodoItemEditViewReadyPresenterOutput: class {
-    
-    func show(model: TodoItemEditViewModel)
-    func showNewModel()
+    func show(model: TodoItemEditViewModel, titlePlaceholder: String, priorityLabels: [String])
 }
 
 protocol TodoItemEditCompleteByPresenterOutput: class {
     
     func show(completeBy: String)
-    func showKeyboard(completeBy: Date?)
-    func showKeyboardHidden()
+    func showEnableEdit(completeBy: Date?)
+    func showCompleteByClear()
 }
 
 protocol TodoItemEditSavePresenterOutput: class {
-    func showTitleIsEmpty(alertTitle: String, message: String)
+    func showAlert(alertTitle: String, message: String, actionTitle: String)
 }

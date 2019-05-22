@@ -30,34 +30,24 @@ extension TodoItemDisplayPresenter: TodoItemDisplayUseCaseOutput {
         output.showBegin()
     }
     
-    private var title: String {
-        return "todo".localized
-    }
-    
     func present(field: FieldName, value: String) {
-        
         let fieldName = field.rawValue.localized
-        output.show(model: TodoItemDisplayRowViewModel(field: fieldName, value: value))
+        output.show(model: TodoItemDisplayRowViewModel(fieldName: fieldName, value: value))
     }
     
     func present(field: FieldName, value: Date) {
-        
         present(field: field, value: TodoItemDisplayPresenter.outboundDateFormatter.string(from: value))
     }
     
     func present(field: FieldName, value: Bool) {
-        
         present(field: field, value: (value ? "yes" : "no").localized)
     }
     
     func present(field: FieldName, value: Todo.Priority) {
-        
         present(field: field, value: value.rawValue.localized)
     }
 
-    
     func presentEnd() {
         output.showEnd()
     }
-    
 }

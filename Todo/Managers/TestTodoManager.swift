@@ -9,26 +9,23 @@ class TestTodoManager: TodoManager {
     }
     
     func fetch(id:String, completion: @escaping (TodoItemManagerResponse) -> ()) {
-        for entity in todoTestData {
-            if entity.id == id {
-                
-                completion(.success(entity: entity))
-                return
-            }
+        do {
+            let todo = try findTodo(id: id)
+            completion(.success(entity: todo))
         }
-        completion(.semanticError(reason: .notFound))
+        catch {
+            completion(.semanticError(reason: .notFound))
+        }
     }
     
     func completed(id:String, completed: Bool, completion: @escaping (TodoItemManagerResponse) -> ()) {
-        
-        if let todo = findTodo(id: id) {
-            
+        do {
+            let todo = try findTodo(id: id)
             todo.completed = completed
             completion(.success(entity: todo))
         }
-        else {
+        catch {
             completion(.semanticError(reason: .notFound))
-
         }
     }
     
@@ -46,44 +43,44 @@ class TestTodoManager: TodoManager {
             values: TodoValues,
             completion: @escaping (TodoItemManagerResponse) -> ()) {
         
-        if let todo = findTodo(id: id) {
-            
+        do {
+            let todo = try findTodo(id: id)
             todo.set(values: values)
             completion(.success(entity: todo))
         }
-        else {
+        catch {
             completion(.semanticError(reason: .notFound))
         }
     }
     
-    private func findTodo(id: String) -> Todo? {
+    func delete(id: String, completion: @escaping (TodoItemManagerResponse) -> ()) {
+        
+        do {
+            let (index, todo) = try findTodoIndex(id: id)
+            todoTestData.remove(at: index)
+            completion(.success(entity: todo))
+        }
+        catch {
+            completion(.semanticError(reason: .notFound))
+        }
+    }
+    
+    private func findTodo(id: String) throws -> Todo {
         for entity in todoTestData {
             if entity.id == id {
                 return entity
             }
         }
-        return nil
-    }
-
-    func delete(id: String, completion: @escaping (TodoItemManagerResponse) -> ()) {
-        
-        if let (index, todo) = findTodoIndex(id: id) {
-            
-            todoTestData.remove(at: index)
-            completion(.success(entity: todo))
-        }
-        else {
-            completion(.semanticError(reason: .notFound))
-        }
+        throw TodoErrorReason.notFound
     }
     
-    private func findTodoIndex(id: String) -> (Int,Todo)? {
+    private func findTodoIndex(id: String) throws -> (Int,Todo) {
         for (index, entity) in todoTestData.enumerated() {
             if entity.id == id {
                 return (index, entity)
             }
         }
-        return nil
+        throw TodoErrorReason.notFound
     }
 }
 

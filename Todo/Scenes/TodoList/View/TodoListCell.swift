@@ -12,7 +12,7 @@ class TodoListCell: UITableViewCell {
     @IBOutlet private(set) weak var priorityLabel: UILabel!
     @IBOutlet private(set) weak var dateLabel: UILabel!
 
-    func show(viewModel: TodoListViewModel) -> Self {
+    func show(viewModel: TodoListRowViewModel) -> Self {
         
         completedButton.delegate = self
 

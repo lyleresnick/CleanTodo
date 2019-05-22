@@ -22,5 +22,6 @@
 "save" = "Enregistrer";
 "edit" = "Modifier";
 
+"enterATitle" = "Entrez un titre";
 "titleRequiredTitle" = "Le Titre est Vide";
 "titleRequiredMessage" = "Entrez un Titre";

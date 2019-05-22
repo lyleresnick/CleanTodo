@@ -4,23 +4,30 @@ import Foundation
 
 struct TodoItemEditViewModel {
     
-    let id: String
     let title: String
     let note: String
     let completeBy: Date?
-    let completeByString: String
+    let completeByAsString: String
     let priority: Int
-    var completed: Bool
+    let completed: Bool
 
     init( model: TodoItemEditPresentationModel ) {
-        id = model.id
         title = model.title
         note = model.note
         completeBy = model.completeBy
-        completeByString = (model.completeBy != nil) ? TodoItemEditViewModel.outboundDateFormatter.string(from: model.completeBy!) : ""
+        completeByAsString = (model.completeBy != nil) ? TodoItemEditViewModel.outboundDateFormatter.string(from: model.completeBy!) : ""
 
         self.priority = model.priority
         completed = model.completed
+    }
+    
+    init() {
+        title = ""
+        note = ""
+        completeBy = nil
+        completeByAsString = ""
+        priority =  0
+        completed = false
     }
     
     static let outboundDateFormatter = DateFormatter.dateFormatter( format: "MMM' 'dd', 'yyyy" )

@@ -64,7 +64,7 @@ class TodoItemEditUseCase {
     
     func eventCompleteByClear() {
         editingTodo.completeBy = nil
-        output.presentKeyboardHidden()
+        output.presentCompleteByClear()
     }
     
     func eventCompleteByToday() {
@@ -72,11 +72,11 @@ class TodoItemEditUseCase {
         output.present(completeBy: editingTodo.completeBy)
     }
     
-    func eventCompleteByShowKeyboard() {
-        output.presentKeyboard(completeBy: editingTodo.completeBy)
+    func eventEnableEditCompleteBy() {
+        output.presentEnableEdit(completeBy: editingTodo.completeBy)
     }
 
-    func event(completeBy: Date) {
+    func eventEdited(completeBy: Date) {
         editingTodo.completeBy = completeBy
         output.present(completeBy: completeBy)
     }
@@ -85,7 +85,7 @@ class TodoItemEditUseCase {
         editingTodo.completed = completed
     }
 
-    func event(priority: Todo.Priority ) {
+    func eventEdited(priority: Todo.Priority ) {
         editingTodo.priority = priority
 
     }

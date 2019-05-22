@@ -25,20 +25,15 @@ class TodoItemEditSaveUseCaseTransformer {
             case let .semanticError(reason):
                 fatalError("unexpected Semantic error: reason \(reason)")
             case let .failure(error):
-                
                 fatalError("Unresolved error: \(error.description)")
-                
             case let .success(todo):
-                
                 self.state.currentTodo = todo
                 self.state.itemChanged = true
-                
                 output.presentSaveCompleted()
             }
         }
             
         if editingTodo.title != "" {
-            
             switch self.editMode {
             case .create:
                 create(editingTodo: editingTodo, completion: completion)

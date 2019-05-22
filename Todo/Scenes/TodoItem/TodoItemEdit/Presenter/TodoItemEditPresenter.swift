@@ -42,22 +42,22 @@ class TodoItemEditPresenter {
         useCase.eventCompleteByToday()
     }
         
-    func eventCompleteByShowKeyboard() {
-        useCase.eventCompleteByShowKeyboard()
+    func eventEnableEditCompleteBy() {
+        useCase.eventEnableEditCompleteBy()
     }
     
-    func event(completeBy: Date) {
-        useCase.event(completeBy: completeBy)
+    func eventEdited(completeBy: Date) {
+        useCase.eventEdited(completeBy: completeBy)
     }
     
     func event(completed: Bool) {
         useCase.event(completed: completed)
     }
     
-    func eventPriority(index: Int) {
+    func eventEditedPriority(index: Int) {
         
         let priority = Todo.Priority(bangs: index)!
-        useCase.event(priority: priority)
+        useCase.eventEdited(priority: priority)
     }
     
     func eventSave() {
@@ -67,8 +67,6 @@ class TodoItemEditPresenter {
     func eventCancel() {
         router.routeEditingCancelled()
     }
-    
-    static let priortyTitles = ["none", "low", "medium", "high"].map { $0.localized }
 }
 
 extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {}
@@ -76,26 +74,31 @@ extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {}
 extension TodoItemEditPresenter: TodoItemEditViewReadyUseCaseOutput {
 
     func present(model: TodoItemEditPresentationModel) {
-        output.show(model: TodoItemEditViewModel(model: model))
+        presentWithLocalizations(model: TodoItemEditViewModel(model: model))
     }
     
     func presentNewModel() {
-        output.showNewModel()
+        presentWithLocalizations(model: TodoItemEditViewModel())
+    }
+    
+    private func presentWithLocalizations(model: TodoItemEditViewModel) {
+        output.show(model: model,
+            titlePlaceholder: "enterATitle".localized,
+            priorityLabels: ["none", "low", "medium", "high"].map { $0.localized })
     }
 }
 
 extension TodoItemEditPresenter: TodoItemEditCompleteByUseCaseOutput {
 
-    func presentKeyboardHidden() {
-        output.showKeyboardHidden()
+    func presentCompleteByClear() {
+        output.showCompleteByClear()
     }
     
-    func presentKeyboard(completeBy: Date?) {
-        output.showKeyboard(completeBy: completeBy)
+    func presentEnableEdit(completeBy: Date?) {
+        output.showEnableEdit(completeBy: completeBy)
     }
     
     func present(completeBy: Date?) {
-        
         output.show(completeBy: (completeBy != nil)
             ? TodoItemEditViewModel.outboundDateFormatter.string(from: completeBy!)
             : "")
@@ -109,7 +112,7 @@ extension TodoItemEditPresenter: TodoItemEditSaveUseCaseOutput {
     }
     
     func presentTitleIsEmpty() {
-        output.showTitleIsEmpty(alertTitle: "titleRequiredTitle".localized, message: "titleRequiredMessage".localized)
+        output.showAlert(alertTitle: "titleRequiredTitle".localized, message: "titleRequiredMessage".localized, actionTitle: "OK".localized)
     }
 }
 

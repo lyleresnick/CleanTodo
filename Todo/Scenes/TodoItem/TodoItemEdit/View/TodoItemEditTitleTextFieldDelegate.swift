@@ -2,7 +2,6 @@
 
 import UIKit
 
-
 class TodoItemEditTitleTextFieldDelegate: NSObject, UITextFieldDelegate {
     
     let presenter: TodoItemEditPresenter

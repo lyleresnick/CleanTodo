@@ -39,7 +39,7 @@ class TodoItemEditViewController: UIViewController {
     }
     
     @IBAction func completeByLabelTouched(_ sender: Any) {
-        presenter.eventCompleteByShowKeyboard()
+        presenter.eventEnableEditCompleteBy()
     }
     
     @IBAction func completeBySwitchTouched(_ sender: UISwitch) {
@@ -53,8 +53,8 @@ class TodoItemEditViewController: UIViewController {
     }
     
     @IBAction func priorityTouched(_ sender: UISegmentedControl) {
-        presenter.eventPriority(index: sender.selectedSegmentIndex)
-    }
+        presenter.eventEditedPriority(index: sender.selectedSegmentIndex)
+}
     
     @IBAction func completedTouched(_ sender: UISwitch) {
         presenter.event(completed: sender.isOn)
@@ -77,7 +77,7 @@ class TodoItemEditViewController: UIViewController {
     
     @IBAction func completeBySetTouched(_ sender: UIButton) {
         
-        presenter.event(completeBy: completeByPickerView.date! )
+        presenter.eventEdited(completeBy: completeByPickerView.date! )
         completeByLabel.resignFirstResponder()
     }
     
@@ -90,55 +90,36 @@ extension TodoItemEditViewController: TodoItemEditPresenterOutput {}
 
 extension TodoItemEditViewController: TodoItemEditViewReadyPresenterOutput {
     
-    func show(model: TodoItemEditViewModel) {
+    func show(model: TodoItemEditViewModel, titlePlaceholder: String, priorityLabels: [String]) {
         
         DispatchQueue.main.async {
-            
+            self.titleTextField.placeholder = titlePlaceholder
+            for (index, title) in priorityLabels.enumerated() {
+                self.prioritySegmentedControl.setTitle(title, forSegmentAt: index)
+            }
             self.titleTextField.text = model.title
             self.noteTextView.text = model.note
-            self.completeBySwitch.isOn = (model.completeByString != "")
-            self.completeByLabel.text = model.completeByString
+            self.completeBySwitch.isOn = (model.completeByAsString != "")
+            self.completeByLabel.text = model.completeByAsString
             self.prioritySegmentedControl.selectedSegmentIndex =  model.priority
-            for (index, title) in TodoItemEditPresenter.priortyTitles.enumerated() {
-                self.prioritySegmentedControl.setTitle(title, forSegmentAt: index)
-            }
             self.completedSwitch.isOn = model.completed
-        }
-    }
-    
-    func showNewModel() {
-        
-        DispatchQueue.main.async {
-            
-            self.titleTextField.text = ""
-            self.titleTextField.placeholder = "Enter a title"
-            self.noteTextView.text = ""
-            self.completeBySwitch.isOn = false
-            self.completeByLabel.text = ""
-            self.prioritySegmentedControl.selectedSegmentIndex =  0
-            for (index, title) in TodoItemEditPresenter.priortyTitles.enumerated() {
-                self.prioritySegmentedControl.setTitle(title, forSegmentAt: index)
-            }
-            self.completedSwitch.isOn = false
         }
     }
 }
 
 extension TodoItemEditViewController: TodoItemEditCompleteByPresenterOutput {
     
-    func showKeyboardHidden() {
+    func showCompleteByClear() {
         
         DispatchQueue.main.async {
-            
             self.completeByLabel.text = ""
             self.completeByLabel.resignFirstResponder()
         }
     }
     
-    func showKeyboard(completeBy: Date?) {
+    func showEnableEdit(completeBy: Date?) {
         
         DispatchQueue.main.async {
-            
             self.completeByPickerView.date = completeBy
             self.completeByLabel.becomeFirstResponder()
         }
@@ -154,12 +135,11 @@ extension TodoItemEditViewController: TodoItemEditCompleteByPresenterOutput {
 
 extension TodoItemEditViewController: TodoItemEditSavePresenterOutput {
     
-    func showTitleIsEmpty(alertTitle: String, message: String) {
+    func showAlert(alertTitle: String, message: String, actionTitle: String) {
         
         DispatchQueue.main.async {
-            
             let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
     }

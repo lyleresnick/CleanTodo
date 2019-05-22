@@ -8,7 +8,7 @@ class TodoListPresenter {
     weak var router: TodoListRouter!
     weak var output: TodoListPresenterOutput!
     
-    private var viewModelList: [TodoListViewModel] = []
+    private var viewModelList: [TodoListRowViewModel] = []
     
     init(useCase: TodoListUseCase) {
         self.useCase = useCase
@@ -34,11 +34,11 @@ class TodoListPresenter {
         
         router.routeCreateItem() { [weak self] model in
             
-            if let strongSelf = self {
+            if let self = self {
 
-                let index = strongSelf.viewModelList.count
-                strongSelf.viewModelList.append(TodoListViewModel(model: model))
-                strongSelf.output.showAdded(index: index)
+                let index = self.viewModelList.count
+                self.viewModelList.append(TodoListRowViewModel(model: model))
+                self.output.showAdded(index: index)
             }
         }
     }
@@ -47,14 +47,14 @@ class TodoListPresenter {
         
         router.routeDisplayItem(id: viewModelList[index].id) { [weak self] model in
             
-            if let strongSelf = self {
-                strongSelf.viewModelList[index] = TodoListViewModel(model: model)
-                strongSelf.output.showChanged(index: index)
+            if let self = self {
+                self.viewModelList[index] = TodoListRowViewModel(model: model)
+                self.output.showChanged(index: index)
             }
         }
     }
     
-    func row(at index: Int ) -> TodoListViewModel {
+    func row(at index: Int ) -> TodoListRowViewModel {
         return viewModelList[index]
     }
     
@@ -72,7 +72,7 @@ extension TodoListPresenter: TodoListViewReadyUseCaseOutput {
     }
 
     func present(model: TodoListPresentationModel) {
-        viewModelList.append( TodoListViewModel( model: model ) )
+        viewModelList.append( TodoListRowViewModel( model: model ) )
     }
 
     func presentTodoListEnd() {
@@ -83,7 +83,7 @@ extension TodoListPresenter: TodoListViewReadyUseCaseOutput {
 extension TodoListPresenter: TodoListCompleteUseCaseOutput {
 
     func presentCompleted(model: TodoListPresentationModel, index: Int) {
-        viewModelList[index] = TodoListViewModel( model: model )
+        viewModelList[index] = TodoListRowViewModel( model: model )
         
         // the output was previously updated due to the immediate toggle state change
         // if this were not the case, an async call would delay the update of the screen

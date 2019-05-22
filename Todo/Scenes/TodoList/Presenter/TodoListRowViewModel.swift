@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct TodoListViewModel {
+struct TodoListRowViewModel {
     
     let id: String
     let title: String
@@ -13,7 +13,7 @@ struct TodoListViewModel {
     init(model: TodoListPresentationModel) {
         self.id = model.id
         self.title = model.title
-        self.completeBy = (model.completeBy != nil) ? TodoListViewModel.outboundDateFormatter.string(from: model.completeBy!) : ""
+        self.completeBy = (model.completeBy != nil) ? TodoListRowViewModel.outboundDateFormatter.string(from: model.completeBy!) : ""
         self.priority = (0..<model.priority).reduce(" ") { result, index in "!\(result)" }
         self.completed = model.completed
     }
