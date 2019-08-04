@@ -16,7 +16,7 @@ protocol TodoItemDisplayUseCaseOutput: class {
     func present(field: FieldName, value: String)
     func present(field: FieldName, value: Date)
     func present(field: FieldName, value: Bool)
-    func present(field: FieldName, value: Todo.Priority)
+    func present(field: FieldName, value: Priority)
     func presentEnd()
     
 }

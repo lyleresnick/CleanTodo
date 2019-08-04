@@ -12,14 +12,14 @@ class TodoItemEditUseCase {
         var title: String
         var note: String
         var completeBy: Date?
-        var priority: Todo.Priority
+        var priority: Priority
         var completed: Bool
         
         init(id: String? = nil,
             title: String = "",
             note: String = "",
             completeBy: Date? = nil,
-            priority: Todo.Priority = .none,
+            priority: Priority = .none,
             completed: Bool = false) {
             
             self.id = id
@@ -85,7 +85,7 @@ class TodoItemEditUseCase {
         editingTodo.completed = completed
     }
 
-    func eventEdited(priority: Todo.Priority ) {
+    func eventEdited(priority: Priority ) {
         editingTodo.priority = priority
 
     }

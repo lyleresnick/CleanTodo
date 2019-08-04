@@ -56,7 +56,7 @@ class TodoItemEditPresenter {
     
     func eventEditedPriority(index: Int) {
         
-        let priority = Todo.Priority(bangs: index)!
+        let priority = Priority(bangs: index)!
         useCase.eventEdited(priority: priority)
     }
     

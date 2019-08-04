@@ -43,7 +43,7 @@ extension TodoItemDisplayPresenter: TodoItemDisplayUseCaseOutput {
         present(field: field, value: (value ? "yes" : "no").localized)
     }
     
-    func present(field: FieldName, value: Todo.Priority) {
+    func present(field: FieldName, value: Priority) {
         present(field: field, value: value.rawValue.localized)
     }
 

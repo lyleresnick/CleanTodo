@@ -3,7 +3,7 @@
 
 import Foundation
 
-extension Todo {
+extension TestTodo {
     
     private static let inboundDateFormatter = DateFormatter.dateFormatter( format:"yyyy'-'MM'-'dd")
     
@@ -22,13 +22,13 @@ extension Todo {
             id: id,
             title: title,
             note: note,
-            completeBy: (completeBy != nil) ? Todo.convert(date: completeBy!) : nil,
+            completeBy: (completeBy != nil) ? TestTodo.convert(date: completeBy!) : nil,
             priority: Priority(rawValue: priority)!,
             completed: (completed == "true") )
     }
     
     private static func convert(date: String) -> Date {
-        guard let date = Todo.inboundDateFormatter.date( from: date ) else {
+        guard let date = TestTodo.inboundDateFormatter.date( from: date ) else {
             fatalError("Format of date is incorrect")
         }
         return date

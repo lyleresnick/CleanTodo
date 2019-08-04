@@ -14,16 +14,16 @@ extension ContainerViewController where Self: UIViewController {
     
     func add( contentController: UIViewController ) {
         
-        addChildViewController( contentController )
+        addChild( contentController )
         containerView.addSubview(contentController.view)
         contentController.view.frame = containerView.bounds
-        contentController.didMove(toParentViewController: self)
+        contentController.didMove(toParent: self)
     }
     
     func remove( contentController: UIViewController ) {
         
-        contentController.willMove(toParentViewController: nil)
+        contentController.willMove(toParent: nil)
         contentController.view.removeFromSuperview()
-        contentController.removeFromParentViewController()
+        contentController.removeFromParent()
     }
 }

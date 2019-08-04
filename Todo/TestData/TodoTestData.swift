@@ -8,4 +8,4 @@ private let todoDictionary = [
     ["id": "5", "title": "Charlie Brown", "note": "Get the album", "completeBy": "2019-02-12", "priority": "high", "completed": "false" ],
 ]
 
-var todoTestData = todoDictionary.map { Todo(dictionary: $0) }
+var todoTestData = todoDictionary.map { TestTodo(dictionary: $0) }

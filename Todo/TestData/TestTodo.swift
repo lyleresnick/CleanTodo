@@ -1,15 +1,15 @@
-//  Copyright (c) 2018 Lyle Resnick. All rights reserved.
+//  Copyright © 2019 Lyle Resnick. All rights reserved.
 
 import Foundation
 
-struct Todo {
-    
-    let id: String
-    let title: String
-    let note: String
-    let completeBy: Date?
-    let priority: Priority
-    let completed: Bool
+class TestTodo {
+
+    var id: String
+    var title: String
+    var note: String
+    var completeBy: Date?
+    var priority: Priority
+    var completed: Bool
     
     init( id: String, title: String, note: String = "", completeBy: Date? = nil, priority: Priority = .none, completed: Bool = false) {
         self.id = id
@@ -20,5 +20,4 @@ struct Todo {
         self.completed = completed
     }
 }
-
 

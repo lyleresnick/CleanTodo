@@ -16,6 +16,11 @@ class TodoItemEditSaveUseCaseTransformer {
     
     func transform(editingTodo: TodoItemEditUseCase.EditingTodo, output: TodoItemEditSaveUseCaseOutput) {
         
+        guard editingTodo.title != "" else {
+            output.presentTitleIsEmpty()
+            return
+        }
+        
         let completion: TodoManagerResponder = {
             [weak output] result in
             
@@ -33,30 +38,17 @@ class TodoItemEditSaveUseCaseTransformer {
             }
         }
             
-        if editingTodo.title != "" {
-            switch self.editMode {
-            case .create:
-                create(editingTodo: editingTodo, completion: completion)
-            case .update:
-                update(editingTodo: editingTodo, completion: completion)
-            }
+        switch self.editMode {
+        case .create:
+            todoManager.create(
+                values: TodoValues(editingTodo: editingTodo),
+                completion: completion)
+        case .update:
+            todoManager.update(
+                id: editingTodo.id!,
+                values: TodoValues(editingTodo: editingTodo),
+                completion: completion)
         }
-        else {
-            output.presentTitleIsEmpty()
-        }
-    }
-    
-    private func create(editingTodo: TodoItemEditUseCase.EditingTodo, completion: @escaping TodoManagerResponder) {
-        todoManager.create(
-            values: TodoValues(editingTodo: editingTodo),
-            completion: completion)
-    }
-
-    private func update(editingTodo: TodoItemEditUseCase.EditingTodo, completion: @escaping TodoManagerResponder) {
-        todoManager.update(
-            id: editingTodo.id!,
-            values: TodoValues(editingTodo: editingTodo),
-            completion: completion)
     }
 }
 

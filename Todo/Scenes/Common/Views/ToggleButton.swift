@@ -74,5 +74,5 @@ class ToggleButton: UIButton {
         }
     }
     
-    override func setImage(_ image: UIImage?, for state: UIControlState) { /* do nothing */ }
+    override func setImage(_ image: UIImage?, for state: UIControl.State) { /* do nothing */ }
 }

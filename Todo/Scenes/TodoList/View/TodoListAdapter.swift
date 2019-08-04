@@ -25,7 +25,7 @@ extension TodoListAdapter: UITableViewDataSource {
             .show(viewModel: presenter.row(at: indexPath.row))
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         presenter.eventDelete(index: indexPath.row)
     }

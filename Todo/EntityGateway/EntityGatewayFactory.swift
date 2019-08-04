@@ -7,7 +7,7 @@ class EntityGatewayFactory {
         case coreData
     }
     
-    static let gatewayImplementation = Implementation.test
+    static let gatewayImplementation = Implementation.coreData
     
     static var entityGateway: EntityGateway = {
 
