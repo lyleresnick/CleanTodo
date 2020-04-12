@@ -61,7 +61,9 @@ class TodoItemRouterViewController: CurrentContainerViewController {
 extension TodoItemRouterViewController: TodoItemRouterViewReadyPresenterOutput {
     
     func show(title: String) {
-        self.title = title
+        DispatchQueue.main.async {
+            self.title = title
+        }
     }
     
     func showViewReady(startMode: TodoStartMode) {
@@ -69,7 +71,7 @@ extension TodoItemRouterViewController: TodoItemRouterViewReadyPresenterOutput {
         switch startMode {
         case .create:
             showCreateView()
-        case .update(_):
+        case .update:
             showDisplayView()
         }
     }

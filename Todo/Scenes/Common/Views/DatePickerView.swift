@@ -8,7 +8,7 @@ class DatePickerView: UIView {
 
     var date: Date? {
         set {
-            datePicker.setDate(date ?? Date(), animated: false)
+            datePicker.setDate(newValue ?? Date(), animated: false)
         }
         get {
             return datePicker.date
