@@ -5,9 +5,10 @@ class EntityGatewayFactory {
     enum Implementation {
         case test
         case coreData
+        case networked
     }
     
-    static let gatewayImplementation = Implementation.test
+    static let gatewayImplementation = Implementation.networked
     
     static var entityGateway: EntityGateway = {
 
@@ -16,6 +17,8 @@ class EntityGatewayFactory {
             return TestEntityGateway()
         case .coreData:
             return CoreDataEntityGateway(manager: CoreDataManager.shared)
+        case .networked:
+            return NetworkedEntityGateway()
         }
     } ()
 

@@ -11,17 +11,17 @@ class TodoListDeleteUseCaseTransformer: TodoListAbstractUseCaseTransformer {
             guard let output = output else { return }
             
             switch result {
-            case let .semanticError(reason):
-                
-                fatalError("semanticError \(reason) is not being processed!")
-                
+            case let .semantic(reason):
+                switch(reason) {
+                case .notFound:
+                    fatalError("semantic event \(reason) is not being processed!")
+                case .noData:
+                    output.presentDeleted(index: index)
+                }
             case let .failure(error):
-                
-                fatalError("Unresolved error: \(error.description)")
-
-            case .success(_):
-                
-                output.presentDeleted(index: index)
+                fatalError("Unresolved error: code: \(error.code), \(error.description)")
+            case .success:
+                fatalError("success is not being processed!")
             }
         }
     }

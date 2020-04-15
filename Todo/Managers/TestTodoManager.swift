@@ -14,7 +14,7 @@ class TestTodoManager: TodoManager {
             completion(.success(entity: Todo(testTodo: todo)))
         }
         catch {
-            completion(.semanticError(reason: .notFound))
+            completion(.semantic(event: .notFound))
         }
     }
     
@@ -25,7 +25,7 @@ class TestTodoManager: TodoManager {
             completion(.success(entity: Todo(testTodo: todo)))
         }
         catch {
-            completion(.semanticError(reason: .notFound))
+            completion(.semantic(event: .notFound))
         }
     }
     
@@ -49,19 +49,19 @@ class TestTodoManager: TodoManager {
             completion(.success(entity: Todo(testTodo: todo)))
         }
         catch {
-            completion(.semanticError(reason: .notFound))
+            completion(.semantic(event: .notFound))
         }
     }
     
     func delete(id: String, completion: @escaping (TodoItemManagerResponse) -> ()) {
         
         do {
-            let (index, todo) = try findTodoIndex(id: id)
+            let index = try findTodoIndex(id: id)
             todoTestData.remove(at: index)
-            completion(.success(entity: Todo(testTodo: todo)))
+            completion(.semantic(event: .noData))
         }
         catch {
-            completion(.semanticError(reason: .notFound))
+            completion(.semantic(event: .notFound))
         }
     }
     
@@ -71,16 +71,16 @@ class TestTodoManager: TodoManager {
                 return entity
             }
         }
-        throw TodoErrorReason.notFound
+        throw TodoSemanticEvent.notFound
     }
     
-    private func findTodoIndex(id: String) throws -> (Int,TestTodo) {
+    private func findTodoIndex(id: String) throws -> Int {
         for (index, entity) in todoTestData.enumerated() {
             if entity.id == id {
-                return (index, entity)
+                return index
             }
         }
-        throw TodoErrorReason.notFound
+        throw TodoSemanticEvent.notFound
     }
 }
 
