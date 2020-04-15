@@ -11,13 +11,13 @@ class TodoListCompletedUseCaseTransformer: TodoListAbstractUseCaseTransformer {
             guard let output = output else { return }
 
             switch result {
-            case let .semanticError(reason):
+            case let .semantic(event):
 
-               fatalError("semanticError \(reason) is not being processed!")
+               fatalError("semantic event: \(event) is not being processed!")
                 
             case let .failure(error):
 
-                fatalError("Unresolved error: \(error.description)")
+                fatalError("Unresolved error: code: \(error.code), \(error.description)")
 
             case let .success(entity):
                 

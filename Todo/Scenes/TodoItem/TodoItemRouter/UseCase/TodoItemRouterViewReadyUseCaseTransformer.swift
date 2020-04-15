@@ -34,19 +34,16 @@ class TodoItemRouterViewReadyUseCaseTransformer {
             output.presentTitle()
 
             switch result {
-            case let .semanticError(reason):
-                
+            case let .semantic(reason):
                 switch(reason) {
                 case .notFound:
                     output.presentNotFound(id: id)
+                case .noData:
+                    fatalError("semantic event \(reason) is not being processed!")
                 }
-                
             case let .failure(error):
-                
-                fatalError("Unresolved error: \(error.description)")
-
+                fatalError("Unresolved error: code: \(error.code), \(error.description)")
             case let .success(todo):
-                
                 self.state.currentTodo = todo
                 output.presentViewReady(startMode: startMode)
             }

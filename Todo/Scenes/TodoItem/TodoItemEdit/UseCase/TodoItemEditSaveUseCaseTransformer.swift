@@ -27,10 +27,10 @@ class TodoItemEditSaveUseCaseTransformer {
             guard let output = output else { return }
             
             switch result {
-            case let .semanticError(reason):
-                fatalError("unexpected Semantic error: reason \(reason)")
+            case let .semantic(event):
+                fatalError("unexpected Semantic event: \(event)")
             case let .failure(error):
-                fatalError("Unresolved error: \(error.description)")
+                fatalError("Unresolved error: code: \(error.code), \(error.description)")
             case let .success(todo):
                 self.state.currentTodo = todo
                 self.state.itemChanged = true

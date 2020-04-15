@@ -1,6 +1,6 @@
 
-enum ManagerResponse<Entity, FailureSource, SemanticErrorReason> {
+enum ManagerResponse<Entity, FailureSource, SemanticEvent> {
     case success(entity: Entity)
     case failure(source: FailureSource, code: Int, description: String)
-    case semanticError(reason: SemanticErrorReason)
+    case semantic(event: SemanticEvent)
 }

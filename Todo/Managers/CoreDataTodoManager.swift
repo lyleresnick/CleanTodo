@@ -53,7 +53,7 @@ class CoreDataTodoManager: TodoManager {
                     completion(self.makeTodo(coreDataTodo: coreDataTodo))
                 }
                 else {
-                    completion(.semanticError(reason: .notFound))
+                    completion(.semantic(event: .notFound))
                 }
             }
             catch {
@@ -74,7 +74,7 @@ class CoreDataTodoManager: TodoManager {
                     completion(self.makeTodo(coreDataTodo: coreDataTodo))
                 }
                 else {
-                    completion(.semanticError(reason: .notFound))
+                    completion(.semantic(event: .notFound))
                 }
             }
             catch {
@@ -126,7 +126,7 @@ class CoreDataTodoManager: TodoManager {
                     completion(self.makeTodo(coreDataTodo: coreDataTodo))
                 }
                 else {
-                    completion(.semanticError(reason: .notFound))
+                    completion(.semantic(event: .notFound))
                 }
             }
             catch {
@@ -142,13 +142,12 @@ class CoreDataTodoManager: TodoManager {
             do {
                 let coreDataTodoList = try context.fetch(self.fetchRequest(id: id))
                 if coreDataTodoList.count > 0, let coreDataTodo = coreDataTodoList.first {
-                    let todoResponse = self.makeTodo(coreDataTodo: coreDataTodo)
                     context.delete(coreDataTodo)
                     try context.save()
-                    completion(todoResponse)
+                    completion(.semantic(event: .noData))
                 }
                 else {
-                    completion(.semanticError(reason: .notFound))
+                    completion(.semantic(event: .notFound))
                 }
             }
             catch {
