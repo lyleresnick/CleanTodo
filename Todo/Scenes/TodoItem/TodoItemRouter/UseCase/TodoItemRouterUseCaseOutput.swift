@@ -7,6 +7,5 @@ protocol TodoItemRouterUseCaseOutput: AnyObject {
     func presentDisplayView()
     func presentEditView()
     func presentNotFound(id: String)
-    func presentChanged(item: TodoListRowPresentationModel)
 }
 

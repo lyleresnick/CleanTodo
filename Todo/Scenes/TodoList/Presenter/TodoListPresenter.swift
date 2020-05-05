@@ -38,9 +38,6 @@ class TodoListPresenter {
 }
 
 extension TodoListPresenter: TodoListUseCaseOutput {
-    func presentAdded(model: TodoListPresentationModel, index: Int) {
-        output.showAdded( model: TodoListViewModel( model: model ), index: index)
-    }
     
     func presentItem() {
         router.routeDisplayItem()
@@ -54,8 +51,8 @@ extension TodoListPresenter: TodoListUseCaseOutput {
         output.showCompleted(model: TodoListViewModel(model: model), index: index)
     }
 
-    func presentChanged(model: TodoListPresentationModel, index: Int) {
-        output.showChanged(model: TodoListViewModel(model: model), index: index)
+    func presentChanged(model: TodoListPresentationModel) {
+        output.showChanged(model: TodoListViewModel(model: model))
     }
 
     func presentDeleted(model: TodoListPresentationModel, index: Int) {

@@ -49,8 +49,8 @@ class TodoItemEditUseCase {
 
         switch appState.itemStartMode! {
         case .update:
-            output.present(model: TodoItemEditPresentationModel(entity: appState.itemState.currentTodo!))
-            editingTodo = TodoItemEditUseCase.EditingTodo(todo: appState.itemState.currentTodo!)
+            output.present(model: TodoItemEditPresentationModel(entity: appState.currentTodo!))
+            editingTodo = TodoItemEditUseCase.EditingTodo(todo: appState.currentTodo!)
         case .create:
             output.presentNewModel()
             editingTodo =  TodoItemEditUseCase.EditingTodo()
@@ -107,7 +107,7 @@ class TodoItemEditUseCase {
         }
     }
     
-    private typealias TodoManagerResponder = (TodoItemManagerResponse) -> ()
+    private typealias TodoManagerResponder = (Response<Todo,ItemIssue>) -> ()
 
     func eventSave() {
         
@@ -116,41 +116,38 @@ class TodoItemEditUseCase {
             return
         }
         
-        let completion: TodoManagerResponder = {
-            [self, weak output] result in
-            
-            guard let output = output else { return }
-            
-            switch result {
-            case let .semantic(event):
-                fatalError("unexpected Semantic event: \(event)")
-            case let .failure(_, code, description):
-                fatalError("Unresolved error: code: \(code), \(description)")
-            case let .success(todo):
-                appState.itemState.currentTodo = todo
-                appState.itemState.itemChanged = true
-                
-                switch appState.itemStartMode! {
-                case .create:
-                    appState.todoList.append(todo);
-
-                case .update(let index, _):
-                    appState.todoList[index] = todo;
-                }
-                output.presentSaveCompleted()
-            }
-        }
         let todoValues = TodoValues(editingTodo: editingTodo)
         switch appState.itemStartMode! {
-        case .create:
-            entityGateway.todoManager.create(
-                values: todoValues,
-                completion: completion)
-        case .update:
-            entityGateway.todoManager.update(
-                id: editingTodo.id!,
-                values: todoValues,
-                completion: completion)
+        case let .create(completed):
+            entityGateway.todoManager.create(values: todoValues) { [self, weak output] result in
+                guard let output = output else { return }
+                switch result {
+                case let .domain(event):
+                    fatalError("unexpected Semantic event: \(event)")
+                case let .failure(_, description):
+                    fatalError("Unresolved error: code: \(description)")
+                case let .success(todo):
+                    appState.currentTodo = todo
+                    appState.todoList.append(todo);
+                    completed();
+                    output.presentSaveCompleted()
+                }
+            }
+        case let .update(index, completed):
+            entityGateway.todoManager.update( id: editingTodo.id!, values: todoValues) { [self, weak output] result in
+                guard let output = output else { return }
+                switch result {
+                case let .domain(issue):
+                    fatalError("unexpected Domain Issue: \(issue)")
+                case let .failure(_, description):
+                    fatalError("Unresolved error: code: \(description)")
+                case let .success(todo):
+                    appState.currentTodo = todo
+                    appState.todoList[index] = todo;
+                    completed();
+                    output.presentSaveCompleted()
+                }
+            }
         }
     }
 }

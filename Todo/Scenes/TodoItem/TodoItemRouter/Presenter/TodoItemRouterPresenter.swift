@@ -16,24 +16,10 @@ class TodoItemRouterPresenter {
     func eventViewReady() {
         useCase.eventViewReady()
     }
-    
-    func eventBack() {
-        useCase.eventBack()
-    }
 }
 
 extension TodoItemRouterPresenter: TodoItemRouterUseCaseOutput {
-    
-    func presentChanged(item: TodoListRowPresentationModel) {
         
-        switch startMode! {
-        case let .update(_, changedCompletion):
-            changedCompletion()
-        case let .create(addedCompletion):
-            addedCompletion()
-        }
-    }
-    
     func presentTitle() {
         output.show(title: title )
     }

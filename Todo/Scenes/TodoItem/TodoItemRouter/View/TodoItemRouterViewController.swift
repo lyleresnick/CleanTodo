@@ -41,13 +41,7 @@ class TodoItemRouterViewController: CurrentContainerViewController {
         }
     }
 
-    override func willMove(toParent parent: UIViewController?) {
-        super.willMove(toParent: parent)
-        if parent == nil {
-            presenter.eventBack()
-        }
-    }
-    
+
     private func show(navigationItem: UINavigationItem) {
         
         self.navigationItem.backBarButtonItem = navigationItem.backBarButtonItem

@@ -15,10 +15,10 @@ class TodoListUseCase {
         entityGateway.todoManager.all() { [self, weak output] result in
             guard let output = output else { return }
             switch result {
-            case let .semantic(event):
-               fatalError("semantic event \(event) is not being processed!")
-            case let .failure(_, code, description):
-                fatalError("Unresolved error: code: \(code), \(description)")
+            case let .domain(issue):
+               fatalError("domain issue: \(issue) is not being processed!")
+            case let .failure(_, description):
+                fatalError("Unresolved error:\(description)")
             case let .success(todoList):
                 appState.todoList = todoList;
                 output.present(model: presentationModelFromAppState())
@@ -35,10 +35,10 @@ class TodoListUseCase {
         entityGateway.todoManager.completed(id: id, completed: completed) { [self, weak output] result in
             guard let output = output else { return }
             switch result {
-            case let .semantic(event):
-               fatalError("semantic event: \(event) is not being processed!")
-            case let .failure(_, code, description):
-                fatalError("Unresolved error: code: \(code), \(description)")
+            case let .domain(issue):
+               fatalError("domain issue: \(issue) is not being processed!")
+            case let .failure(_, description):
+                fatalError("Unresolved error:\(description)")
             case let .success(entity):
                 appState.todoList[index] = entity;
                 output.presentCompleted(model: presentationModelFromAppState(), index: index)
@@ -51,35 +51,34 @@ class TodoListUseCase {
         entityGateway.todoManager.delete(id: id) { [self, weak output] result in
             guard let output = output else { return }
             switch result {
-            case let .semantic(reason):
-                switch(reason) {
+            case let .domain(issue):
+                switch(issue) {
                 case .notFound:
-                    fatalError("semantic event \(reason) is not being processed!")
+                    fatalError("domain issue: \(issue) is not being processed!")
                 case .noData:
                     appState.todoList.remove(at: index);
                     output.presentDeleted(model: presentationModelFromAppState(), index: index)
                 }
-            case let .failure(_, code, description):
-                fatalError("Unresolved error: code: \(code), \(description)")
+            case let .failure(_, description):
+                fatalError("Unresolved error:\(description)")
             case .success:
                 fatalError("success is not being processed!")
             }
         }
     }
     
+    private var completion:  () -> Void  { return { [self, weak output] in
+        guard let output = output else { return }
+        output.presentChanged(model: self.presentationModelFromAppState())
+    }}
+    
     func eventCreate() {
-        appState.itemStartMode = .create(completion: { [self, weak output] in
-            guard let output = output else { return }
-            output.presentAdded(model: presentationModelFromAppState(), index: appState.todoList.count - 1)
-        })
+        appState.itemStartMode = .create(completion: completion)
         output.presentItem();
     }
 
     func eventItemSelected(index: Int) {
-        appState.itemStartMode = .update(index: index, completion: { [self, weak output] in
-            guard let output = output else { return }
-            output.presentChanged(model: presentationModelFromAppState(), index: index)
-        })
+        appState.itemStartMode = .update(index: index, completion: completion)
         output.presentItem();
     }
 

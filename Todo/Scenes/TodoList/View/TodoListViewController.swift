@@ -30,10 +30,10 @@ class TodoListViewController: UIViewController {
 }
 
 extension TodoListViewController: TodoListPresenterOutput {
-    func showChanged(model: TodoListViewModel, index: Int) {
+    func showChanged(model: TodoListViewModel) {
         adapter.model = model
         DispatchQueue.main.async {
-            self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+            self.tableView.reloadData()
         }
     }
 
@@ -58,13 +58,6 @@ extension TodoListViewController: TodoListPresenterOutput {
         // if this were not the case, an async call would delay the update of the screen
         // if a network error occurs or it turns out the item was deleted by another user, the app should present a message about the situation and, in the former case, reset the button to the previous state; in the latter case the item should be deleted
 
-    }
-
-    func showAdded(model: TodoListViewModel, index: Int) {
-        adapter.model = model
-        DispatchQueue.main.async {
-            self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .top)
-        }
     }
 }
 

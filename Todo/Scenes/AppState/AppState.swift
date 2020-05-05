@@ -11,5 +11,5 @@ import Foundation
 class AppState {
     var todoList: [Todo]!
     var itemStartMode: TodoItemStartMode!
-    var itemState: TodoItemState!
+    var currentTodo: Todo?
 }

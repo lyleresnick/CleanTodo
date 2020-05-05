@@ -10,7 +10,7 @@ class TodoListAdapter: NSObject {
     init(presenter: TodoListPresenter) {
         self.presenter = presenter
     }
-    var model: TodoListViewModel!
+    var model =  TodoListViewModel(model: TodoListPresentationModel(entityList: []))
 }
 
 extension TodoListAdapter: UITableViewDataSource {

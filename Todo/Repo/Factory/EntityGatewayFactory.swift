@@ -8,7 +8,7 @@ class EntityGatewayFactory {
         case networked
     }
     
-    static let gatewayImplementation = Implementation.test
+    static let gatewayImplementation = Implementation.networked
     
     static var entityGateway: EntityGateway = {
 

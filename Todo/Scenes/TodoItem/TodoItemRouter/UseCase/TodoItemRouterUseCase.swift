@@ -12,7 +12,6 @@ class TodoItemRouterUseCase {
         
         self.entityGateway = entityGateway
         self.appState = appState
-        appState.itemState = TodoItemState()
     }
 
     func eventViewReady() {
@@ -26,7 +25,7 @@ class TodoItemRouterUseCase {
     }
     private func startCreate() {
         
-        appState.itemState.currentTodo = nil
+        appState.currentTodo = nil
         output.presentEditView()
     }
 
@@ -38,33 +37,17 @@ class TodoItemRouterUseCase {
             output.presentTitle()
 
             switch result {
-            case let .semantic(reason):
-                switch(reason) {
+            case let .domain(issue):
+                switch(issue) {
                 case .notFound:
                     output.presentNotFound(id: id)
-                case .noData:
-                    fatalError("semantic event \(reason) is not being processed!")
                 }
-            case let .failure(_, code, description):
-                fatalError("Unresolved error: code: \(code), \(description)")
+            case let .failure(_, description):
+                fatalError("Unresolved error: \(description)")
             case let .success(todo):
-                appState.itemState.currentTodo = todo
+                appState.currentTodo = todo
                 output.presentDisplayView()
             }
         }
     }
-
-    
-    func eventBack() {
-        
-        if appState.itemState.itemChanged {
-            switch appState.itemStartMode! {
-            case .create(let changedItemCallback):
-                changedItemCallback()
-            case .update(_, let changedItemCallback):
-                changedItemCallback()
-            }
-        }
-    }
-
 }

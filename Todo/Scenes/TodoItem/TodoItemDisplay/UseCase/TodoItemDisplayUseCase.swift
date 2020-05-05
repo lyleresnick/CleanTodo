@@ -11,7 +11,7 @@ class TodoItemDisplayUseCase {
 
     func eventViewReady() {
 
-        let todo = appState.itemState.currentTodo!
+        let todo = appState.currentTodo!
         output.presentBegin()
         
         output.present(field: .title, value: todo.title)

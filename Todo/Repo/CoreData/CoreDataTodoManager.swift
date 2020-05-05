@@ -18,7 +18,7 @@ class CoreDataTodoManager: TodoManager {
     }
 
     private lazy var fetchRequestAll =  NSFetchRequest<CoreDataTodo>(entityName: "Todo")
-    func all(completion: @escaping (TodoListManagerResponse) -> ()) {
+    func all(completion: @escaping (Response<[Todo], Void>) -> ()) {
         
         manager.persistentContainer.performBackgroundTask() { context in
 
@@ -27,23 +27,23 @@ class CoreDataTodoManager: TodoManager {
                 let dirtyTodoList = coreDataTodoList.map { Todo(coreDataTodo: $0) }
                 let todoList = dirtyTodoList.compactMap { $0 }
                 guard dirtyTodoList.count == todoList.count else {
-                    completion(.failure(source: .coreData, code: 0, description: "invalid Todo data"))
+                    completion(.failure(source: .coreData, description: "invalid Todo data"))
                     return
                 }
                 completion(.success(entity: todoList ))
             } catch {
                 let nserror = error as NSError
-                completion(.failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription))
+                completion(.failure(source: .coreData, description: nserror.localizedDescription))
             }
         }
     }
     
-    private func makeItemFailure(error: Error) -> TodoItemManagerResponse {
+    private func makeItemFailure<Entity, DomainIssue>(error: Error) -> Response<Entity, DomainIssue> {
         let nserror = error as NSError
-        return .failure(source: .coreData, code: nserror.code, description: nserror.localizedDescription)
+        return .failure(source: .coreData, description: nserror.localizedDescription)
     }
     
-    func fetch(id: String, completion: @escaping (TodoItemManagerResponse) -> ()) {
+    func fetch(id: String, completion: @escaping (Response<Todo, ItemIssue>) -> ()) {
 
         manager.persistentContainer.performBackgroundTask() { context in
 
@@ -53,7 +53,7 @@ class CoreDataTodoManager: TodoManager {
                     completion(self.makeTodo(coreDataTodo: coreDataTodo))
                 }
                 else {
-                    completion(.semantic(event: .notFound))
+                    completion(.domain(issue: .notFound))
                 }
             }
             catch {
@@ -62,7 +62,7 @@ class CoreDataTodoManager: TodoManager {
         }
     }
     
-    func completed(id: String, completed: Bool, completion: @escaping (TodoItemManagerResponse) -> ()) {
+    func completed(id: String, completed: Bool, completion: @escaping (Response<Todo, ItemIssue>) -> ()) {
         
         manager.persistentContainer.performBackgroundTask() { context in
             
@@ -74,7 +74,7 @@ class CoreDataTodoManager: TodoManager {
                     completion(self.makeTodo(coreDataTodo: coreDataTodo))
                 }
                 else {
-                    completion(.semantic(event: .notFound))
+                    completion(.domain(issue: .notFound))
                 }
             }
             catch {
@@ -85,7 +85,7 @@ class CoreDataTodoManager: TodoManager {
     
     func create(
             values: TodoValues,
-            completion: @escaping (TodoItemManagerResponse) -> ()) {
+            completion: @escaping (Response<Todo, Void>) -> ()) {
         
         manager.persistentContainer.performBackgroundTask() { context in
             
@@ -103,9 +103,16 @@ class CoreDataTodoManager: TodoManager {
         }
     }
     
-    func makeTodo(coreDataTodo: CoreDataTodo) -> TodoItemManagerResponse {
+    func makeTodo(coreDataTodo: CoreDataTodo) -> Response<Todo, ItemIssue> {
         guard let todo = Todo(coreDataTodo: coreDataTodo) else {
-            return .failure(source: .coreData, code: 0, description: "invalid Todo data")
+            return .failure(source: .coreData, description: "invalid Todo data")
+        }
+        return .success(entity: todo)
+    }
+
+    func makeTodo(coreDataTodo: CoreDataTodo) -> Response<Todo, Void> {
+        guard let todo = Todo(coreDataTodo: coreDataTodo) else {
+            return .failure(source: .coreData, description: "invalid Todo data")
         }
         return .success(entity: todo)
     }
@@ -113,7 +120,7 @@ class CoreDataTodoManager: TodoManager {
     func update(
             id: String,
             values: TodoValues,
-            completion: @escaping (TodoItemManagerResponse) -> ()) {
+            completion: @escaping (Response<Todo, ItemIssue>) -> ()) {
 
         manager.persistentContainer.performBackgroundTask() { context in
             
@@ -126,7 +133,7 @@ class CoreDataTodoManager: TodoManager {
                     completion(self.makeTodo(coreDataTodo: coreDataTodo))
                 }
                 else {
-                    completion(.semantic(event: .notFound))
+                    completion(.domain(issue: .notFound))
                 }
             }
             catch {
@@ -135,7 +142,7 @@ class CoreDataTodoManager: TodoManager {
         }
     }
     
-    func delete(id: String, completion: @escaping (TodoItemManagerResponse) -> ()) {
+    func delete(id: String, completion: @escaping (Response<Todo?, DeleteIssue>) -> ()) {
         
         manager.persistentContainer.performBackgroundTask() { context in
             
@@ -144,10 +151,10 @@ class CoreDataTodoManager: TodoManager {
                 if coreDataTodoList.count > 0, let coreDataTodo = coreDataTodoList.first {
                     context.delete(coreDataTodo)
                     try context.save()
-                    completion(.semantic(event: .noData))
+                    completion(.success(entity: nil))
                 }
                 else {
-                    completion(.semantic(event: .notFound))
+                    completion(.domain(issue: .notFound))
                 }
             }
             catch {
