@@ -4,34 +4,34 @@ import Foundation
 
 class TestTodoManager: TodoManager {
 
-    func all(completion: @escaping (TodoListManagerResponse) -> ()) {
+    func all(completion: @escaping (Response<[Todo], Void>) -> ()) {
         completion(.success(entity: todoTestData.map { Todo(testTodo: $0) }))
     }
     
-    func fetch(id:String, completion: @escaping (TodoItemManagerResponse) -> ()) {
+    func fetch(id:String, completion: @escaping (Response<Todo, ItemIssue>) -> ()) {
         do {
             let todo = try findTodo(id: id)
             completion(.success(entity: Todo(testTodo: todo)))
         }
         catch {
-            completion(.semantic(event: .notFound))
+            completion(.domain(issue: .notFound))
         }
     }
     
-    func completed(id:String, completed: Bool, completion: @escaping (TodoItemManagerResponse) -> ()) {
+    func completed(id:String, completed: Bool, completion: @escaping (Response<Todo, ItemIssue>) -> ()) {
         do {
             let todo = try findTodo(id: id)
             todo.completed = completed
             completion(.success(entity: Todo(testTodo: todo)))
         }
         catch {
-            completion(.semantic(event: .notFound))
+            completion(.domain(issue: .notFound))
         }
     }
     
     func create(
             values: TodoValues,
-            completion: @escaping (TodoItemManagerResponse) -> ()) {
+            completion: @escaping (Response<Todo, Void>) -> ()) {
         
         let todo = TestTodo( id: UUID().uuidString, values: values)
         todoTestData.append(todo)
@@ -41,7 +41,7 @@ class TestTodoManager: TodoManager {
     func update(
             id: String,
             values: TodoValues,
-            completion: @escaping (TodoItemManagerResponse) -> ()) {
+            completion: @escaping (Response<Todo, ItemIssue>) -> ()) {
         
         do {
             let todo = try findTodo(id: id)
@@ -49,20 +49,24 @@ class TestTodoManager: TodoManager {
             completion(.success(entity: Todo(testTodo: todo)))
         }
         catch {
-            completion(.semantic(event: .notFound))
+            completion(.domain(issue: .notFound))
         }
     }
     
-    func delete(id: String, completion: @escaping (TodoItemManagerResponse) -> ()) {
+    func delete(id: String, completion: @escaping (Response<Todo?, DeleteIssue>) -> ()) {
         
         do {
             let index = try findTodoIndex(id: id)
             todoTestData.remove(at: index)
-            completion(.semantic(event: .noData))
+            completion(.domain(issue: .noData))
         }
         catch {
-            completion(.semantic(event: .notFound))
+            completion(.domain(issue: .notFound))
         }
+    }
+    
+    private enum TodoIssue: Error {
+        case notFound
     }
     
     private func findTodo(id: String) throws -> TestTodo {
@@ -71,7 +75,7 @@ class TestTodoManager: TodoManager {
                 return entity
             }
         }
-        throw TodoSemanticEvent.notFound
+        throw TodoIssue.notFound
     }
     
     private func findTodoIndex(id: String) throws -> Int {
@@ -80,7 +84,7 @@ class TestTodoManager: TodoManager {
                 return index
             }
         }
-        throw TodoSemanticEvent.notFound
+        throw TodoIssue.notFound
     }
 }
 

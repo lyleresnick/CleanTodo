@@ -38,15 +38,13 @@ class TodoItemRouterUseCase {
             output.presentTitle()
 
             switch result {
-            case let .semantic(reason):
-                switch(reason) {
+            case let .domain(issue):
+                switch(issue) {
                 case .notFound:
                     output.presentNotFound(id: id)
-                case .noData:
-                    fatalError("semantic event \(reason) is not being processed!")
                 }
-            case let .failure(_, code, description):
-                fatalError("Unresolved error: code: \(code), \(description)")
+            case let .failure(_, description):
+                fatalError("Unresolved error: \(description)")
             case let .success(todo):
                 appState.itemState.currentTodo = todo
                 output.presentDisplayView()

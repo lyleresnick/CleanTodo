@@ -2,6 +2,10 @@
 
 import Foundation
 
+struct FormatException : Error {
+    let description: String
+}
+
 struct Todo {
     
     let id: String
@@ -20,12 +24,11 @@ struct Todo {
         self.completed = completed
     }
     
-    init?( id: String, title: String, note: String = "", completeBy: Date? = nil, priority rawPriority: String, completed: Bool = false) {
+    init( id: String, title: String, note: String = "", completeBy: Date? = nil, priority rawPriority: String, completed: Bool = false) throws {
         guard
             let priority = Priority(rawValue: rawPriority)
         else {
-            print("Todo found with invalid priority: \(rawPriority)")
-            return nil
+            throw(FormatException(description: "Todo intialized found with invalid priority: \(rawPriority)"))
         }
         self.id = id
         self.title = title

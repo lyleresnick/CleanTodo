@@ -7,10 +7,8 @@ This Todo app is a full reference implementation for VIPER. It demonstrates many
 - saving of captured data, 
 - localization, 
 - the use of view and presentation models
-- ViewController parameter passing, 
-- data cache injection, 
+- use of app state for caching and returning results from sibling Presenters, 
 - output sub-protocols organized by event,
-- returning results from sibling Presenters,
 - separation of Entity Domain Objects from Data Transfer Objects
 
 The are two Routers:

@@ -4,9 +4,12 @@ import Foundation
 
 extension Todo {
     
-    init?(networkedTodo from: NetworkedTodo) {
-        guard let id = from.id else { return nil }
-        self.init(
+    init(networkedTodo from: NetworkedTodo) throws {
+        guard let id = from.id
+        else {
+            throw FormatException(description: "id must not be null")
+        }
+        try self.init(
             id: id,
             title: from.title,
             note: from.note,

@@ -2,36 +2,31 @@
 
 import Foundation
 
-enum  TodoSemanticEvent: Error {
+enum  ItemIssue {
     case notFound
+}
+
+enum  DeleteIssue {
     case noData
+    case notFound
 }
-
-enum DataSources {
-    case test
-    case coreData
-    case networked
-}
-
-typealias TodoListManagerResponse = ManagerResponse<[Todo], DataSources, TodoSemanticEvent>
-typealias TodoItemManagerResponse = ManagerResponse<Todo, DataSources, TodoSemanticEvent>
 
 protocol TodoManager {
     
-    func all(completion: @escaping (TodoListManagerResponse) -> ())
-    func completed(id: String, completed: Bool, completion: @escaping (TodoItemManagerResponse) -> ())
+    func all(completion: @escaping (Response<[Todo], Void>) -> ())
+    func completed(id: String, completed: Bool, completion: @escaping (Response<Todo, ItemIssue>) -> ())
     
     func create(
-                values: TodoValues,
-                completion: @escaping (TodoItemManagerResponse) -> ())
+        values: TodoValues,
+        completion: @escaping (Response<Todo, Void>) -> ())
     
     func update(id: String,
-                values: TodoValues,
-                completion: @escaping (TodoItemManagerResponse) -> ())
+        values: TodoValues,
+        completion: @escaping (Response<Todo, ItemIssue>) -> ())
     
-    func fetch(id:String, completion: @escaping (TodoItemManagerResponse) -> ())
+    func fetch(id:String, completion: @escaping (Response<Todo, ItemIssue>) -> ())
     
-    func delete(id:String, completion: @escaping (TodoItemManagerResponse) -> ())
+    func delete(id:String, completion: @escaping (Response<Todo?, DeleteIssue>) -> ())
 }
 
 
