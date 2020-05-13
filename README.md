@@ -21,7 +21,7 @@ No attempt has been made to make the scenes aesthetically pleasing - its all abo
 
 ## Demo Modes
 
-The demo has two modes: *test* and *coreData*. `test` mode uses an in-memory datastore. `coreData` mode uses CoreData! You can flip between the two modes by changing the value of the `gatewayImplementation`  in the `EntityGatewayFactory` .
+The demo has 3 modes: *test* and *coreData* and *networked*. `test` mode uses an in-memory datastore. `coreData` mode uses CoreData on a local database. `networked` mode uses a network server. You can flip between the modes by changing the value of the `gatewayImplementation` in the `EntityGatewayFactory` .
 
 
 
