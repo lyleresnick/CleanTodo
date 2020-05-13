@@ -11,7 +11,7 @@ This Todo app is a full reference implementation for VIPER. It demonstrates many
 - data cache injection, 
 - output sub-protocols organized by event,
 - returning results from sibling Presenters,
-- separation of Entity Models from source models
+- separation of Entity Domain Objects from Data Transfer Objects
 
 The are two Routers:
 * A Navigation Controller acts as a root router managing a list and a detail scene. 
