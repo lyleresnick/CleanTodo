@@ -76,7 +76,7 @@ class NetworkedTodoManager: TodoManager {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
 
-        let dataTask = defaultSession.dataTask(with: request ) { data, response, error in
+        let dataTask = defaultSession.dataTask(with: request) { data, response, error in
             self.processResponse(data: data, response: response, error: error, completion: completion, errorResolver: errorResolver)
         }
         dataTask.resume()

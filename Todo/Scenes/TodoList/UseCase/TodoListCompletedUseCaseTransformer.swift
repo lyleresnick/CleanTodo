@@ -15,9 +15,9 @@ class TodoListCompletedUseCaseTransformer: TodoListAbstractUseCaseTransformer {
 
                fatalError("semantic event: \(event) is not being processed!")
                 
-            case let .failure(error):
+            case let .failure(_, code, description):
 
-                fatalError("Unresolved error: code: \(error.code), \(error.description)")
+                fatalError("Unresolved error: code: \(code), \(description)")
 
             case let .success(entity):
                 
