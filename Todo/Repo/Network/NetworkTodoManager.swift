@@ -2,7 +2,7 @@
 
 import Foundation
 
-class NetworkedTodoManager: TodoManager {
+class NetworkTodoManager: TodoManager {
     
     enum HTTPMethod: String {
         case get = "GET"

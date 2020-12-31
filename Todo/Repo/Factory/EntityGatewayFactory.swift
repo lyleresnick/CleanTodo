@@ -18,7 +18,7 @@ class EntityGatewayFactory {
         case .coreData:
             return CoreDataEntityGateway(manager: CoreDataManager.shared)
         case .networked:
-            return NetworkedEntityGateway()
+            return NetworkEntityGateway()
         }
     } ()
 

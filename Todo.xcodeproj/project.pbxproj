@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3CD47A722441770700DB466C /* NetworkedEntityGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD47A712441770700DB466C /* NetworkedEntityGateway.swift */; };
-		3CD47A74244177FB00DB466C /* NetworkedTodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD47A73244177FB00DB466C /* NetworkedTodoManager.swift */; };
+		3CD47A722441770700DB466C /* NetworkEntityGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD47A712441770700DB466C /* NetworkEntityGateway.swift */; };
+		3CD47A74244177FB00DB466C /* NetworkTodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD47A73244177FB00DB466C /* NetworkTodoManager.swift */; };
 		3CD47A792441FED900DB466C /* NetworkedTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD47A782441FED800DB466C /* NetworkedTodo.swift */; };
 		3CD47A7B24429A9500DB466C /* Todo+NetworkedTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD47A7A24429A9500DB466C /* Todo+NetworkedTodo.swift */; };
 		3CD47A7D2443419500DB466C /* NetworkedTodo+TodoValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD47A7C2443419500DB466C /* NetworkedTodo+TodoValues.swift */; };
@@ -117,8 +117,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3CD47A712441770700DB466C /* NetworkedEntityGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkedEntityGateway.swift; sourceTree = "<group>"; };
-		3CD47A73244177FB00DB466C /* NetworkedTodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkedTodoManager.swift; sourceTree = "<group>"; };
+		3CD47A712441770700DB466C /* NetworkEntityGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEntityGateway.swift; sourceTree = "<group>"; };
+		3CD47A73244177FB00DB466C /* NetworkTodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTodoManager.swift; sourceTree = "<group>"; };
 		3CD47A782441FED800DB466C /* NetworkedTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkedTodo.swift; sourceTree = "<group>"; };
 		3CD47A7A24429A9500DB466C /* Todo+NetworkedTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Todo+NetworkedTodo.swift"; sourceTree = "<group>"; };
 		3CD47A7C2443419500DB466C /* NetworkedTodo+TodoValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkedTodo+TodoValues.swift"; sourceTree = "<group>"; };
@@ -241,14 +241,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3CD47A772441807300DB466C /* Networked */ = {
+		3CD47A772441807300DB466C /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				3CD47A782441FED800DB466C /* NetworkedTodo.swift */,
 				3CD47A7A24429A9500DB466C /* Todo+NetworkedTodo.swift */,
 				3CD47A7C2443419500DB466C /* NetworkedTodo+TodoValues.swift */,
 			);
-			path = Networked;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		6DDEB7A7227726870006DB9D /* UseCaseStore */ = {
@@ -357,16 +357,47 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		B3523F2E1FFD294F00DB7802 /* EntityGateway */ = {
+		B337BC4F259E04C9000B1080 /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+				B337BC50259E0553000B1080 /* Factory */,
+				B337BC51259E0553000B1080 /* Network */,
+				B337BC52259E0553000B1080 /* Test */,
+				B3743E702060AEE5009D45F6 /* CoreData */,
+				B3A454F91FFDACBE00EDC6E9 /* Entities */,
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		B337BC50259E0553000B1080 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
 				B39CC4291FFD43AC008A3B8E /* EntityGatewayFactory.swift */,
 				B3523F2F1FFD299F00DB7802 /* EntityGateway.swift */,
-				B3523F311FFD2A8C00DB7802 /* TestEntityGateway.swift */,
-				B3743E7B206205E8009D45F6 /* CoreDataEntityGateway.swift */,
-				3CD47A712441770700DB466C /* NetworkedEntityGateway.swift */,
+				B3523F2A1FFD271800DB7802 /* ManagerResponse.swift */,
+				B31148F12000410B0091B71E /* TodoManager.swift */,
 			);
-			path = EntityGateway;
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		B337BC51259E0553000B1080 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3CD47A712441770700DB466C /* NetworkEntityGateway.swift */,
+				3CD47A772441807300DB466C /* Data */,
+				3CD47A73244177FB00DB466C /* NetworkTodoManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		B337BC52259E0553000B1080 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				B31148F22000410B0091B71E /* TestTodoManager.swift */,
+				B3523F311FFD2A8C00DB7802 /* TestEntityGateway.swift */,
+				B3580F8822F89E8000CB2FC5 /* Data */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 		B35577C31FF8110000AF9815 = {
@@ -390,13 +421,7 @@
 		B35577CE1FF8110000AF9815 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
-				3CD47A772441807300DB466C /* Networked */,
-				B306CD98201068D50018F92A /* Localizable.strings */,
-				B3580F8822F89E8000CB2FC5 /* TestData */,
-				B3743E702060AEE5009D45F6 /* CoreData */,
-				B3A454F91FFDACBE00EDC6E9 /* Entities */,
-				B3A454FB1FFDACBE00EDC6E9 /* Managers */,
-				B3523F2E1FFD294F00DB7802 /* EntityGateway */,
+				B337BC4F259E04C9000B1080 /* Repo */,
 				6DDEB7A7227726870006DB9D /* UseCaseStore */,
 				B3A454D11FFDABEF00EDC6E9 /* Scenes */,
 				B35577CF1FF8110000AF9815 /* AppDelegate.swift */,
@@ -416,7 +441,7 @@
 			path = TodoTests;
 			sourceTree = "<group>";
 		};
-		B3580F8822F89E8000CB2FC5 /* TestData */ = {
+		B3580F8822F89E8000CB2FC5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				B32058652006F5ED00C79C4A /* TodoTestData.swift */,
@@ -424,7 +449,7 @@
 				B3580F8B22F8A50100CB2FC5 /* TestTodo+TodoValues.swift */,
 				B371FD26204313F7000A38E4 /* TestTodo+Dictionary.swift */,
 			);
-			path = TestData;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		B36C3712203C550100E19029 /* TodoRootRouter */ = {
@@ -465,6 +490,8 @@
 		B3743E702060AEE5009D45F6 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				B3743E7B206205E8009D45F6 /* CoreDataEntityGateway.swift */,
+				B3743E7920620511009D45F6 /* CoreDataTodoManager.swift */,
 				B35FF6872060A2BA0071AEA5 /* CoreDataManager.swift */,
 				B3743E8320620D69009D45F6 /* CoreDataTodo.swift */,
 				B3AB0E20205B1D950019E3E8 /* Todo.xcdatamodeld */,
@@ -483,6 +510,7 @@
 		B3A454D11FFDABEF00EDC6E9 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				B306CD98201068D50018F92A /* Localizable.strings */,
 				B35577D31FF8110000AF9815 /* Main.storyboard */,
 				B32058672006F7C300C79C4A /* Common */,
 				B36C3712203C550100E19029 /* TodoRootRouter */,
@@ -500,18 +528,6 @@
 				B313BFB422F8916D003FDDE3 /* Priority.swift */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		B3A454FB1FFDACBE00EDC6E9 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				B3523F2A1FFD271800DB7802 /* ManagerResponse.swift */,
-				B31148F12000410B0091B71E /* TodoManager.swift */,
-				B31148F22000410B0091B71E /* TestTodoManager.swift */,
-				B3743E7920620511009D45F6 /* CoreDataTodoManager.swift */,
-				3CD47A73244177FB00DB466C /* NetworkedTodoManager.swift */,
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		B3B0177F20256E6F00B9AFFC /* TodoItem */ = {
@@ -848,7 +864,7 @@
 				B3A454FD1FFDACBF00EDC6E9 /* Todo.swift in Sources */,
 				B38F923B20407AA800996EE0 /* TodoItemRouterRouter.swift in Sources */,
 				B38F923D20412FA500996EE0 /* CurrentContainerViewController.swift in Sources */,
-				3CD47A74244177FB00DB466C /* NetworkedTodoManager.swift in Sources */,
+				3CD47A74244177FB00DB466C /* NetworkTodoManager.swift in Sources */,
 				B3708562200DC1B700DE87BC /* TodoListAbstractUseCaseTransformer.swift in Sources */,
 				B31148EC200040390091B71E /* TodoListPresentationModel.swift in Sources */,
 				B3B017BB20256E6F00B9AFFC /* TodoItemDisplayRowViewModel.swift in Sources */,
@@ -884,7 +900,7 @@
 				B3743E8520620D69009D45F6 /* CoreDataTodo.swift in Sources */,
 				B3ABAA802039DEF100D9C3BF /* TodoItemEditMode.swift in Sources */,
 				B3B017B120256E6F00B9AFFC /* TodoItemRouterPresenterOutput.swift in Sources */,
-				3CD47A722441770700DB466C /* NetworkedEntityGateway.swift in Sources */,
+				3CD47A722441770700DB466C /* NetworkEntityGateway.swift in Sources */,
 				B31F98792029E56F0045892A /* StringLocalize.swift in Sources */,
 				B39676D821365618007BC557 /* Segue.swift in Sources */,
 				B3580F8C22F8A50100CB2FC5 /* TestTodo+TodoValues.swift in Sources */,
