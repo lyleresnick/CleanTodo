@@ -1,21 +1,10 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
-protocol TodoListUseCaseOutput:
-    TodoListViewReadyUseCaseOutput,
-    TodoListCompleteUseCaseOutput,
-    TodoListDeleteUseCaseOutput {}
-
-protocol TodoListViewReadyUseCaseOutput: class {
-    
-    func presentTodoListBegin()
+protocol TodoListUseCaseOutput: AnyObject {
     func present(model: TodoListPresentationModel)
-    func presentTodoListEnd()
-}
-
-protocol TodoListCompleteUseCaseOutput: class {
     func presentCompleted(model: TodoListPresentationModel, index: Int)
-}
-
-protocol TodoListDeleteUseCaseOutput: class {
-    func presentDeleted(index: Int)
+    func presentChanged(model: TodoListPresentationModel, index: Int)
+    func presentDeleted(model: TodoListPresentationModel, index: Int)
+    func presentAdded(model: TodoListPresentationModel, index: Int)
+    func presentItem()
 }

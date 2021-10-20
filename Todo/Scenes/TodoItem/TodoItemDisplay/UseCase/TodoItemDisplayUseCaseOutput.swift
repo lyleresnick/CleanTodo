@@ -10,7 +10,7 @@ enum FieldName: String {
     case completed
 }
 
-protocol TodoItemDisplayUseCaseOutput: class {
+protocol TodoItemDisplayUseCaseOutput: AnyObject {
     
     func presentBegin()
     func present(field: FieldName, value: String)

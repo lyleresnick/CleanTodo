@@ -13,12 +13,7 @@ extension TodoRootRouterPresenter: TodoItemRouterRouter {
 }
 
 extension TodoRootRouterPresenter: TodoListRouter {
-    
-    func routeDisplayItem(id: String, completion: @escaping TodoListChangedItemCallback) {
-        output.showItem(id: id, completion: completion)
-    }
-    
-    func routeCreateItem(completion: @escaping TodoListChangedItemCallback) {
-        output.showCreateItem(completion: completion)
+    func routeDisplayItem() {
+        output.showItem()
     }
 }

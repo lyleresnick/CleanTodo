@@ -1,5 +1,5 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
-protocol TodoItemDisplayRouter: class {
+protocol TodoItemDisplayRouter: AnyObject {
     func routeEditView()
 }

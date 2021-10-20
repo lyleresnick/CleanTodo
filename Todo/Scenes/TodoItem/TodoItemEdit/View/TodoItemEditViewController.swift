@@ -86,10 +86,8 @@ class TodoItemEditViewController: UIViewController {
     }
 }
 
-extension TodoItemEditViewController: TodoItemEditPresenterOutput {}
+extension TodoItemEditViewController: TodoItemEditPresenterOutput {
 
-extension TodoItemEditViewController: TodoItemEditViewReadyPresenterOutput {
-    
     func show(model: TodoItemEditViewModel, titlePlaceholder: String, priorityLabels: [String]) {
         
         DispatchQueue.main.async {
@@ -105,12 +103,8 @@ extension TodoItemEditViewController: TodoItemEditViewReadyPresenterOutput {
             self.completedSwitch.isOn = model.completed
         }
     }
-}
-
-extension TodoItemEditViewController: TodoItemEditCompleteByPresenterOutput {
     
     func showCompleteByClear() {
-        
         DispatchQueue.main.async {
             self.completeByLabel.text = ""
             self.completeByLabel.resignFirstResponder()
@@ -118,7 +112,6 @@ extension TodoItemEditViewController: TodoItemEditCompleteByPresenterOutput {
     }
     
     func showEnableEdit(completeBy: Date?) {
-        
         DispatchQueue.main.async {
             self.completeByPickerView.date = completeBy
             self.completeByLabel.becomeFirstResponder()
@@ -126,17 +119,12 @@ extension TodoItemEditViewController: TodoItemEditCompleteByPresenterOutput {
     }
     
     func show(completeBy: String) {
-        
         DispatchQueue.main.async {
             self.completeByLabel.text = completeBy
         }
     }
-}
-
-extension TodoItemEditViewController: TodoItemEditSavePresenterOutput {
     
     func showAlert(alertTitle: String, message: String, actionTitle: String) {
-        
         DispatchQueue.main.async {
             let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))

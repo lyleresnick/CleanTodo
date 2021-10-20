@@ -3,15 +3,31 @@
 class TodoItemDisplayUseCase {
     
     weak var output: TodoItemDisplayUseCaseOutput!
-    private let itemState: TodoItemUseCaseState
+    private var appState: AppState
 
-    init(useCaseStore: UseCaseStore = RealUseCaseStore.store ) {
-        itemState = useCaseStore[itemStateKey] as! TodoItemUseCaseState
+    init(appState: AppState = TodoAppState.instance ) {
+        self.appState = appState;
     }
 
     func eventViewReady() {
 
-        let transformer = TodoItemDisplayViewReadyUseCaseTransformer(state: itemState)
-        transformer.transform(output: output)
+        let todo = appState.itemState.currentTodo!
+        output.presentBegin()
+        
+        output.present(field: .title, value: todo.title)
+        if todo.note != "" {
+            output.present(field: .note, value: todo.note)
+        }
+        if let completeBy = todo.completeBy {
+            output.present(field: .completeBy, value: completeBy)
+        }
+        switch todo.priority {
+        case .none:
+            break
+        default:
+            output.present(field: .priority, value: todo.priority)
+        }
+        output.present(field: .completed, value: todo.completed)
+        output.presentEnd()
     }
 }

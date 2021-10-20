@@ -2,7 +2,7 @@
 
 import UIKit
 
-protocol ToggleButtonDelegate: class {
+protocol ToggleButtonDelegate: AnyObject {
     func onTouched()
     func offTouched()
 }

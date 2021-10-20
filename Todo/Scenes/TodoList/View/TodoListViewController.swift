@@ -7,7 +7,6 @@ class TodoListViewController: UIViewController {
     private var adapter: TodoListAdapter!
     var presenter: TodoListPresenter!
     @IBOutlet weak var tableView: UITableView!
-    var prepareFor: PrepareForSegueClosure!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,51 +24,44 @@ class TodoListViewController: UIViewController {
         presenter.eventViewReady()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        prepareFor(segue)
-    }
-
     @IBAction func addTouched(_ sender: Any) {
         presenter.eventCreate()
     }
 }
 
-extension TodoListViewController: TodoListPresenterOutput {}
-
-extension TodoListViewController: TodoListViewReadyPresenterOutput {
-
-    func showTodoList() {
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-}
-
-extension TodoListViewController: TodoListDeletePresenterOutput {
-
-    func showDeleted(index: Int) {
-        
-        DispatchQueue.main.async {
-            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .bottom)
-        }
-    }
-}
-
-extension TodoListViewController: TodoListChangedPresenterOutput {
-
-    func showChanged(index: Int) {
-        
+extension TodoListViewController: TodoListPresenterOutput {
+    func showChanged(model: TodoListViewModel, index: Int) {
+        adapter.model = model
         DispatchQueue.main.async {
             self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
         }
     }
-}
 
-extension TodoListViewController: TodoListCreatePresenterOutput {
+    func showTodoList(model: TodoListViewModel ) {
+        adapter.model = model
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 
-    func showAdded(index: Int) {
+    func showDeleted(model: TodoListViewModel, index: Int) {
+        adapter.model = model
+        DispatchQueue.main.async {
+            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .bottom)
+        }
+    }
+
+    func showCompleted(model: TodoListViewModel, index: Int) {
+        adapter.model = model
         
+        // the output was previously updated due to the immediate toggle state change
+        // if this were not the case, an async call would delay the update of the screen
+        // if a network error occurs or it turns out the item was deleted by another user, the app should present a message about the situation and, in the former case, reset the button to the previous state; in the latter case the item should be deleted
+
+    }
+
+    func showAdded(model: TodoListViewModel, index: Int) {
+        adapter.model = model
         DispatchQueue.main.async {
             self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .top)
         }

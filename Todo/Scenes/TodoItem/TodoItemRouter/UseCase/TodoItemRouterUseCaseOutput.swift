@@ -2,19 +2,11 @@
 
 import Foundation
 
-protocol TodoItemRouterUseCaseOutput:
-    TodoItemRouterViewReadyUseCaseOutput,
-    TodoItemRouterBackUseCaseOutput {}
-
-
-protocol TodoItemRouterViewReadyUseCaseOutput: class {
-    
+protocol TodoItemRouterUseCaseOutput: AnyObject {
     func presentTitle()
-    func presentViewReady(startMode: TodoStartMode)
+    func presentDisplayView()
+    func presentEditView()
     func presentNotFound(id: String)
-}
-
-protocol TodoItemRouterBackUseCaseOutput: class {
-    func presentChanged(item: TodoListPresentationModel)
+    func presentChanged(item: TodoListRowPresentationModel)
 }
 

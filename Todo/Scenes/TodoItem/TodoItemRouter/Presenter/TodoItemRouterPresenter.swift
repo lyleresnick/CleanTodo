@@ -6,7 +6,7 @@ class TodoItemRouterPresenter {
 
     private let useCase: TodoItemRouterUseCase
     weak var router: TodoItemRouterRouter!
-    var startMode: TodoStartMode!
+    var startMode: TodoItemStartMode!
     weak var output: TodoItemRouterPresenterOutput!
     
     init(useCase: TodoItemRouterUseCase) {
@@ -14,7 +14,7 @@ class TodoItemRouterPresenter {
     }
     
     func eventViewReady() {
-        useCase.eventViewReady(startMode: startMode)
+        useCase.eventViewReady()
     }
     
     func eventBack() {
@@ -22,29 +22,28 @@ class TodoItemRouterPresenter {
     }
 }
 
-extension TodoItemRouterPresenter: TodoItemRouterUseCaseOutput {}
+extension TodoItemRouterPresenter: TodoItemRouterUseCaseOutput {
     
-extension TodoItemRouterPresenter: TodoItemRouterBackUseCaseOutput {
-
-    func presentChanged(item: TodoListPresentationModel) {
+    func presentChanged(item: TodoListRowPresentationModel) {
         
         switch startMode! {
         case let .update(_, changedCompletion):
-            changedCompletion(item)
+            changedCompletion()
         case let .create(addedCompletion):
-            addedCompletion(item)
+            addedCompletion()
         }
     }
-}
-
-extension TodoItemRouterPresenter: TodoItemRouterViewReadyUseCaseOutput {
     
     func presentTitle() {
         output.show(title: title )
     }
 
-    func presentViewReady(startMode: TodoStartMode) {
-        output.showViewReady(startMode: startMode)
+    func presentEditView() {
+        output.showEditView()
+    }
+    
+    func presentDisplayView() {
+        output.showDisplayView()
     }
     
     private var title: String {
@@ -52,7 +51,6 @@ extension TodoItemRouterPresenter: TodoItemRouterViewReadyUseCaseOutput {
     }
 
     func presentNotFound(id: String) {
-        
         let messageFormat = "todoNotFound".localized
         let message = String(format: messageFormat, id)
         output.showView(message: message )
@@ -60,29 +58,24 @@ extension TodoItemRouterPresenter: TodoItemRouterViewReadyUseCaseOutput {
 }
     
 extension TodoItemRouterPresenter: TodoItemDisplayRouter {
-    
+
     func routeEditView() {
         output.showEditView()
     }
 }
 
 extension TodoItemRouterPresenter: TodoItemEditRouter {
+    func routeCreateItemCancelled() {
+        router.routeCreateItemCancelled()
+    }
     
     func routeSaveCompleted() {
         output.showDisplayView()
     }
     
-    func routeEditingCancelled() {
-        
-        switch startMode! {
-        case .update:
-            output.showDisplayView()
-        case .create:
-            router.routeCreateItemCancelled()
-        }
+    func routeEditItemCancelled() {
+        output.showDisplayView()
     }
-    
-    
 }
 
 

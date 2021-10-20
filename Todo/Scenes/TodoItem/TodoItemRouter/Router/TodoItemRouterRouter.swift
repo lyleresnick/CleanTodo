@@ -1,6 +1,6 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
-protocol TodoItemRouterRouter: class {
+protocol TodoItemRouterRouter: AnyObject {
     
     func routeCreateItemCancelled()
 }

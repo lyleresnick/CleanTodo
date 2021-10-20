@@ -2,15 +2,12 @@
 
 import Foundation
 
+
 struct TodoListPresentationModel {
-    let todoList: [TodoListRowPresentationModel];
-    
-    init(entityList: [Todo]) {
-        todoList = entityList.map { TodoListRowPresentationModel(entity: $0) }
-    }
+    let todoList: [TodoListPresentationRowModel];
 }
 
-struct TodoListRowPresentationModel {
+struct TodoListPresentationRowModel {
     
     let id: String
     let title: String

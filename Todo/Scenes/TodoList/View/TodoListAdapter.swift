@@ -10,19 +10,20 @@ class TodoListAdapter: NSObject {
     init(presenter: TodoListPresenter) {
         self.presenter = presenter
     }
+    var model: TodoListViewModel!
 }
 
 extension TodoListAdapter: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.rowCount
+        return model.todoList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         return cellConfigurator
             .set(tableView: tableView, indexPath: indexPath, presenter: presenter)
-            .show(viewModel: presenter.row(at: indexPath.row))
+            .show(viewModel: model.todoList[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

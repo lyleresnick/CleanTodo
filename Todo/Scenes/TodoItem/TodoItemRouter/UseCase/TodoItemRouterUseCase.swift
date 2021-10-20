@@ -5,31 +5,66 @@ class TodoItemRouterUseCase {
     weak var output: TodoItemRouterUseCaseOutput!
     
     private var entityGateway: EntityGateway
-    private var useCaseStore: UseCaseStore
-    private var itemState = TodoItemUseCaseState()
+    private var appState: AppState
 
     init( entityGateway: EntityGateway = EntityGatewayFactory.entityGateway,
-          useCaseStore: UseCaseStore = RealUseCaseStore.store ) {
+          appState: AppState = TodoAppState.instance ) {
         
         self.entityGateway = entityGateway
-        self.useCaseStore = useCaseStore
-        self.useCaseStore[itemStateKey] = itemState
+        self.appState = appState
+        appState.itemState = TodoItemState()
     }
 
-    func eventViewReady(startMode: TodoStartMode) {
+    func eventViewReady() {
 
-        let transformer = TodoItemRouterViewReadyUseCaseTransformer(modelManager: entityGateway.todoManager, state: itemState)
-        transformer.transform(startMode: startMode, output: output)
+        switch appState.itemStartMode! {
+        case .create:
+            startCreate()
+        case .update(let index, _):
+            startUpdate(index: index)
+        }
     }
+    private func startCreate() {
+        
+        appState.itemState.currentTodo = nil
+        output.presentEditView()
+    }
+
+    private func startUpdate(index: Int) {
+        
+        let id = appState.todoList[index].id
+        entityGateway.todoManager.fetch(id: id) { [self, weak output] result in
+            guard let output = output else { return }
+            output.presentTitle()
+
+            switch result {
+            case let .semantic(reason):
+                switch(reason) {
+                case .notFound:
+                    output.presentNotFound(id: id)
+                case .noData:
+                    fatalError("semantic event \(reason) is not being processed!")
+                }
+            case let .failure(_, code, description):
+                fatalError("Unresolved error: code: \(code), \(description)")
+            case let .success(todo):
+                appState.itemState.currentTodo = todo
+                output.presentDisplayView()
+            }
+        }
+    }
+
     
     func eventBack() {
         
-        if itemState.itemChanged {
-            output.presentChanged(item: TodoListPresentationModel(entity: itemState.currentTodo!))
+        if appState.itemState.itemChanged {
+            switch appState.itemStartMode! {
+            case .create(let changedItemCallback):
+                changedItemCallback()
+            case .update(_, let changedItemCallback):
+                changedItemCallback()
+            }
         }
     }
-    
-    deinit {
-        useCaseStore[itemStateKey] = nil
-    }
+
 }

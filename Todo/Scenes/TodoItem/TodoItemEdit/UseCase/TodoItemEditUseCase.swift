@@ -32,24 +32,30 @@ class TodoItemEditUseCase {
     }
     
     private var editingTodo: EditingTodo!
-    var editMode: TodoItemEditMode!
     
     private let entityGateway: EntityGateway
-    private let itemState: TodoItemUseCaseState
+    private var appState: AppState
 
     init( entityGateway: EntityGateway = EntityGatewayFactory.entityGateway,
-          useCaseStore: UseCaseStore = RealUseCaseStore.store ) {
+          appState: AppState = TodoAppState.instance ) {
         
         self.entityGateway = entityGateway
-        self.itemState = useCaseStore[itemStateKey] as! TodoItemUseCaseState
-    }
+        self.appState = appState
+        }
     
     // MARK: - Initialization
 
     func eventViewReady() {
 
-        let transformer = TodoItemEditViewReadyUseCaseTransformer(editMode: editMode, state: itemState)
-        editingTodo = transformer.transform(output: output)
+        switch appState.itemStartMode! {
+        case .update:
+            output.present(model: TodoItemEditPresentationModel(entity: appState.itemState.currentTodo!))
+            editingTodo = TodoItemEditUseCase.EditingTodo(todo: appState.itemState.currentTodo!)
+        case .create:
+            output.presentNewModel()
+            editingTodo =  TodoItemEditUseCase.EditingTodo()
+        }
+
     }
 
     // MARK: - Data Capture
@@ -92,9 +98,85 @@ class TodoItemEditUseCase {
     
     // MARK: - Finalization
     
+    func eventCancel() {
+        switch appState.itemStartMode! {
+        case .update:
+            output.presentEditItemCancelled()
+        case .create:
+            output.presentCreateItemCancelled()
+        }
+    }
+    
+    private typealias TodoManagerResponder = (TodoItemManagerResponse) -> ()
+
     func eventSave() {
         
-        let transformer = TodoItemEditSaveUseCaseTransformer(editMode: editMode, todoManager: entityGateway.todoManager, state: itemState)
-        transformer.transform(editingTodo: editingTodo, output: output)
+        guard editingTodo.title != "" else {
+            output.presentTitleIsEmpty()
+            return
+        }
+        
+        let completion: TodoManagerResponder = {
+            [self, weak output] result in
+            
+            guard let output = output else { return }
+            
+            switch result {
+            case let .semantic(event):
+                fatalError("unexpected Semantic event: \(event)")
+            case let .failure(_, code, description):
+                fatalError("Unresolved error: code: \(code), \(description)")
+            case let .success(todo):
+                appState.itemState.currentTodo = todo
+                appState.itemState.itemChanged = true
+                
+                switch appState.itemStartMode! {
+                case .create:
+                    appState.todoList.append(todo);
+
+                case .update(let index, _):
+                    appState.todoList[index] = todo;
+                }
+                output.presentSaveCompleted()
+            }
+        }
+        let todoValues = TodoValues(editingTodo: editingTodo)
+        switch appState.itemStartMode! {
+        case .create:
+            entityGateway.todoManager.create(
+                values: todoValues,
+                completion: completion)
+        case .update:
+            entityGateway.todoManager.update(
+                id: editingTodo.id!,
+                values: todoValues,
+                completion: completion)
+        }
+    }
+}
+
+private extension TodoItemEditUseCase.EditingTodo {
+    
+    init(todo: Todo) {
+        
+        id = todo.id
+        title = todo.title
+        note = todo.note
+        completeBy = todo.completeBy
+        priority = todo.priority
+        completed = todo.completed
+    }
+}
+
+
+private extension TodoValues {
+    
+    init(editingTodo: TodoItemEditUseCase.EditingTodo) {
+        
+        title = editingTodo.title
+        note = editingTodo.note
+        completeBy = editingTodo.completeBy
+        priority = editingTodo.priority
+        completed = editingTodo.completed
     }
 }

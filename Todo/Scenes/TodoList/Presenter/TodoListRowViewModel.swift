@@ -2,6 +2,14 @@
 
 import Foundation
 
+struct TodoListViewModel {
+    let todoList: [TodoListRowViewModel]
+    
+    init(model: TodoListPresentationModel) {
+        todoList = model.todoList.map { TodoListRowViewModel(model: $0) }
+    }
+}
+
 struct TodoListRowViewModel {
     
     let id: String
@@ -10,7 +18,7 @@ struct TodoListRowViewModel {
     let priority: String
     let completed: Bool
     
-    init(model: TodoListPresentationModel) {
+    init(model: TodoListRowPresentationModel) {
         self.id = model.id
         self.title = model.title
         self.completeBy = (model.completeBy != nil) ? TodoListRowViewModel.outboundDateFormatter.string(from: model.completeBy!) : ""

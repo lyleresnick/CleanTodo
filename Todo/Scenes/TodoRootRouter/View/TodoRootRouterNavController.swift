@@ -24,34 +24,19 @@ enum TodoRootRouterSegue: String, Segue {
     case showTodo
 }
 
-extension TodoRootRouterNavController: TodoRootRouterPresenterOutput {}
-
-extension TodoRootRouterNavController: TodoRootRouterItemPresenterOutput {
+extension TodoRootRouterNavController: TodoRootRouterPresenterOutput {
 
     func showPop() {
         popViewController(animated: true)
     }
-}
-
-extension TodoRootRouterNavController: TodoRootRouterListPresenterOutput {
     
-    func showCreateItem(completion: @escaping TodoListChangedItemCallback) {
-        
-        performSegue(identifier: .createTodo, startMode: .create(completion: completion))
+    func showItem() {
+        performSegue(identifier: .showTodo)
     }
     
-    func showItem(id: String, completion: @escaping TodoListChangedItemCallback) {
-        
-        performSegue(identifier: .showTodo, startMode: .update(id: id, completion: completion))
-    }
-    
-    private func performSegue(identifier: TodoRootRouterSegue, startMode: TodoStartMode) {
+    private func performSegue(identifier: TodoRootRouterSegue) {
         
         let listViewController = viewControllers.first as! TodoListViewController
-        listViewController.prepareFor = { segue in
-            let viewController = segue.destination as! TodoItemRouterViewController
-            viewController.presenter.startMode = startMode
-        }
         listViewController.performSegue(identifier: identifier)
     }
 }

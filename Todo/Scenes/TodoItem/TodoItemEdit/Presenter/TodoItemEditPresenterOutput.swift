@@ -2,22 +2,10 @@
 
 import Foundation
 
-protocol TodoItemEditPresenterOutput:
-    TodoItemEditViewReadyPresenterOutput,
-    TodoItemEditCompleteByPresenterOutput,
-    TodoItemEditSavePresenterOutput {}
-
-protocol TodoItemEditViewReadyPresenterOutput: class {
+protocol TodoItemEditPresenterOutput: AnyObject {
     func show(model: TodoItemEditViewModel, titlePlaceholder: String, priorityLabels: [String])
-}
-
-protocol TodoItemEditCompleteByPresenterOutput: class {
-    
     func show(completeBy: String)
     func showEnableEdit(completeBy: Date?)
     func showCompleteByClear()
-}
-
-protocol TodoItemEditSavePresenterOutput: class {
     func showAlert(alertTitle: String, message: String, actionTitle: String)
 }

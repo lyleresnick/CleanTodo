@@ -6,16 +6,7 @@ class TodoItemEditPresenter {
     
     private let useCase: TodoItemEditUseCase
     weak var router: TodoItemEditRouter!
-    
-    var editMode: TodoItemEditMode {
-        get {
-            return useCase.editMode
-        }
-        set {
-            useCase.editMode = newValue
-        }
-    }
-    
+        
     weak var output: TodoItemEditPresenterOutput!
     
     init(useCase: TodoItemEditUseCase) {
@@ -65,13 +56,11 @@ class TodoItemEditPresenter {
     }
     
     func eventCancel() {
-        router.routeEditingCancelled()
+        useCase.eventCancel()
     }
 }
 
-extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {}
-
-extension TodoItemEditPresenter: TodoItemEditViewReadyUseCaseOutput {
+extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
 
     func present(model: TodoItemEditPresentationModel) {
         presentWithLocalizations(model: TodoItemEditViewModel(model: model))
@@ -86,9 +75,6 @@ extension TodoItemEditPresenter: TodoItemEditViewReadyUseCaseOutput {
             titlePlaceholder: "enterATitle".localized,
             priorityLabels: ["none", "low", "medium", "high"].map { $0.localized })
     }
-}
-
-extension TodoItemEditPresenter: TodoItemEditCompleteByUseCaseOutput {
 
     func presentCompleteByClear() {
         output.showCompleteByClear()
@@ -103,12 +89,17 @@ extension TodoItemEditPresenter: TodoItemEditCompleteByUseCaseOutput {
             ? TodoItemEditViewModel.outboundDateFormatter.string(from: completeBy!)
             : "")
     }
-}
-
-extension TodoItemEditPresenter: TodoItemEditSaveUseCaseOutput {
     
     func presentSaveCompleted() {
         router.routeSaveCompleted()
+    }
+    
+    func presentEditItemCancelled() {
+        router.routeEditItemCancelled()
+    }
+    
+    func presentCreateItemCancelled() {
+        router.routeCreateItemCancelled()
     }
     
     func presentTitleIsEmpty() {
