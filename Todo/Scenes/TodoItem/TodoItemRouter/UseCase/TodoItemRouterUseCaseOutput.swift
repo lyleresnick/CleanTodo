@@ -3,6 +3,7 @@
 import Foundation
 
 protocol TodoItemRouterUseCaseOutput: AnyObject {
+    func presentLoading()
     func presentTitle()
     func presentDisplayView()
     func presentEditView()

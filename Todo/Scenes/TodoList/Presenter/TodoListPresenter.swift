@@ -38,6 +38,9 @@ class TodoListPresenter {
 }
 
 extension TodoListPresenter: TodoListUseCaseOutput {
+    func presentLoading() {
+        output.showLoading()
+    }
     
     func presentItem() {
         router.routeDisplayItem()

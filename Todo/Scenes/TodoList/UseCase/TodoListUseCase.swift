@@ -12,6 +12,7 @@ class TodoListUseCase {
     }
 
     func eventViewReady() {
+        output.presentLoading()
         entityGateway.todoManager.all() { [self, weak output] result in
             guard let output = output else { return }
             switch result {
@@ -32,6 +33,7 @@ class TodoListUseCase {
     
     func event(completed: Bool, index: Int) {
         let id = appState.todoList[index].id
+        output.presentLoading()
         entityGateway.todoManager.completed(id: id, completed: completed) { [self, weak output] result in
             guard let output = output else { return }
             switch result {
@@ -48,6 +50,7 @@ class TodoListUseCase {
     
     func eventDelete(index: Int) {
         let id = appState.todoList[index].id
+        output.presentLoading()
         entityGateway.todoManager.delete(id: id) { [self, weak output] result in
             guard let output = output else { return }
             switch result {
@@ -67,8 +70,8 @@ class TodoListUseCase {
         }
     }
     
-    private var completion:  () -> Void  { return { [self, weak output] in
-        guard let output = output else { return }
+    private var completion:  () -> Void  { return { [weak self, weak output] in
+        guard let output = output, let self = self else { return }
         output.presentChanged(model: self.presentationModelFromAppState())
     }}
     

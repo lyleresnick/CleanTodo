@@ -2,10 +2,11 @@
 
 import UIKit
 
-class TodoItemRouterViewController: CurrentContainerViewController {
+class TodoItemRouterViewController: CurrentContainerViewController, SpinnerAttachable {
 
     var presenter: TodoItemRouterPresenter!
     @IBOutlet weak var messageLabel: UILabel!
+    private var spinnerView: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -14,6 +15,7 @@ class TodoItemRouterViewController: CurrentContainerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        spinnerView = attachSpinner()
         presenter.eventViewReady()
     }
 
@@ -41,7 +43,6 @@ class TodoItemRouterViewController: CurrentContainerViewController {
         }
     }
 
-
     private func show(navigationItem: UINavigationItem) {
         
         self.navigationItem.backBarButtonItem = navigationItem.backBarButtonItem
@@ -52,15 +53,19 @@ class TodoItemRouterViewController: CurrentContainerViewController {
 }
 
 extension TodoItemRouterViewController: TodoItemRouterPresenterOutput {
+    func showLoading() {
+        DispatchQueue.main.async { [ weak self] in
+            self?.spinnerView.startAnimating()
+        }
+    }
     
     func show(title: String) {
-        DispatchQueue.main.async {
-            self.title = title
+        DispatchQueue.main.async { [ weak self] in
+            self?.title = title
         }
     }
     
     func showViewReady(startMode: TodoItemStartMode) {
-        
         switch startMode {
         case .create:
             showCreateView()
@@ -70,44 +75,46 @@ extension TodoItemRouterViewController: TodoItemRouterPresenterOutput {
     }
     
     private func showCreateView() {
-        
-        DispatchQueue.main.async {
-            self.configureMessage(hidden: true)
+        DispatchQueue.main.async { [ weak self] in
+            guard let self = self else { return }
+            self.configure(messageHidden: true)
             self.performSegue(withIdentifier: Segue.showEditView.rawValue, sender: TodoItemEditMode.create)
         }
     }
     
     func showView(message: String) {
-        
-        DispatchQueue.main.async {
-            self.show(navigationItem: self.createMessageNavigationItem())
-            self.configureMessage(hidden: false)
+        DispatchQueue.main.async { [ weak self] in
+            guard let self = self else { return }
+            self.configure(messageHidden: false)
             self.messageLabel.text = message
+            self.show(navigationItem: self.createMessageNavigationItem())
         }
     }
     
     private func createMessageNavigationItem() -> UINavigationItem {
-        
         let navItem = UINavigationItem()
         navItem.title = "todo".localized
         return navItem
     }
     
-    private func configureMessage(hidden: Bool) {
-        messageLabel.isHidden = hidden
-        containerView.isHidden = !hidden
+    private func configure(messageHidden: Bool) {
+        spinnerView.stopAnimating()
+        messageLabel.isHidden = messageHidden
+        containerView.isHidden = !messageHidden
     }
 
     func showDisplayView() {
-        DispatchQueue.main.async {
-            self.configureMessage(hidden: true)
+        DispatchQueue.main.async { [ weak self] in
+            guard let self = self else { return }
+            self.configure(messageHidden: true)
             self.performSegue(withIdentifier: Segue.showDisplayView.rawValue, sender: nil)
         }
     }
     
     func showEditView() {
-        DispatchQueue.main.async {
-            self.configureMessage(hidden: true)
+        DispatchQueue.main.async { [ weak self] in
+            guard let self = self else { return }
+            self.configure(messageHidden: true)
             self.performSegue(withIdentifier: Segue.showEditView.rawValue, sender: nil)
         }
     }

@@ -19,11 +19,11 @@ struct TodoListRowViewModel {
     let completed: Bool
     
     init(model: TodoListRowPresentationModel) {
-        self.id = model.id
-        self.title = model.title
-        self.completeBy = (model.completeBy != nil) ? TodoListRowViewModel.outboundDateFormatter.string(from: model.completeBy!) : ""
-        self.priority = (0..<model.priority).reduce(" ") { result, index in "!\(result)" }
-        self.completed = model.completed
+        id = model.id
+        title = model.title
+        completeBy = (model.completeBy != nil) ? Self.outboundDateFormatter.string(from: model.completeBy!) : ""
+        priority = (0..<model.priority.bangs).reduce(" ") { result, _ in "!\(result)" }
+        completed = model.completed
     }
     
     private static let outboundDateFormatter = DateFormatter.dateFormatter( format: "MMM' 'dd', 'yyyy" )

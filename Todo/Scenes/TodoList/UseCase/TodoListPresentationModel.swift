@@ -15,14 +15,14 @@ struct TodoListRowPresentationModel {
     let id: String
     let title: String
     let completeBy: Date?
-    let priority: Int
+    let priority: Priority
     let completed: Bool
     
     init(entity: Todo) {
-        self.id = entity.id
-        self.title = entity.title
-        self.completeBy = entity.completeBy
-        self.priority = entity.priority.bangs
-        self.completed = entity.completed
+        id = entity.id
+        title = entity.title
+        completeBy = entity.completeBy
+        priority = entity.priority
+        completed = entity.completed
     }
 }

@@ -2,7 +2,7 @@
 
 import UIKit
 
-class TodoItemEditViewController: UIViewController {
+class TodoItemEditViewController: UIViewController, SpinnerAttachable {
     
     var presenter: TodoItemEditPresenter!
     
@@ -23,9 +23,12 @@ class TodoItemEditViewController: UIViewController {
 
     private var titleTextFieldDelegate: TodoItemEditTitleTextFieldDelegate!
     private var noteTextViewDelegate: TodoItemEditNoteTextViewDelegate!
+    private var spinnerView: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        spinnerView = attachSpinner()
         
         titleTextFieldDelegate = TodoItemEditTitleTextFieldDelegate(presenter: presenter)
         titleTextField.delegate = titleTextFieldDelegate
@@ -87,10 +90,17 @@ class TodoItemEditViewController: UIViewController {
 }
 
 extension TodoItemEditViewController: TodoItemEditPresenterOutput {
+    func showLoading() {
+        DispatchQueue.main.async { [ weak self] in
+            self?.spinnerView.startAnimating()
+        }
+    }
 
     func show(model: TodoItemEditViewModel, titlePlaceholder: String, priorityLabels: [String]) {
-        
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [ weak self] in
+            guard let self = self else { return }
+            self.spinnerView.stopAnimating()
+
             self.titleTextField.placeholder = titlePlaceholder
             for (index, title) in priorityLabels.enumerated() {
                 self.prioritySegmentedControl.setTitle(title, forSegmentAt: index)
@@ -105,27 +115,35 @@ extension TodoItemEditViewController: TodoItemEditPresenterOutput {
     }
     
     func showCompleteByClear() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [ weak self] in
+            guard let self = self else { return }
+            self.spinnerView.stopAnimating()
             self.completeByLabel.text = ""
             self.completeByLabel.resignFirstResponder()
         }
     }
     
     func showEnableEdit(completeBy: Date?) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [ weak self] in
+            guard let self = self else { return }
+            self.spinnerView.stopAnimating()
             self.completeByPickerView.date = completeBy
             self.completeByLabel.becomeFirstResponder()
         }
     }
     
     func show(completeBy: String) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [ weak self] in
+            guard let self = self else { return }
+            self.spinnerView.stopAnimating()
             self.completeByLabel.text = completeBy
         }
     }
     
     func showAlert(alertTitle: String, message: String, actionTitle: String) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [ weak self] in
+            guard let self = self else { return }
+            self.spinnerView.stopAnimating()
             let alert = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)

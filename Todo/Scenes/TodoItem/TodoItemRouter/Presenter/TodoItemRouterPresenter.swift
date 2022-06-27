@@ -3,7 +3,6 @@
 import Foundation
 
 class TodoItemRouterPresenter {
-
     private let useCase: TodoItemRouterUseCase
     weak var router: TodoItemRouterRouter!
     var startMode: TodoItemStartMode!
@@ -19,7 +18,6 @@ class TodoItemRouterPresenter {
 }
 
 extension TodoItemRouterPresenter: TodoItemRouterUseCaseOutput {
-        
     func presentTitle() {
         output.show(title: title )
     }
@@ -44,13 +42,16 @@ extension TodoItemRouterPresenter: TodoItemRouterUseCaseOutput {
 }
     
 extension TodoItemRouterPresenter: TodoItemDisplayRouter {
-
     func routeEditView() {
         output.showEditView()
     }
 }
 
 extension TodoItemRouterPresenter: TodoItemEditRouter {
+    func presentLoading() {
+        output.showLoading()
+    }
+    
     func routeCreateItemCancelled() {
         router.routeCreateItemCancelled()
     }

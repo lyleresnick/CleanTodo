@@ -61,7 +61,10 @@ class TodoItemEditPresenter {
 }
 
 extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
-
+    func presentLoading() {
+        output.showLoading()
+    }
+    
     func present(model: TodoItemEditPresentationModel) {
         presentWithLocalizations(model: TodoItemEditViewModel(model: model))
     }

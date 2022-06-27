@@ -50,6 +50,7 @@
 		B357EE7B271D0FCA002FC293 /* TodoAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B357EE7A271D0FCA002FC293 /* TodoAppState.swift */; };
 		B3580F8C22F8A50100CB2FC5 /* TestTodo+TodoValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3580F8B22F8A50100CB2FC5 /* TestTodo+TodoValues.swift */; };
 		B35FF6882060A2BA0071AEA5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FF6872060A2BA0071AEA5 /* CoreDataManager.swift */; };
+		B3610B082865F7A600824518 /* SpinnerAttachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3610B072865F7A600824518 /* SpinnerAttachable.swift */; };
 		B36C3725203C550100E19029 /* TodoRootRouterPresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36C3714203C550100E19029 /* TodoRootRouterPresenterOutput.swift */; };
 		B36C3726203C550100E19029 /* TodoRootRouterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36C3715203C550100E19029 /* TodoRootRouterPresenter.swift */; };
 		B36C3728203C550100E19029 /* TodoRootRouterConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36C3719203C550100E19029 /* TodoRootRouterConnector.swift */; };
@@ -158,6 +159,7 @@
 		B357EE7A271D0FCA002FC293 /* TodoAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAppState.swift; sourceTree = "<group>"; };
 		B3580F8B22F8A50100CB2FC5 /* TestTodo+TodoValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestTodo+TodoValues.swift"; sourceTree = "<group>"; };
 		B35FF6872060A2BA0071AEA5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B3610B072865F7A600824518 /* SpinnerAttachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerAttachable.swift; sourceTree = "<group>"; };
 		B36C3714203C550100E19029 /* TodoRootRouterPresenterOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoRootRouterPresenterOutput.swift; sourceTree = "<group>"; };
 		B36C3715203C550100E19029 /* TodoRootRouterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoRootRouterPresenter.swift; sourceTree = "<group>"; };
 		B36C3719203C550100E19029 /* TodoRootRouterConnector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoRootRouterConnector.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 		B320586A2006F7C300C79C4A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3610B072865F7A600824518 /* SpinnerAttachable.swift */,
 				B31D208F203248A50039FB32 /* BackingInputViewLabel.swift */,
 				B38FAA142018DA28006A3B4F /* CurrentContainerEmbedSegue.swift */,
 				B348399F20176F250072CDC6 /* ContainerViewController.swift */,
@@ -870,6 +873,7 @@
 				B3B017B320256E6F00B9AFFC /* TodoItemRouterConnector.swift in Sources */,
 				B3743E8520620D69009D45F6 /* CoreDataTodo.swift in Sources */,
 				B3ABAA802039DEF100D9C3BF /* TodoItemEditMode.swift in Sources */,
+				B3610B082865F7A600824518 /* SpinnerAttachable.swift in Sources */,
 				B3B017B120256E6F00B9AFFC /* TodoItemRouterPresenterOutput.swift in Sources */,
 				B31F98792029E56F0045892A /* StringLocalize.swift in Sources */,
 				B39676D821365618007BC557 /* Segue.swift in Sources */,
@@ -987,7 +991,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1043,7 +1047,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1059,7 +1063,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JTC7H5GCJ5;
 				INFOPLIST_FILE = Todo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cellarpoint.Todo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1075,7 +1079,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JTC7H5GCJ5;
 				INFOPLIST_FILE = Todo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cellarpoint.Todo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
