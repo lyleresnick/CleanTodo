@@ -117,6 +117,7 @@ class TodoItemEditUseCase {
         }
         
         let todoValues = TodoValues(editingTodo: editingTodo)
+        output.presentLoading()
         switch appState.itemStartMode! {
         case let .create(completed):
             entityGateway.todoManager.create(values: todoValues) { [self, weak output] result in

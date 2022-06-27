@@ -50,7 +50,7 @@ class CurrentContainerViewController: UIViewController, ContainerViewController 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any? = nil) {
-        
+        // this faults if the segue is not CurrentContainerEmbedSegue
         let _ = segue as! CurrentContainerEmbedSegue
     }
 

@@ -3,6 +3,7 @@
 import Foundation
 
 protocol TodoItemEditUseCaseOutput: AnyObject {
+    func presentLoading()
     func present(model: TodoItemEditPresentationModel)
     func presentNewModel()
     func presentSaveCompleted()

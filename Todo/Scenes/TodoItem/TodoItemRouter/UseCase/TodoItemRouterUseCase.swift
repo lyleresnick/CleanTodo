@@ -30,7 +30,7 @@ class TodoItemRouterUseCase {
     }
 
     private func startUpdate(index: Int) {
-        
+        output.presentLoading()
         let id = appState.todoList[index].id
         entityGateway.todoManager.fetch(id: id) { [self, weak output] result in
             guard let output = output else { return }

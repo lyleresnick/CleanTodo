@@ -3,6 +3,7 @@
 import Foundation
 
 protocol TodoItemEditPresenterOutput: AnyObject {
+    func showLoading()
     func show(model: TodoItemEditViewModel, titlePlaceholder: String, priorityLabels: [String])
     func show(completeBy: String)
     func showEnableEdit(completeBy: Date?)
