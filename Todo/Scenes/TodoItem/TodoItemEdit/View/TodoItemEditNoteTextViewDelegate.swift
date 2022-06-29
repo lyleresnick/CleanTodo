@@ -3,7 +3,6 @@
 import UIKit
 
 class TodoItemEditNoteTextViewDelegate: NSObject, UITextViewDelegate {
-    
     let presenter: TodoItemEditPresenter
     
     init(presenter: TodoItemEditPresenter) {

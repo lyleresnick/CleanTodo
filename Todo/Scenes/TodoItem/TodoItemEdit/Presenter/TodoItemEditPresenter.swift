@@ -3,14 +3,14 @@
 import Foundation
 
 class TodoItemEditPresenter {
-    
     private let useCase: TodoItemEditUseCase
-    weak var router: TodoItemEditRouter!
+    unowned let router: TodoItemEditRouter
         
     weak var output: TodoItemEditPresenterOutput!
     
-    init(useCase: TodoItemEditUseCase) {
+    init(useCase: TodoItemEditUseCase, router: TodoItemEditRouter) {
         self.useCase = useCase
+        self.router = router
     }
     
     func eventViewReady() {

@@ -3,7 +3,6 @@
 import UIKit
 
 class TodoListCell: UITableViewCell {
-    
     weak var tableView: UITableView!
     var presenter: TodoListPresenter!
     
@@ -26,7 +25,6 @@ class TodoListCell: UITableViewCell {
 }
 
 extension TodoListCell: ToggleButtonDelegate {
-    
     func onTouched() {
         presenter.eventCompleted(index: tableView.indexPath(for: self)!.row)
     }

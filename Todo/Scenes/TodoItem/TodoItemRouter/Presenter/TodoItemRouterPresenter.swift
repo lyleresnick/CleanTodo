@@ -4,12 +4,13 @@ import Foundation
 
 class TodoItemRouterPresenter {
     private let useCase: TodoItemRouterUseCase
-    weak var router: TodoItemRouterRouter!
+    unowned let router: TodoItemRouterRouter!
     var startMode: TodoItemStartMode!
     weak var output: TodoItemRouterPresenterOutput!
     
-    init(useCase: TodoItemRouterUseCase) {
+    init(useCase: TodoItemRouterUseCase, router: TodoItemRouterRouter) {
         self.useCase = useCase
+        self.router = router
     }
     
     func eventViewReady() {
@@ -37,7 +38,7 @@ extension TodoItemRouterPresenter: TodoItemRouterUseCaseOutput {
     func presentNotFound(id: String) {
         let messageFormat = "todoNotFound".localized
         let message = String(format: messageFormat, id)
-        output.showView(message: message )
+        output.showMessageView(message: message )
     }
 }
     

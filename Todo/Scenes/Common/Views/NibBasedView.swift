@@ -3,7 +3,6 @@
 import UIKit
 
 class NibBasedView: UIView {
-
     @IBOutlet private(set) weak var view: UIView!
 
     public override init(frame: CGRect = CGRect.zero ) {
@@ -17,7 +16,6 @@ class NibBasedView: UIView {
     }
 
     func postInitSetUp() {
-
         backgroundColor = .clear
 
         loadView()
@@ -36,6 +34,4 @@ class NibBasedView: UIView {
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.translatesAutoresizingMaskIntoConstraints = true
     }
-
-
 }

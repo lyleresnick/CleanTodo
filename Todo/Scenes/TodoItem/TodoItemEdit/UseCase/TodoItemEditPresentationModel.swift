@@ -3,7 +3,6 @@
 import Foundation
 
 struct TodoItemEditPresentationModel {
-
     let title: String
     let note: String
     let completeBy: Date?

@@ -3,14 +3,12 @@
 import UIKit
 
 class CurrentContainerViewController: UIViewController, ContainerViewController  {
-    
     @IBOutlet private(set) weak var containerView: UIView!
     
     private let duration = 0.55
     private var currentViewController: UIViewController?
     
     func show(viewController: UIViewController, animated: Bool) {
-        
         if animated {
             showAnimated(viewController: viewController)
         }
@@ -20,9 +18,7 @@ class CurrentContainerViewController: UIViewController, ContainerViewController 
     }
 
     private func showAnimated(viewController: UIViewController) {
-        
         if let currentViewController = currentViewController {
-            
             viewController.view.alpha = 0.0
             add(contentController: viewController)
             
@@ -41,7 +37,6 @@ class CurrentContainerViewController: UIViewController, ContainerViewController 
     }
     
     private func show(viewController: UIViewController) {
-        
         add(contentController: viewController)
         if let currentViewController = currentViewController {
             remove(contentController: currentViewController)

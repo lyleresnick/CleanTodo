@@ -1,7 +1,6 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
 class TodoItemDisplayUseCase {
-    
     weak var output: TodoItemDisplayUseCaseOutput!
     private var appState: AppState
 
@@ -10,7 +9,6 @@ class TodoItemDisplayUseCase {
     }
 
     func eventViewReady() {
-
         let todo = appState.currentTodo!
         output.presentBegin()
         

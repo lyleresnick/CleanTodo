@@ -1,6 +1,7 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
-protocol TodoRootRouterPresenterOutput: AnyObject {
+protocol TodoRouterPresenterOutput: AnyObject {
     func showItem()
+    func showReady()
     func showPop()
 }

@@ -5,13 +5,12 @@ import Foundation
 struct TodoListPresentationModel {
     let todoList: [TodoListRowPresentationModel];
     
-    init(entityList: [Todo]) {
-        todoList = entityList.map { TodoListRowPresentationModel(entity: $0) }
+    init(todoList: [Todo]) {
+        self.todoList = todoList.map { TodoListRowPresentationModel(entity: $0) }
     }
 }
 
 struct TodoListRowPresentationModel {
-    
     let id: String
     let title: String
     let completeBy: Date?

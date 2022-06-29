@@ -4,5 +4,3 @@ enum TodoItemEditMode {
     case create
     case update
 }
-
-let itemStateKey = "itemState"

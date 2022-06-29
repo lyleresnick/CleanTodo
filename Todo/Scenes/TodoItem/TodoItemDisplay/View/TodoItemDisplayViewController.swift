@@ -3,20 +3,11 @@
 import UIKit
 
 class TodoItemDisplayViewController: UIViewController {
-    
     var presenter: TodoItemDisplayPresenter!
-    
     @IBOutlet weak var stackView: UIStackView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        TodoItemDisplayConnector(viewController: self).configure()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
         presenter.eventViewReady()
     }
     
@@ -26,14 +17,11 @@ class TodoItemDisplayViewController: UIViewController {
 }
 
 extension TodoItemDisplayViewController: TodoItemDisplayPresenterOutput {
-    
     func showBegin() {
     }
     
     func show(model: TodoItemDisplayRowViewModel) {
-        
         DispatchQueue.main.async {
-            
             let row = TodoItemDisplayRowView()
             row.show(model: model)
             self.stackView.addArrangedSubview(row)
@@ -41,14 +29,8 @@ extension TodoItemDisplayViewController: TodoItemDisplayPresenterOutput {
     }
     
     func showEnd() {
-        
         DispatchQueue.main.async {
             self.stackView.addArrangedSubview(UIView())
         }
     }
 }
-
-
-
-
-

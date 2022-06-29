@@ -11,7 +11,6 @@ struct TodoListViewModel {
 }
 
 struct TodoListRowViewModel {
-    
     let id: String
     let title: String
     let completeBy: String

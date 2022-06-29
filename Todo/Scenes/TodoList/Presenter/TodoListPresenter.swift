@@ -3,13 +3,13 @@
 import Foundation
 
 class TodoListPresenter {
-    
     private let useCase: TodoListUseCase
-    weak var router: TodoListRouter!
+    unowned let router: TodoListRouter
     weak var output: TodoListPresenterOutput!
         
-    init(useCase: TodoListUseCase) {
+    init(useCase: TodoListUseCase, router: TodoListRouter) {
         self.useCase = useCase
+        self.router = router
     }
     
     func eventViewReady() {

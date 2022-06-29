@@ -3,22 +3,15 @@
 import UIKit
 
 class TodoListViewController: UIViewController, SpinnerAttachable {
-    
     private var adapter: TodoListAdapter!
     var presenter: TodoListPresenter!
     @IBOutlet weak var tableView: UITableView!
     private var spinnerView: UIActivityIndicatorView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        TodoListConnector(viewController: self).configure()
-        adapter = TodoListAdapter(presenter: presenter)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        adapter = TodoListAdapter(presenter: presenter)
         spinnerView = attachSpinner()
         tableView.delegate = adapter
         tableView.dataSource = adapter
