@@ -1,9 +1,7 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
 class TodoItemRouterUseCase {
-    
     weak var output: TodoItemRouterUseCaseOutput!
-    
     private var entityGateway: EntityGateway
     private var appState: AppState
 
@@ -15,7 +13,6 @@ class TodoItemRouterUseCase {
     }
 
     func eventViewReady() {
-
         switch appState.itemStartMode! {
         case .create:
             startCreate()
@@ -24,7 +21,6 @@ class TodoItemRouterUseCase {
         }
     }
     private func startCreate() {
-        
         appState.currentTodo = nil
         output.presentEditView()
     }

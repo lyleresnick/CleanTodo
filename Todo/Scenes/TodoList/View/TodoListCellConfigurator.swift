@@ -3,7 +3,6 @@
 import UIKit
 
 class TodoListCellConfigurator {
-    
     private enum Cell: String  {
         case todoList
     }

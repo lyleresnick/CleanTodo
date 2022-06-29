@@ -1,9 +1,8 @@
-//  Copyright © 2017 lifetales.me. All rights reserved.
+//  Copyright © 2017 Lyle Resnick. All rights reserved.
 
 import UIKit
 
 class DatePickerView: UIView {
-    
     @IBOutlet weak var datePicker: UIDatePicker!
 
     var date: Date? {

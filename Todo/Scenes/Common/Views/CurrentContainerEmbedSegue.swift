@@ -4,7 +4,6 @@ import UIKit
 
 @objc(CurrentContainerEmbedSegue)
 class CurrentContainerEmbedSegue: UIStoryboardSegue {
-    
     override func perform() {
         
         let sourceContainer = source as! CurrentContainerViewController

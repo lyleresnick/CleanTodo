@@ -2,9 +2,11 @@
 
 import UIKit
 
-protocol SpinnerAttachable {}
+protocol SpinnerAttaching {
+    func attachSpinner() -> UIActivityIndicatorView
+}
 
-extension SpinnerAttachable where Self: UIViewController {
+extension SpinnerAttaching where Self: UIViewController {
     func attachSpinner() -> UIActivityIndicatorView {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.color = .white

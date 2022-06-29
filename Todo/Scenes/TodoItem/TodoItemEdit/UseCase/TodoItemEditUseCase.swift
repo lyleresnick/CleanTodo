@@ -3,11 +3,9 @@
 import Foundation
 
 class TodoItemEditUseCase {
-    
     weak var output: TodoItemEditUseCaseOutput!
     
     struct EditingTodo {
-        
         var id: String?
         var title: String
         var note: String
@@ -93,7 +91,6 @@ class TodoItemEditUseCase {
 
     func eventEdited(priority: Priority ) {
         editingTodo.priority = priority
-
     }
     
     // MARK: - Finalization

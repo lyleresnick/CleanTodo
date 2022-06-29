@@ -5,5 +5,5 @@ protocol TodoItemRouterPresenterOutput: AnyObject {
     func show(title: String)
     func showEditView()
     func showDisplayView()
-    func showView(message: String)
+    func showMessageView(message: String)
 }

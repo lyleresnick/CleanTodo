@@ -2,15 +2,8 @@
 
 import UIKit
 
-class TodoItemEditViewController: UIViewController, SpinnerAttachable {
-    
+class TodoItemEditViewController: UIViewController, SpinnerAttaching {
     var presenter: TodoItemEditPresenter!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        TodoItemEditConnector(viewController: self).configure()
-    }
     
     @IBOutlet var stackView: UIStackView!
     @IBOutlet weak var titleTextField: UITextField!

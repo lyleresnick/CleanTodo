@@ -18,5 +18,4 @@ protocol TodoItemDisplayUseCaseOutput: AnyObject {
     func present(field: FieldName, value: Bool)
     func present(field: FieldName, value: Priority)
     func presentEnd()
-    
 }

@@ -17,7 +17,7 @@ struct TodoItemEditViewModel {
         completeBy = model.completeBy
         completeByAsString = (model.completeBy != nil) ? TodoItemEditViewModel.outboundDateFormatter.string(from: model.completeBy!) : ""
 
-        self.priority = model.priority
+        self.priority = model.priority.bangs
         completed = model.completed
     }
     

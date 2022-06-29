@@ -1,7 +1,6 @@
 //  Copyright (c) 2018 Lyle Resnick. All rights reserved.
 
 class TodoListUseCase {
-    
     weak var output: TodoListUseCaseOutput!
     let entityGateway: EntityGateway
     let appState: AppState
@@ -22,13 +21,9 @@ class TodoListUseCase {
                 fatalError("Unresolved error:\(description)")
             case let .success(todoList):
                 appState.todoList = todoList;
-                output.present(model: presentationModelFromAppState())
+                output.present(model: TodoListPresentationModel(todoList: appState.todoList))
             }
         }
-    }
-    
-    private func presentationModelFromAppState() -> TodoListPresentationModel {
-        return TodoListPresentationModel(entityList: appState.todoList)
     }
     
     func event(completed: Bool, index: Int) {
@@ -43,7 +38,7 @@ class TodoListUseCase {
                 fatalError("Unresolved error:\(description)")
             case let .success(entity):
                 appState.todoList[index] = entity;
-                output.presentCompleted(model: presentationModelFromAppState(), index: index)
+                output.presentCompleted(model: TodoListPresentationModel(todoList: appState.todoList), index: index)
             }
         }
     }
@@ -60,7 +55,7 @@ class TodoListUseCase {
                     fatalError("domain issue: \(issue) is not being processed!")
                 case .noData:
                     appState.todoList.remove(at: index);
-                    output.presentDeleted(model: presentationModelFromAppState(), index: index)
+                    output.presentDeleted(model: TodoListPresentationModel(todoList: appState.todoList), index: index)
                 }
             case let .failure(_, description):
                 fatalError("Unresolved error:\(description)")
@@ -72,7 +67,7 @@ class TodoListUseCase {
     
     private var completion:  () -> Void  { return { [weak self, weak output] in
         guard let output = output, let self = self else { return }
-        output.presentChanged(model: self.presentationModelFromAppState())
+        output.presentChanged(model: TodoListPresentationModel(todoList: self.appState.todoList))
     }}
     
     func eventCreate() {
@@ -84,5 +79,4 @@ class TodoListUseCase {
         appState.itemStartMode = .update(index: index, completion: completion)
         output.presentItem();
     }
-
 }
