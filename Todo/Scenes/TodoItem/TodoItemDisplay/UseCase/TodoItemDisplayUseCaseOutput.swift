@@ -11,11 +11,8 @@ enum FieldName: String {
 }
 
 protocol TodoItemDisplayUseCaseOutput: AnyObject {
-    
-    func presentBegin()
-    func present(field: FieldName, value: String)
-    func present(field: FieldName, value: Date)
-    func present(field: FieldName, value: Bool)
-    func present(field: FieldName, value: Priority)
-    func presentEnd()
+    func present(model: TodoItemDisplayPresentationModel )
 }
+
+
+

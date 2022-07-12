@@ -10,22 +10,21 @@ class TodoItemDisplayUseCase {
 
     func eventViewReady() {
         let todo = appState.currentTodo!
-        output.presentBegin()
-        
-        output.present(field: .title, value: todo.title)
+        var rows: [TodoItemDisplayRowPresentationModel] = []
+        rows.append(.init(field: .title, value: .string(todo.title)))
         if todo.note != "" {
-            output.present(field: .note, value: todo.note)
+            rows.append(.init(field: .note, value: .string(todo.note)))
         }
         if let completeBy = todo.completeBy {
-            output.present(field: .completeBy, value: completeBy)
+            rows.append(.init(field: .completeBy, value: .date( completeBy)))
         }
         switch todo.priority {
         case .none:
             break
         default:
-            output.present(field: .priority, value: todo.priority)
+            rows.append(.init(field: .priority, value: .priority(todo.priority)))
         }
-        output.present(field: .completed, value: todo.completed)
-        output.presentEnd()
+        rows.append(.init(field: .completed, value: .bool(todo.completed)))
+        output.present(model: TodoItemDisplayPresentationModel(rows: rows))
     }
 }
