@@ -25,28 +25,19 @@ class TodoItemEditPresenter {
         useCase.eventEdited(note: note)
     }
     
-    func eventCompleteByClear() {
-        useCase.eventCompleteByClear()
-    }
-    
-    func eventCompleteByToday() {
-        useCase.eventCompleteByToday()
+    func eventEdited(completeBySwitch: Bool) {
+        useCase.eventEdited(completeBySwitch: completeBySwitch)
     }
         
-    func eventEnableEditCompleteBy() {
-        useCase.eventEnableEditCompleteBy()
-    }
-    
     func eventEdited(completeBy: Date) {
         useCase.eventEdited(completeBy: completeBy)
     }
     
-    func event(completed: Bool) {
-        useCase.event(completed: completed)
+    func eventEdited(completed: Bool) {
+        useCase.eventEdited(completed: completed)
     }
     
     func eventEditedPriority(index: Int) {
-        
         let priority = Priority(bangs: index)!
         useCase.eventEdited(priority: priority)
     }
@@ -69,28 +60,16 @@ extension TodoItemEditPresenter: TodoItemEditUseCaseOutput {
         presentWithLocalizations(model: TodoItemEditViewModel(model: model))
     }
     
-    func presentNewModel() {
-        presentWithLocalizations(model: TodoItemEditViewModel())
-    }
-    
     private func presentWithLocalizations(model: TodoItemEditViewModel) {
         output.show(model: model,
             titlePlaceholder: "enterATitle".localized,
             priorityLabels: ["none", "low", "medium", "high"].map { $0.localized })
     }
-
-    func presentCompleteByClear() {
-        output.showCompleteByClear()
-    }
-    
-    func presentEnableEdit(completeBy: Date?) {
-        output.showEnableEdit(completeBy: completeBy)
-    }
     
     func present(completeBy: Date?) {
-        output.show(completeBy: (completeBy != nil)
-            ? TodoItemEditViewModel.outboundDateFormatter.string(from: completeBy!)
-            : "")
+        output.show(completeByAsString: (completeBy != nil)
+                    ? TodoItemEditViewModel.outboundDateFormatter.string(from: completeBy!)
+                    : "")
     }
     
     func presentSaveCompleted() {

@@ -17,19 +17,13 @@ class TodoItemDisplayViewController: UIViewController {
 }
 
 extension TodoItemDisplayViewController: TodoItemDisplayPresenterOutput {
-    func showBegin() {
-    }
-    
-    func show(model: TodoItemDisplayRowViewModel) {
+    func show(model: TodoItemDisplayViewModel) {
         DispatchQueue.main.async {
-            let row = TodoItemDisplayRowView()
-            row.show(model: model)
-            self.stackView.addArrangedSubview(row)
-        }
-    }
-    
-    func showEnd() {
-        DispatchQueue.main.async {
+            model.rows.forEach { row in
+                let rowView = TodoItemDisplayRowView()
+                rowView.show(model: row)
+                self.stackView.addArrangedSubview(rowView)
+            }
             self.stackView.addArrangedSubview(UIView())
         }
     }

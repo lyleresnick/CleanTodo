@@ -18,6 +18,7 @@ extension TodoItemRouterViewController: TodoItemRouterPresenterOutput {
     func showLoading() {
         DispatchQueue.main.async { [ weak self] in
             self?.spinnerView.startAnimating()
+            self?.messageLabel.text = ""
         }
     }
     

@@ -5,11 +5,8 @@ import Foundation
 protocol TodoItemEditUseCaseOutput: AnyObject {
     func presentLoading()
     func present(model: TodoItemEditPresentationModel)
-    func presentNewModel()
     func presentSaveCompleted()
     func presentTitleIsEmpty()
-    func presentEnableEdit(completeBy: Date?)
-    func presentCompleteByClear()
     func present(completeBy: Date?)
     func presentEditItemCancelled()
     func presentCreateItemCancelled()

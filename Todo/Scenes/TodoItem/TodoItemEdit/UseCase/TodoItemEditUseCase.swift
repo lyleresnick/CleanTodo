@@ -39,21 +39,18 @@ class TodoItemEditUseCase {
         
         self.entityGateway = entityGateway
         self.appState = appState
-        }
+    }
     
     // MARK: - Initialization
 
     func eventViewReady() {
-
         switch appState.itemStartMode! {
         case .update:
-            output.present(model: TodoItemEditPresentationModel(entity: appState.currentTodo!))
             editingTodo = TodoItemEditUseCase.EditingTodo(todo: appState.currentTodo!)
         case .create:
-            output.presentNewModel()
             editingTodo =  TodoItemEditUseCase.EditingTodo()
         }
-
+        output.present(model: TodoItemEditPresentationModel(editingTodo: editingTodo))
     }
 
     // MARK: - Data Capture
@@ -66,18 +63,9 @@ class TodoItemEditUseCase {
         editingTodo.note = note
     }
     
-    func eventCompleteByClear() {
-        editingTodo.completeBy = nil
-        output.presentCompleteByClear()
-    }
-    
-    func eventCompleteByToday() {
-        editingTodo.completeBy = Date()
+    func eventEdited(completeBySwitch: Bool) {
+        editingTodo.completeBy = completeBySwitch ? Date() : nil
         output.present(completeBy: editingTodo.completeBy)
-    }
-    
-    func eventEnableEditCompleteBy() {
-        output.presentEnableEdit(completeBy: editingTodo.completeBy)
     }
 
     func eventEdited(completeBy: Date) {
@@ -85,7 +73,7 @@ class TodoItemEditUseCase {
         output.present(completeBy: completeBy)
     }
     
-    func event(completed: Bool) {
+    func eventEdited(completed: Bool) {
         editingTodo.completed = completed
     }
 
@@ -104,15 +92,11 @@ class TodoItemEditUseCase {
         }
     }
     
-    private typealias TodoManagerResponder = (Response<Todo,ItemIssue>) -> ()
-
     func eventSave() {
-        
         guard editingTodo.title != "" else {
             output.presentTitleIsEmpty()
             return
         }
-        
         let todoValues = TodoValues(editingTodo: editingTodo)
         output.presentLoading()
         switch appState.itemStartMode! {
@@ -151,9 +135,7 @@ class TodoItemEditUseCase {
 }
 
 private extension TodoItemEditUseCase.EditingTodo {
-    
     init(todo: Todo) {
-        
         id = todo.id
         title = todo.title
         note = todo.note
@@ -163,11 +145,8 @@ private extension TodoItemEditUseCase.EditingTodo {
     }
 }
 
-
 private extension TodoValues {
-    
     init(editingTodo: TodoItemEditUseCase.EditingTodo) {
-        
         title = editingTodo.title
         note = editingTodo.note
         completeBy = editingTodo.completeBy

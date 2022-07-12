@@ -17,18 +17,9 @@ struct TodoItemEditViewModel {
         completeBy = model.completeBy
         completeByAsString = (model.completeBy != nil) ? TodoItemEditViewModel.outboundDateFormatter.string(from: model.completeBy!) : ""
 
-        self.priority = model.priority.bangs
+        priority = model.priority.bangs
         completed = model.completed
     }
-    
-    init() {
-        title = ""
-        note = ""
-        completeBy = nil
-        completeByAsString = ""
-        priority =  0
-        completed = false
-    }
-    
+        
     static let outboundDateFormatter = DateFormatter.dateFormatter( format: "MMM' 'dd', 'yyyy" )
 }

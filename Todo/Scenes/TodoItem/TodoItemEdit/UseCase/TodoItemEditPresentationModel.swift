@@ -9,11 +9,12 @@ struct TodoItemEditPresentationModel {
     let priority: Priority
     var completed: Bool
 
-    init( entity: Todo ) {
-        title = entity.title
-        note = entity.note
-        completeBy = entity.completeBy
-        priority = entity.priority
-        completed = entity.completed
+    init( editingTodo: TodoItemEditUseCase.EditingTodo ) {
+        title = editingTodo.title
+        note = editingTodo.note
+        completeBy = editingTodo.completeBy
+        priority = editingTodo.priority
+        completed = editingTodo.completed
     }
+
 }

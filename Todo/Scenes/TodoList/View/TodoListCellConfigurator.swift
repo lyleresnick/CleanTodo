@@ -24,6 +24,7 @@ class TodoListCellConfigurator {
     
     func tableCell() -> TodoListCell {
         let cell = tableView!.dequeueReusableCell(withIdentifier: Cell.todoList.rawValue, for: indexPath!) as! TodoListCell
+        // these are for use by "swipe to delete" and by "on/off checkbox touched"
         cell.presenter = presenter
         cell.tableView = tableView
         return cell

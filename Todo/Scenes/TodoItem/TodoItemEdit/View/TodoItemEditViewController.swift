@@ -35,17 +35,11 @@ class TodoItemEditViewController: UIViewController, SpinnerAttaching {
     }
     
     @IBAction func completeByLabelTouched(_ sender: Any) {
-        presenter.eventEnableEditCompleteBy()
+        completeByLabel.becomeFirstResponder()
     }
     
     @IBAction func completeBySwitchTouched(_ sender: UISwitch) {
-        
-        if sender.isOn {
-            presenter.eventCompleteByToday()
-        }
-        else {
-            presenter.eventCompleteByClear()
-        }
+        presenter.eventEdited(completeBySwitch: sender.isOn)
     }
     
     @IBAction func priorityTouched(_ sender: UISegmentedControl) {
@@ -53,17 +47,15 @@ class TodoItemEditViewController: UIViewController, SpinnerAttaching {
 }
     
     @IBAction func completedTouched(_ sender: UISwitch) {
-        presenter.event(completed: sender.isOn)
+        presenter.eventEdited(completed: sender.isOn)
     }
     
     @IBAction func saveTouched(_ sender: UIBarButtonItem) {
-        
         view.endEditing(true)
         presenter.eventSave()
     }
     
     @IBAction func cancelTouched(_ sender: UIBarButtonItem) {
-        
         presenter.eventCancel()
     }
     
@@ -72,9 +64,7 @@ class TodoItemEditViewController: UIViewController, SpinnerAttaching {
     }
     
     @IBAction func completeBySetTouched(_ sender: UIButton) {
-        
         presenter.eventEdited(completeBy: completeByPickerView.date! )
-        completeByLabel.resignFirstResponder()
     }
     
     @IBAction func mainViewTouched(_ sender: Any) {
@@ -100,36 +90,20 @@ extension TodoItemEditViewController: TodoItemEditPresenterOutput {
             }
             self.titleTextField.text = model.title
             self.noteTextView.text = model.note
-            self.completeBySwitch.isOn = (model.completeByAsString != "")
+            self.completeBySwitch.isOn = (model.completeBy != nil)
             self.completeByLabel.text = model.completeByAsString
+            self.completeByPickerView.date = model.completeBy
             self.prioritySegmentedControl.selectedSegmentIndex =  model.priority
             self.completedSwitch.isOn = model.completed
         }
     }
-    
-    func showCompleteByClear() {
+        
+    func show(completeByAsString: String) {
         DispatchQueue.main.async { [ weak self] in
             guard let self = self else { return }
             self.spinnerView.stopAnimating()
-            self.completeByLabel.text = ""
+            self.completeByLabel.text = completeByAsString
             self.completeByLabel.resignFirstResponder()
-        }
-    }
-    
-    func showEnableEdit(completeBy: Date?) {
-        DispatchQueue.main.async { [ weak self] in
-            guard let self = self else { return }
-            self.spinnerView.stopAnimating()
-            self.completeByPickerView.date = completeBy
-            self.completeByLabel.becomeFirstResponder()
-        }
-    }
-    
-    func show(completeBy: String) {
-        DispatchQueue.main.async { [ weak self] in
-            guard let self = self else { return }
-            self.spinnerView.stopAnimating()
-            self.completeByLabel.text = completeBy
         }
     }
     
