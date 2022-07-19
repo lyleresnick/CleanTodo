@@ -27,20 +27,20 @@ class CoreDataTodoManager: TodoManager {
                 let dirtyTodoList = coreDataTodoList.map { Todo(coreDataTodo: $0) }
                 let todoList = dirtyTodoList.compactMap { $0 }
                 guard dirtyTodoList.count == todoList.count else {
-                    completion(.failure(source: .coreData, description: "invalid Todo data"))
+                    completion(.failure(description: "invalid Todo data"))
                     return
                 }
                 completion(.success(entity: todoList ))
             } catch {
                 let nserror = error as NSError
-                completion(.failure(source: .coreData, description: nserror.localizedDescription))
+                completion(.failure(description: nserror.localizedDescription))
             }
         }
     }
     
     private func makeItemFailure<Entity, DomainIssue>(error: Error) -> Response<Entity, DomainIssue> {
         let nserror = error as NSError
-        return .failure(source: .coreData, description: nserror.localizedDescription)
+        return .failure(description: nserror.localizedDescription)
     }
     
     func fetch(id: String, completion: @escaping (Response<Todo, ItemIssue>) -> ()) {
@@ -105,14 +105,14 @@ class CoreDataTodoManager: TodoManager {
     
     func makeTodo(coreDataTodo: CoreDataTodo) -> Response<Todo, ItemIssue> {
         guard let todo = Todo(coreDataTodo: coreDataTodo) else {
-            return .failure(source: .coreData, description: "invalid Todo data")
+            return .failure(description: "invalid Todo data")
         }
         return .success(entity: todo)
     }
 
     func makeTodo(coreDataTodo: CoreDataTodo) -> Response<Todo, Void> {
         guard let todo = Todo(coreDataTodo: coreDataTodo) else {
-            return .failure(source: .coreData, description: "invalid Todo data")
+            return .failure(description: "invalid Todo data")
         }
         return .success(entity: todo)
     }

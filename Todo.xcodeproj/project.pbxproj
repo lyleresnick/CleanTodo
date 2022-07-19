@@ -51,6 +51,8 @@
 		B35E8B22287D163B006FB90F /* TodoItemDisplayPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35E8B21287D163B006FB90F /* TodoItemDisplayPresentationModel.swift */; };
 		B35FF6882060A2BA0071AEA5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FF6872060A2BA0071AEA5 /* CoreDataManager.swift */; };
 		B3610B082865F7A600824518 /* SpinnerAttaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3610B072865F7A600824518 /* SpinnerAttaching.swift */; };
+		B36BCBEE28871A0A00A40CB2 /* NetworkApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36BCBED28871A0A00A40CB2 /* NetworkApiClient.swift */; };
+		B36BCBF028871ECB00A40CB2 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36BCBEF28871ECB00A40CB2 /* ApiClient.swift */; };
 		B371FD25204311CD000A38E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B371FD24204311CD000A38E4 /* Assets.xcassets */; };
 		B371FD27204313F7000A38E4 /* TestTodo+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B371FD26204313F7000A38E4 /* TestTodo+Dictionary.swift */; };
 		B374141527F72A5B000C5B68 /* NetworkEntityGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = B374141427F72A5B000C5B68 /* NetworkEntityGateway.swift */; };
@@ -161,6 +163,8 @@
 		B35E8B21287D163B006FB90F /* TodoItemDisplayPresentationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItemDisplayPresentationModel.swift; sourceTree = "<group>"; };
 		B35FF6872060A2BA0071AEA5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B3610B072865F7A600824518 /* SpinnerAttaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerAttaching.swift; sourceTree = "<group>"; };
+		B36BCBED28871A0A00A40CB2 /* NetworkApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApiClient.swift; sourceTree = "<group>"; };
+		B36BCBEF28871ECB00A40CB2 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		B371FD24204311CD000A38E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B371FD26204313F7000A38E4 /* TestTodo+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestTodo+Dictionary.swift"; sourceTree = "<group>"; };
 		B374141427F72A5B000C5B68 /* NetworkEntityGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkEntityGateway.swift; sourceTree = "<group>"; };
@@ -344,6 +348,7 @@
 				B3523F2F1FFD299F00DB7802 /* EntityGateway.swift */,
 				B3523F2A1FFD271800DB7802 /* Response.swift */,
 				B31148F12000410B0091B71E /* TodoManager.swift */,
+				B36BCBEF28871ECB00A40CB2 /* ApiClient.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				B374141427F72A5B000C5B68 /* NetworkEntityGateway.swift */,
 				3CD47A772441807300DB466C /* Data */,
 				3CD47A73244177FB00DB466C /* NetworkTodoManager.swift */,
+				B36BCBED28871A0A00A40CB2 /* NetworkApiClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -812,6 +818,7 @@
 				B31148E2200040390091B71E /* TodoListViewModel.swift in Sources */,
 				B3B017CD20256E7000B9AFFC /* TodoItemEditRouter.swift in Sources */,
 				B31148EB200040390091B71E /* TodoListCell.swift in Sources */,
+				B36BCBF028871ECB00A40CB2 /* ApiClient.swift in Sources */,
 				B371FD27204313F7000A38E4 /* TestTodo+Dictionary.swift in Sources */,
 				B3B017CA20256E7000B9AFFC /* TodoItemEditUseCaseOutput.swift in Sources */,
 				B31148EA200040390091B71E /* TodoListViewController.swift in Sources */,
@@ -843,6 +850,7 @@
 				B3B79615286D5453003DC25C /* TodoListAssembly.swift in Sources */,
 				B3A454FD1FFDACBF00EDC6E9 /* Todo.swift in Sources */,
 				B35E8B22287D163B006FB90F /* TodoItemDisplayPresentationModel.swift in Sources */,
+				B36BCBEE28871A0A00A40CB2 /* NetworkApiClient.swift in Sources */,
 				B38F923B20407AA800996EE0 /* TodoItemRouterRouter.swift in Sources */,
 				B38F923D20412FA500996EE0 /* CurrentContainerViewController.swift in Sources */,
 				B3B7961E286D548A003DC25C /* TodoItemEdit Assembly.swift in Sources */,
