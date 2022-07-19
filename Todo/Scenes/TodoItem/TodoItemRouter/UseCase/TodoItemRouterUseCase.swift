@@ -38,7 +38,7 @@ class TodoItemRouterUseCase {
                 case .notFound:
                     output.presentNotFound(id: id)
                 }
-            case let .failure(_, description):
+            case let .failure(description):
                 fatalError("Unresolved error: \(description)")
             case let .success(todo):
                 appState.currentTodo = todo

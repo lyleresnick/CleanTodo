@@ -17,7 +17,7 @@ class TodoListUseCase {
             switch result {
             case let .domain(issue):
                fatalError("domain issue: \(issue) is not being processed!")
-            case let .failure(_, description):
+            case let .failure(description):
                 fatalError("Unresolved error:\(description)")
             case let .success(todoList):
                 appState.todoList = todoList;
@@ -34,7 +34,7 @@ class TodoListUseCase {
             switch result {
             case let .domain(issue):
                fatalError("domain issue: \(issue) is not being processed!")
-            case let .failure(_, description):
+            case let .failure(description):
                 fatalError("Unresolved error:\(description)")
             case let .success(entity):
                 appState.todoList[index] = entity;
@@ -57,7 +57,7 @@ class TodoListUseCase {
                     appState.todoList.remove(at: index);
                     output.presentDeleted(model: TodoListPresentationModel(todoList: appState.todoList), index: index)
                 }
-            case let .failure(_, description):
+            case let .failure(description):
                 fatalError("Unresolved error:\(description)")
             case .success:
                 fatalError("success is not being processed!")

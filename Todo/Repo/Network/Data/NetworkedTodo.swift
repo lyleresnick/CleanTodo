@@ -34,20 +34,3 @@ struct NetworkedTodo: Codable  {
 //        self.init(id: id, title: title, note: note, completeBy: completeBy, priority: priority, completed: completed)
 //    }
 //
-//    func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        try container.encode(id, forKey: .id)
-//        try container.encode(title, forKey: .title)
-//        try container.encode(note, forKey: .note)
-//        if let completeBy = completeBy {
-//            try container.encode(completeBy, forKey: .completeBy)
-//        }
-//        try container.encode(priority, forKey: .priority)
-//        try container.encode(completed, forKey: .completed)
-//    }
-//
-//}
-//
-//
-//
-//

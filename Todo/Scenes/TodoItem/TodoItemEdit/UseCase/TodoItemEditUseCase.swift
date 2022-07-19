@@ -106,7 +106,7 @@ class TodoItemEditUseCase {
                 switch result {
                 case let .domain(event):
                     fatalError("unexpected Semantic event: \(event)")
-                case let .failure(_, description):
+                case let .failure(description):
                     fatalError("Unresolved error: code: \(description)")
                 case let .success(todo):
                     appState.currentTodo = todo
@@ -121,7 +121,7 @@ class TodoItemEditUseCase {
                 switch result {
                 case let .domain(issue):
                     fatalError("unexpected Domain Issue: \(issue)")
-                case let .failure(_, description):
+                case let .failure(description):
                     fatalError("Unresolved error: code: \(description)")
                 case let .success(todo):
                     appState.currentTodo = todo
