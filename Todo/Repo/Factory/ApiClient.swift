@@ -8,17 +8,21 @@
 
 import Foundation
 
+enum NetworkFailureParty {
+    case client(code: Int? = nil)
+    case server(code: Int)
+}
 struct FailureInfo : Error {
-    let statusCode: Int?
+    let party: NetworkFailureParty
     let description: String
     
-    init(statusCode: Int? = nil, description: String) {
-        self.statusCode = statusCode
+    init(party: NetworkFailureParty, description: String) {
+        self.party = party
         self.description = description
     }
     
     init(response: HTTPURLResponse) {
-        self.init(statusCode: response.statusCode, description: response.description)
+        self.init(party: .server(code: response.statusCode), description: response.description)
     }
 }
 

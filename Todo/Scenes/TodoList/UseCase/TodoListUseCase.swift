@@ -22,6 +22,8 @@ class TodoListUseCase {
             case let .success(todoList):
                 appState.todoList = todoList;
                 output.present(model: TodoListPresentationModel(todoList: appState.todoList))
+            case let .networkIssue(issue):
+                fatalError("Unresolved network error: \(issue)")
             }
         }
     }
@@ -39,6 +41,8 @@ class TodoListUseCase {
             case let .success(entity):
                 appState.todoList[index] = entity;
                 output.presentCompleted(model: TodoListPresentationModel(todoList: appState.todoList), index: index)
+            case let .networkIssue(issue):
+                fatalError("Unresolved network error:\(issue)")
             }
         }
     }
@@ -61,6 +65,8 @@ class TodoListUseCase {
                 fatalError("Unresolved error:\(description)")
             case .success:
                 fatalError("success is not being processed!")
+            case let .networkIssue(issue):
+                fatalError("Unresolved network error:\(issue)")
             }
         }
     }

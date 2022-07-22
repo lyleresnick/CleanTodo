@@ -113,6 +113,8 @@ class TodoItemEditUseCase {
                     appState.todoList.append(todo);
                     completed();
                     output.presentSaveCompleted()
+                case let .networkIssue(issue):
+                    fatalError("Unresolved network error:\(issue)")
                 }
             }
         case let .update(index, completed):
@@ -128,7 +130,9 @@ class TodoItemEditUseCase {
                     appState.todoList[index] = todo;
                     completed();
                     output.presentSaveCompleted()
-                }
+                case let .networkIssue(issue):
+                    fatalError("Unresolved network error:\(issue)")
+               }
             }
         }
     }
