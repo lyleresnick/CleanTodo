@@ -43,6 +43,8 @@ class TodoItemRouterUseCase {
             case let .success(todo):
                 appState.currentTodo = todo
                 output.presentDisplayView()
+            case let .networkIssue(issue):
+                fatalError("Unresolved network error: \(issue)")
             }
         }
     }

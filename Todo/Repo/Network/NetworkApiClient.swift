@@ -86,11 +86,12 @@ class NetworkApiClient: ApiClient {
     private func completionHandler(completion: @escaping (Result<Data, FailureInfo>) -> ()) -> ((Data?, URLResponse?, Error?) -> ()) {
         return { data, response, error in
             if let error = error {
-                completion(.failure(FailureInfo(description: error.localizedDescription)))
+                let nsError = error as NSError
+                completion(.failure(FailureInfo(party: .client(code: nsError.code), description: error.localizedDescription)))
                 return
             }
             guard let response = response as? HTTPURLResponse else {
-                completion(.failure(FailureInfo(description: "response is not a HTTPURLResponse")))
+                completion(.failure(FailureInfo(party: .client(), description: "response is not a HTTPURLResponse")))
                 return
             }
             guard response.statusCode == 200 else {
@@ -98,7 +99,7 @@ class NetworkApiClient: ApiClient {
                 return
             }
             guard let data = data else {
-                completion(.failure(FailureInfo(description: "Data is nil")))
+                completion(.failure(FailureInfo(party: .client(), description: "Data is nil")))
                 return
             }
             completion(.success(data))
