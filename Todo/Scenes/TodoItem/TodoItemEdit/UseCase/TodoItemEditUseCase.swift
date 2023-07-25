@@ -110,6 +110,7 @@ class TodoItemEditUseCase {
                     fatalError("Unresolved error: code: \(description)")
                 case let .success(todo):
                     appState.currentTodo = todo
+                    appState.itemStartMode = .update(index: appState.todoList.count, completion: completed)
                     appState.todoList.append(todo);
                     completed();
                     output.presentSaveCompleted()
