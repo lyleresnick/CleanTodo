@@ -1,6 +1,6 @@
 # Todo
 
-This Todo app is a full reference implementation for VIPER. It demonstrates many of the tasks you would do on a daily basis in a VIPER based project such as:
+This Todo app is a full reference implementation for an App based on Mobile Clean Architecture. It demonstrates many tasks you might do on a daily basis during a project, such as:
 
 - routing, 
 - data validation and capture, 
