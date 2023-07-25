@@ -24,7 +24,7 @@ class NetworkApiClient: ApiClient {
         return URLSession(configuration: sessionConfig)
     }()
     
-    static private let todobackendUrl = "https://todobackend-lyle.herokuapp.com/api"
+    static private let todobackendUrl = "https://todo-backend-lyle.fly.dev/api"
 //    static private let todobackendUrl = "http://localhost:8080/api"
     fileprivate static let baseURL = URL(string: todobackendUrl)!
 
