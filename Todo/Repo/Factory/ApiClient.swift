@@ -29,7 +29,7 @@ struct FailureInfo : Error {
 protocol ApiClient {
     func all(completion: @escaping (Result<Data, FailureInfo>) -> ())
     func fetch(id: String, completion: @escaping (Result<Data, FailureInfo>) -> ())
-    func create(values: TodoValues, completion: @escaping (Result<Data, FailureInfo>) -> ())
-    func update(id: String, values: TodoValues, completion: @escaping (Result<Data, FailureInfo>) -> ())
+    func create(params: TodoParams, completion: @escaping (Result<Data, FailureInfo>) -> ())
+    func update(id: String, params: TodoParams, completion: @escaping (Result<Data, FailureInfo>) -> ())
     func delete(id: String, completion: @escaping (Result<Data, FailureInfo>) -> ())
 }

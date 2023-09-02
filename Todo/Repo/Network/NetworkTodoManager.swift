@@ -8,10 +8,9 @@ class NetworkTodoManager: TodoManager {
     init(apiClient: ApiClient) {
         self.apiClient = apiClient
     }
-    private let formatter = DateFormatter.dateFormatter( format:"yyyy'-'MM'-'dd'T23:59:59Z'")
     private lazy var decoder: JSONDecoder = {
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(formatter)
+        decoder.dateDecodingStrategy = .iso8601
         return decoder
     }()
 
@@ -19,9 +18,9 @@ class NetworkTodoManager: TodoManager {
         apiClient.all { [weak self] result in
             guard let self = self else { return }
             completion( self.exceptionGuard(result: result) { data in
-                let networkedTodoList = try self.decoder.decode([NetworkedTodo].self, from: data)
-                return try networkedTodoList.compactMap {
-                    try Todo(networkedTodo: $0)
+                let responseTodoList = try self.decoder.decode([TodoResponse].self, from: data)
+                return try responseTodoList.compactMap {
+                    try Todo(todoResponse: $0)
                 }
             })
         }
@@ -31,8 +30,8 @@ class NetworkTodoManager: TodoManager {
         apiClient.fetch(id: id) {  [weak self] result in
             guard let self = self else { return }
             completion(self.exceptionGuard(result: result) { data in
-                let networkedTodo = try self.decoder.decode(NetworkedTodo.self, from: data)
-                return try Todo(networkedTodo: networkedTodo)
+                let TodoResponse = try self.decoder.decode(TodoResponse.self, from: data)
+                return try Todo(todoResponse: TodoResponse)
             } domainFilter: { code in
                 if code == 404 {
                     return .notFound
@@ -57,8 +56,8 @@ class NetworkTodoManager: TodoManager {
         apiClient.fetch(id: id) { [weak self] result in
             guard let self = self else { return }
             fetchCompletion(self.exceptionGuard(result: result) { data in
-                let networkedTodo = try self.decoder.decode(NetworkedTodo.self, from: data)
-                return try Todo(networkedTodo: networkedTodo)
+                let todoResponse = try self.decoder.decode(TodoResponse.self, from: data)
+                return try Todo(todoResponse: todoResponse)
             } domainFilter: { code in
                 if code == 404 {
                     return .notFound
@@ -69,21 +68,21 @@ class NetworkTodoManager: TodoManager {
     }
     
     func create(values: TodoValues, completion: @escaping (Response<Todo, Void>) -> ()) {
-        apiClient.create(values: values) { [weak self] result in
+        apiClient.create(params: TodoParams(values: values)) { [weak self] result in
             guard let self = self else { return }
             completion(self.exceptionGuard(result: result) { data in
-                let networkedTodo = try self.decoder.decode(NetworkedTodo.self, from: data)
-                return try Todo(networkedTodo: networkedTodo)
+                let todoResponse = try self.decoder.decode(TodoResponse.self, from: data)
+                return try Todo(todoResponse: todoResponse)
             })
         }
     }
     
     func update(id: String, values: TodoValues, completion: @escaping (Response<Todo, ItemIssue>) -> ()) {
-        apiClient.update(id: id, values: values) { [weak self] result in
+        apiClient.update(id: id, params: TodoParams(values: values)) { [weak self] result in
             guard let self = self else { return }
             completion(self.exceptionGuard(result: result) { data in
-                let networkedTodo = try self.decoder.decode(NetworkedTodo.self, from: data)
-                return try Todo(networkedTodo: networkedTodo)
+                let todoResponse = try self.decoder.decode(TodoResponse.self, from: data)
+                return try Todo(todoResponse: todoResponse)
             } domainFilter: { code in
                 if code == 404 {
                     return .notFound

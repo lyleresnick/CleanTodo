@@ -3,18 +3,18 @@
 class EntityGatewayFactory {
     
     enum Implementation {
-        case test
+        case ephemeral
         case coreData
         case networked
     }
     
-    static let gatewayImplementation = Implementation.networked
+    static let gatewayImplementation = Implementation.ephemeral
     
     static var entityGateway: EntityGateway = {
 
         switch gatewayImplementation {
-        case .test:
-            return TestEntityGateway()
+        case .ephemeral:
+            return EphemeralEntityGateway()
         case .coreData:
             return CoreDataEntityGateway(manager: CoreDataManager.shared)
         case .networked:

@@ -2,7 +2,7 @@
 
 import Foundation
 
-class TestTodoManager: TodoManager {
+class EphemeralTodoManager: TodoManager {
 
     func all(completion: @escaping (Response<[Todo], Void>) -> ()) {
         completion(.success(entity: todoTestData.map { Todo(testTodo: $0) }))
@@ -33,7 +33,7 @@ class TestTodoManager: TodoManager {
             values: TodoValues,
             completion: @escaping (Response<Todo, Void>) -> ()) {
         
-        let todo = TestTodo( id: UUID().uuidString, values: values)
+        let todo = EphemeralTodo( id: UUID().uuidString, values: values)
         todoTestData.append(todo)
         completion(.success(entity: Todo(testTodo: todo)))
     }
@@ -69,7 +69,7 @@ class TestTodoManager: TodoManager {
         case notFound
     }
     
-    private func findTodo(id: String) throws -> TestTodo {
+    private func findTodo(id: String) throws -> EphemeralTodo {
         for entity in todoTestData {
             if entity.id == id {
                 return entity
@@ -88,7 +88,7 @@ class TestTodoManager: TodoManager {
     }
 }
 
-private extension TestTodo {
+private extension EphemeralTodo {
     
     func set(values: TodoValues) {
         
@@ -101,7 +101,7 @@ private extension TestTodo {
 }
 
 private extension Todo {
-    init(testTodo: TestTodo) {
+    init(testTodo: EphemeralTodo) {
         self.init(
             id: testTodo.id,
             title: testTodo.title,

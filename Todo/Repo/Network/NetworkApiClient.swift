@@ -49,18 +49,18 @@ class NetworkApiClient: ApiClient {
         ).resume( )
     }
     
-    func create( values: TodoValues,completion: @escaping (Result<Data, FailureInfo>) -> ()) {
+func create(params: TodoParams, completion: @escaping (Result<Data, FailureInfo>) -> ()) {
         session.uploadTask(
             with: URLRequest(httpMethod: .post, resource: "todo", uploading: true),
-            from: try! encoder.encode(NetworkedTodo(todoValues: values)), // this wont fail
+            from: try! encoder.encode(params), // this wont fail
             completionHandler: completionHandler(completion: completion)
         ).resume()
     }
                 
-    func update(id: String, values: TodoValues, completion: @escaping (Result<Data, FailureInfo>) -> ()) {
+    func update(id: String, params: TodoParams, completion: @escaping (Result<Data, FailureInfo>) -> ()) {
         session.uploadTask(
             with: URLRequest(httpMethod: .put, resource: todoResource(id: id), uploading: true),
-            from:  try! encoder.encode(NetworkedTodo(todoValues: values)), // this wont fail
+            from:  try! encoder.encode(params), // this wont fail
             completionHandler: completionHandler(completion: completion)
         ).resume()
     }
