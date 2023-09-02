@@ -2,15 +2,15 @@
 
 import Foundation
 
-extension NetworkedTodo {
+extension Todo {
     
-    init(todoValues from: TodoValues) {
-        self.init(
-            id: nil,
+    init(todoResponse from: TodoResponse) throws {
+        try self.init(
+            id: from.id,
             title: from.title,
-            note: from.note,
+            note: from.note ,
             completeBy: from.completeBy,
-            priority: from.priority.rawValue,
+            priority: from.priority,
             completed: from.completed)
     }
 }
